@@ -15,6 +15,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.XPathExpressionException;
 
+import org.hamcrest.Matcher;
 import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
@@ -106,11 +107,69 @@ public class Examples {
     }
 
     @Test
+    public void expect_NodeCount_Matcher() throws XPathExpressionException {
+        thrown.expect(UnsupportedOperationException.class);
+        thrown.expectMessage("Not implemented yet");
+
+        XmlDocumentChecker.check(eg).andExpect(xpath("//Repeated").nodeCount(null));
+    }
+
+    @Test
+    public void expect_Node_Matcher() throws XPathExpressionException {
+        thrown.expect(UnsupportedOperationException.class);
+        thrown.expectMessage("Not implemented yet");
+
+        XmlDocumentChecker.check(eg).andExpect(xpath("//Repeated").node(null));
+    }
+
+    @Test
+    public void expect_Number() throws XPathExpressionException {
+        thrown.expect(UnsupportedOperationException.class);
+        thrown.expectMessage("Not implemented yet");
+
+        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsSeventeen").number(17.0));
+    }
+
+    @Test
+    public void expect_Number_Matcher() throws XPathExpressionException {
+        thrown.expect(UnsupportedOperationException.class);
+        thrown.expectMessage("Not implemented yet");
+
+        Matcher<? super Double> dummyMatcher = null;
+        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsSeventeen").number(dummyMatcher));
+    }
+
+    @Test
+    public void expect_String() throws XPathExpressionException {
+        thrown.expect(UnsupportedOperationException.class);
+        thrown.expectMessage("Not implemented yet");
+
+        XmlDocumentChecker.check(eg).andExpect(xpath("//Repeated").string("I'm a string"));
+    }
+
+    @Test
+    public void expect_String_Matcher() throws XPathExpressionException {
+        thrown.expect(UnsupportedOperationException.class);
+        thrown.expectMessage("Not implemented yet");
+
+        Matcher<? super String> dummyMatcher = null;
+        XmlDocumentChecker.check(eg).andExpect(xpath("//Repeated").string(dummyMatcher));
+    }
+
+    @Test
     public void invalidXpath() throws XPathExpressionException {
         thrown.expect(XPathExpressionException.class);
         thrown.expectCause(IsInstanceOf.<Throwable>instanceOf(TransformerException.class));
 
         XmlDocumentChecker.check(eg).andExpect(xpath("This is an invalid XPath").exists());
+    }
+
+    @Test
+    public void expect_BooleanValue() throws XPathExpressionException {
+        thrown.expect(UnsupportedOperationException.class);
+        thrown.expectMessage("Not implemented yet");
+
+        XmlDocumentChecker.check(eg).andExpect(xpath("/AlwaysTrue").booleanValue(true));
     }
 
 
@@ -138,6 +197,18 @@ public class Examples {
 
         root.appendChild(doc.createElement("Repeated"));
         root.appendChild(doc.createElement("Repeated"));
+
+        {
+            Element elementWithAttribute = doc.createElement("ElementWithSizeAttribute");
+            elementWithAttribute.setAttribute("size", "15");
+            root.appendChild(elementWithAttribute);
+        }
+
+        {
+            Element element = doc.createElement("ContainsSeventeen");
+            element.setTextContent("17");
+            root.appendChild(element);
+        }
 
         safeDumpXmlToConsole(doc);
 

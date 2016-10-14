@@ -52,6 +52,7 @@ public class XpathNodeMatchers {
      */
     public XmlNodeMatcher node(final Matcher<? super Node> matcher) {
         return rootNode -> {
+            throwNotImplementedYet();
             //getChecker(rootNode).assertNode(matcher);
         };
     }
@@ -101,6 +102,7 @@ public class XpathNodeMatchers {
      */
     public XmlNodeMatcher nodeCount(final Matcher<Integer> matcher) {
         return rootNode -> {
+            throwNotImplementedYet();
             //getChecker(rootNode).hasNodes(matcher);
         };
     }
@@ -118,6 +120,7 @@ public class XpathNodeMatchers {
      */
     public XmlNodeMatcher string(final String expectedValue) {
         return rootNode -> {
+            throwNotImplementedYet();
             //getChecker(rootNode).assertString(expectedValue);
         };
     }
@@ -135,6 +138,7 @@ public class XpathNodeMatchers {
      */
     public XmlNodeMatcher string(final Matcher<? super String> matcher) {
         return rootNode -> {
+            throwNotImplementedYet();
             //getChecker(rootNode).assertString(matcher);
         };
     }
@@ -148,6 +152,7 @@ public class XpathNodeMatchers {
      */
     public XmlNodeMatcher number(final Double expectedValue) {
         return rootNode -> {
+            throwNotImplementedYet();
             //getChecker(rootNode).assertNumber(expectedValue);
         };
     }
@@ -162,6 +167,7 @@ public class XpathNodeMatchers {
      */
     public XmlNodeMatcher number(final Matcher<? super Double> matcher) {
         return rootNode -> {
+            throwNotImplementedYet();
             //getChecker(rootNode).assertNumber(matcher);
         };
     }
@@ -176,6 +182,7 @@ public class XpathNodeMatchers {
      */
     public XmlNodeMatcher booleanValue(final Boolean expectedValue) {
         return rootNode -> {
+            throwNotImplementedYet();
             //getChecker(rootNode).assertBoolean(expectedValue);
         };
     }
@@ -190,6 +197,16 @@ public class XpathNodeMatchers {
     private NodeSelectionChecker getChecker(Node rootNode) {
         final NodeList nodes = xpathHelper.getNodes(rootNode);
         return new NodeSelectionChecker(nodes, "XPath " + xpathHelper.getXPath());
+    }
+
+    /**
+     * common way to mark the methods that have not been implemented yet
+     *
+     * @throws UnsupportedOperationException
+     *             always
+     */
+    private void throwNotImplementedYet() {
+        throw new UnsupportedOperationException("Not implemented yet");
     }
 
 }
