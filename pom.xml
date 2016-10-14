@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-dependencies</artifactId>
+    <version>1.2.5.RELEASE</version>
+    <relativePath /> <!-- lookup parent from repository -->
+  </parent>
+
+  <groupId>org.ayeseeem</groupId>
+  <artifactId>icm-dpickx</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>Data Pickaxe for XML</name>
+  <description>Library for extracting and checking parts of an XML document</description>
+
+  <organization>
+    <name>${osgi.bundle.vendor}</name>
+  </organization>
+
+  <!-- TODO: Replace with GitHub? -->
+  <scm>
+    <connection>scm:svn:http://svn.ayeseeem.org/dpickx/trunk/icm-dpickx</connection>
+    <developerConnection>scm:svn:http://svn.ayeseeem.org/dpickx/trunk/icm-dpickx</developerConnection>
+  </scm>
+
+  <distributionManagement>
+    <repository>
+      <id>project.repository</id>
+      <url>${projectRepository.url}</url>
+    </repository>
+    <snapshotRepository>
+      <id>project.repository</id>
+      <url>${projectRepository.url}</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.version>1.8</java.version>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
+    <projectRepository.url>file://H:/maven/repo</projectRepository.url>
+    <osgi.bundle.vendor>ayeseeem.org</osgi.bundle.vendor>
+  </properties>
+
+  <dependencies>
+
+    <!-- TODO: ICM 2015-10-30: Is this still true? -->
+    <!-- Not just used in test scope -->
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest-core</artifactId>
+    </dependency>
+
+    <!-- Logging API: SLF4J for logging - implementation is not specified, 
+      users of the jar can pick their own impl. -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+
+    <!-- Logging implementation for testing only, does not affect users of the jar -->
+    <dependency> 
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>xmlunit</groupId>
+      <artifactId>xmlunit</artifactId>
+      <version>1.6</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <!-- TODO: ICM 2015-10-30: Not needed? -->
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <!-- create test jar so test code helpers can be used elsewhere,
+                by using a dependency of type test-jar -->
+              <goal>test-jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
