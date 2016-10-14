@@ -1,0 +1,12 @@
+# ignore back-ups
+*.bak
+*~
+
+# ignore thumbnails created by Windows
+Thumbs.db
+
+# Eclipse
+.classpath
+.project
+.settings
+target
