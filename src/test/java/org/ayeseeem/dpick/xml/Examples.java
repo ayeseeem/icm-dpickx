@@ -89,6 +89,18 @@ public class Examples {
     }
 
     @Test
+    public void expect_Exists_Attribute() throws XPathExpressionException {
+        XmlDocumentChecker.check(eg).andExpect(xpath("//ElementWithSizeAttribute/@size").exists());
+        XmlDocumentChecker.check(eg).andExpect(xpath("/RootElement/ElementWithSizeAttribute/@size").exists());
+    }
+
+    @Test
+    public void expect_DoesNotExist_Attribute() throws XPathExpressionException {
+        XmlDocumentChecker.check(eg).andExpect(xpath("//ElementWithSizeAttribute/@nonExistentAttribute").doesNotExist());
+        XmlDocumentChecker.check(eg).andExpect(xpath("/RootElement/ElementWithSizeAttribute/@nonExistentAttribute").doesNotExist());
+    }
+
+    @Test
     public void expect_NodeCount() throws XPathExpressionException {
         XmlDocumentChecker.check(eg).andExpect(xpath("//Repeated").nodeCount(2));
     }
