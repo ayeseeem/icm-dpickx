@@ -33,6 +33,7 @@ public class NodeSelectionChecker {
     }
 
     public void doesNotExist() {
+        // TODO: ICM 2016-10-14: Clarify message: "exists (unexpectedly)"
         assertTrue(nodes.getLength() == 0, this.selectionExpression + " exists");
     }
 
@@ -68,6 +69,7 @@ public class NodeSelectionChecker {
      *             always, with the given message
      */
     public static void fail(String message) {
+        // TODO: ICM 2016-10-14: Throw a library-specific Error - perhaps extension of AssertionError
         throw new AssertionError(message);
     }
 

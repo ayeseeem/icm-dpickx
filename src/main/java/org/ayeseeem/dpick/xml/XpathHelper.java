@@ -61,6 +61,12 @@ public class XpathHelper {
         } catch (XPathExpressionException e) {
             // we don't know why we would ever see this. The XPath compiled OK:
             // we don't know why it would fail to evaluate.
+            //
+            // TODO: ICM 2016-10-14: Improve/change: can happen e.g. if Node is
+            // an empty XML Document top-level element, e.g. created:
+            // Document doc = builder.newDocument();
+            // Node n = doc.getDocumentElement();
+            //
             // So return an empty node list, rather than throwing an exception
             String message = "Unexpected problem evaluating XPath expression " + this.xPath;
             logger.error(message, e);
