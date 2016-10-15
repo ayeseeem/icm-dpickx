@@ -152,7 +152,9 @@ public class XpathNodeMatchers {
      */
     public XmlNodeMatcher number(final Double expectedValue) {
         return rootNode -> {
-            getChecker(rootNode).assertNumber(expectedValue);
+            NodeSelectionChecker checker = getChecker(rootNode);
+            checker.exists();
+            checker.assertNumber(expectedValue);
         };
     }
 

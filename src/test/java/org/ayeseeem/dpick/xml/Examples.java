@@ -148,6 +148,14 @@ public class Examples {
     }
 
     @Test
+    public void expect_Number_NonExistentElement() throws XPathExpressionException {
+        thrown.expect(AssertionError.class);
+        thrown.expectMessage("XPath //NeverExisting does not exist");
+
+        XmlDocumentChecker.check(eg).andExpect(xpath("//NeverExisting").number(888.0));
+    }
+
+    @Test
     public void expect_Number_Matcher() throws XPathExpressionException {
         thrown.expect(UnsupportedOperationException.class);
         thrown.expectMessage("Not implemented yet");
