@@ -3,7 +3,6 @@ package org.ayeseeem.dpick.xml;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -55,15 +54,14 @@ public class NodeSelectionChecker {
         });
     }
 
-    // HACK: ICM 2016-10-15: In progress - need better processing of text content
-    // TODO: ICM 2016-10-15: Does this support attribute values yet?
+    // HACK: ICM 2016-10-15: In progress - need better processing of text content?
     public static List<String> getValueStrings(NodeList nodes) {
         final List<String> valueStrings = new ArrayList<>();
         for (int i = 0; i < nodes.getLength(); i++) {
             final Node node = nodes.item(i);
-            if (node.getNodeType() == Node.ELEMENT_NODE) {
-                Element element = (Element) node;
-                String valueString = element.getTextContent();
+            final short nodeType = node.getNodeType();
+            if (nodeType == Node.ELEMENT_NODE || nodeType == Node.ATTRIBUTE_NODE) {
+                String valueString = node.getTextContent();
                 valueStrings.add(valueString);
             }
         }

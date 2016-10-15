@@ -156,6 +156,27 @@ public class Examples {
     }
 
     @Test
+    public void expect_Number_Attribute() throws XPathExpressionException {
+        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsAttributeWithEighteen/@attrOf18").number(18.0));
+    }
+
+    @Test
+    public void expect_Number_Attribute_WrongValue() throws XPathExpressionException {
+        thrown.expect(AssertionError.class);
+        thrown.expectMessage("Expected a number 888.0 for XPath //ContainsAttributeWithEighteen/@attrOf18, not 18");
+
+        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsAttributeWithEighteen/@attrOf18").number(888.0));
+    }
+
+    @Test
+    public void expect_Number_NonExistentAttribute() throws XPathExpressionException {
+        thrown.expect(AssertionError.class);
+        thrown.expectMessage("XPath //ContainsAttributeWithEighteen/@nonExistentAttribute does not exist");
+
+        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsAttributeWithEighteen/@nonExistentAttribute").number(888.0));
+    }
+
+    @Test
     public void expect_Number_Matcher() throws XPathExpressionException {
         thrown.expect(UnsupportedOperationException.class);
         thrown.expectMessage("Not implemented yet");
@@ -232,6 +253,13 @@ public class Examples {
         {
             Element element = doc.createElement("ContainsSeventeen");
             element.setTextContent("17");
+            root.appendChild(element);
+        }
+
+        {
+            Element element = doc.createElement("ContainsAttributeWithEighteen");
+            element.setTextContent("blah blah");
+            element.setAttribute("attrOf18", "18");
             root.appendChild(element);
         }
 
