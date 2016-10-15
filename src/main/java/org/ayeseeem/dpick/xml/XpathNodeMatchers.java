@@ -152,8 +152,7 @@ public class XpathNodeMatchers {
      */
     public XmlNodeMatcher number(final Double expectedValue) {
         return rootNode -> {
-            throwNotImplementedYet();
-            //getChecker(rootNode).assertNumber(expectedValue);
+            getChecker(rootNode).assertNumber(expectedValue);
         };
     }
 

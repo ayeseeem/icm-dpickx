@@ -1,5 +1,10 @@
 package org.ayeseeem.dpick.xml;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
@@ -40,6 +45,29 @@ public class NodeSelectionChecker {
     public void hasNodes(int expectedCount) {
         int length = nodes.getLength();
         assertTrue(length == expectedCount, "Expected " + expectedCount + " nodes for " + this.selectionExpression + ", not " + length);
+    }
+
+    public void assertNumber(Double expectedValue) {
+        final List<String> valueStrings = getValueStrings(nodes);
+        valueStrings.forEach(valueString -> {
+            final double value = Double.parseDouble(valueString);
+            assertTrue(value == expectedValue, "Expected a number " + expectedValue + " for " + this.selectionExpression + ", not " + value);
+        });
+    }
+
+    // HACK: ICM 2016-10-15: In progress - need better processing of text content
+    // TODO: ICM 2016-10-15: Does this support attribute values yet?
+    public static List<String> getValueStrings(NodeList nodes) {
+        final List<String> valueStrings = new ArrayList<>();
+        for (int i = 0; i < nodes.getLength(); i++) {
+            final Node node = nodes.item(i);
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
+                Element element = (Element) node;
+                String valueString = element.getTextContent();
+                valueStrings.add(valueString);
+            }
+        }
+        return valueStrings;
     }
 
     /**

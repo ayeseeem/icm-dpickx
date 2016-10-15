@@ -136,10 +136,15 @@ public class Examples {
 
     @Test
     public void expect_Number() throws XPathExpressionException {
-        thrown.expect(UnsupportedOperationException.class);
-        thrown.expectMessage("Not implemented yet");
-
         XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsSeventeen").number(17.0));
+    }
+
+    @Test
+    public void expect_Number_WrongValue() throws XPathExpressionException {
+        thrown.expect(AssertionError.class);
+        thrown.expectMessage("Expected a number 888.0 for XPath //ContainsSeventeen, not 17");
+
+        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsSeventeen").number(888.0));
     }
 
     @Test
