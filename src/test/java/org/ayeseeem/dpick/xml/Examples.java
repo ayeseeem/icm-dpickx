@@ -1,6 +1,7 @@
 package org.ayeseeem.dpick.xml;
 
 import static org.ayeseeem.dpick.xml.NodeMatchers.xpath;
+import static org.junit.Assert.fail;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -27,28 +28,34 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 /**
- * Examples of usage, mainly as JUnit tests
+ * Examples of usage as JUnit tests
  *
  * @author ayeseeem@gmail.com
  *
  */
 public class Examples {
 
-    /**
-     * Untested example of the sort of usage
-     *
-     * @param node
-     *            DOM Node within which to check - usually a document root
-     */
-    public void exampleProcessNode(Node node) {
+    @Test
+    public void exampleComplexCheck_ValidXml() throws XPathExpressionException {
+        XmlDocumentChecker.check(eg).andExpect(xpath("/RootElement/SomethingUnique").exists())
+                .andExpect(xpath("//Repeated").exists())
+                .andExpect(xpath("//Repeated").nodeCount(2))
+                .andExpect(xpath("//NeverExisting").doesNotExist())
+                .andExpect(xpath("/NeverExistingTopLevel").doesNotExist())
+                .andExpect(xpath("//ElementWithSizeAttribute/@size").exists())
+                .andExpect(xpath("//ContainsSeventeen").number(17.0));
+    }
+
+    @Test
+    public void exampleHandlingXmlProblem() throws XPathExpressionException {
         try {
-            XmlDocumentChecker.check(node).andExpect(xpath("/Request/Attributes").exists())
-                    .andExpect(xpath("//Attribute").exists())
-                    .andExpect(xpath("//Attribute").nodeCount(2))
-                    .andExpect(xpath("/NonExistent").doesNotExist())
-                    .andExpect(xpath("/Attribute").doesNotExist()); // not a top-level element
-        } catch (XPathExpressionException | AssertionError e) {
-            throw new RuntimeException("dpickx: problem with XPath", e);
+            XmlDocumentChecker.check(eg).andExpect(xpath("/Version").number(3.0));
+
+            fail("example/test should not reach here");
+        } catch (AssertionError e) {
+            @SuppressWarnings("unused")
+            final String status = "Document is not Version 3";
+            // Do something about it
         }
     }
 
