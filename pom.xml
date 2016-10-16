@@ -84,23 +84,4 @@
     </dependency>
   </dependencies>
 
-  <!-- TODO: ICM 2015-10-30: Not needed? -->
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <executions>
-          <execution>
-            <goals>
-              <!-- create test jar so test code helpers can be used elsewhere,
-                by using a dependency of type test-jar -->
-              <goal>test-jar</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
-
 </project>
