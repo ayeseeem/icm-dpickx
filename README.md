@@ -3,6 +3,21 @@ Data Pickaxe for XML
 
 Library for extracting and checking parts of an XML document
 
+
+TODO
+----
+
+- [ ] Throw a library-specific `Error` instead of (or perhaps extension of)
+      `AssertionError`
+- [ ] Do something with `andDo` - come up with an example usage?
+- [ ] Ensure that partial or poor implementations of `NodeSelectionChecker`
+      methods fail by default, rather than pass by default
+- [ ] Capture required value
+- [ ] Capture optional value
+- [ ] Capture First or Capture Sole? (=> node count == 1)
+- [ ] Capture All for multiple nodes
+
+
 Origin
 ------
 
