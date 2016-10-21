@@ -162,6 +162,9 @@ public class Examples {
         XmlDocumentChecker.check(eg).andExpect(xpath("//NeverExisting").number(888.0));
     }
 
+    // TODO: ICM 2016-10-21: Test multiple numbers match
+    // TODO: ICM 2016-10-21: Test multiple numbers not all matching match
+
     @Test
     public void expect_Number_Attribute() throws XPathExpressionException {
         XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsAttributeWithEighteen/@attrOf18").number(18.0));
@@ -194,10 +197,31 @@ public class Examples {
 
     @Test
     public void expect_String() throws XPathExpressionException {
-        thrown.expect(UnsupportedOperationException.class);
-        thrown.expectMessage("Not implemented yet");
+        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsSeventeen").string("17"));
+    }
 
-        XmlDocumentChecker.check(eg).andExpect(xpath("//Repeated").string("I'm a string"));
+    @Test
+    public void expect_String_WrongValue() throws XPathExpressionException {
+        thrown.expect(AssertionError.class);
+        thrown.expectMessage("Expected a value 888 for XPath //ContainsSeventeen, not 17");
+
+        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsSeventeen").string("888"));
+    }
+
+    @Test
+    public void expect_String_NonExistentElement() throws XPathExpressionException {
+        thrown.expect(AssertionError.class);
+        thrown.expectMessage("XPath //NeverExisting does not exist");
+
+        XmlDocumentChecker.check(eg).andExpect(xpath("//NeverExisting").string("888"));
+    }
+
+    // TODO: ICM 2016-10-21: Test multiple strings match
+    // TODO: ICM 2016-10-21: Test multiple strings not all matching match
+
+    @Test
+    public void expect_String_Attribute() throws XPathExpressionException {
+        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsAttributeWithEighteen/@attrOf18").string("18"));
     }
 
     @Test

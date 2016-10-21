@@ -54,6 +54,14 @@ public class NodeSelectionChecker {
         });
     }
 
+    public void assertString(String expectedValue) {
+        final List<String> valueStrings = getValueStrings(nodes);
+        valueStrings.forEach(valueString -> {
+            final String value = valueString;
+            assertTrue(value == expectedValue, "Expected a value " + expectedValue + " for " + this.selectionExpression + ", not " + value);
+        });
+    }
+
     // HACK: ICM 2016-10-15: In progress - need better processing of text content?
     public static List<String> getValueStrings(NodeList nodes) {
         final List<String> valueStrings = new ArrayList<>();

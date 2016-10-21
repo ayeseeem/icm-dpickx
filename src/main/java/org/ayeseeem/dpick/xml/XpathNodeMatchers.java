@@ -120,8 +120,9 @@ public class XpathNodeMatchers {
      */
     public XmlNodeMatcher string(final String expectedValue) {
         return rootNode -> {
-            throwNotImplementedYet();
-            //getChecker(rootNode).assertString(expectedValue);
+            NodeSelectionChecker checker = getChecker(rootNode);
+            checker.exists();
+            checker.assertString(expectedValue);
         };
     }
 
