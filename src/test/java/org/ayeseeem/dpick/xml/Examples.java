@@ -162,8 +162,21 @@ public class Examples {
         XmlDocumentChecker.check(eg).andExpect(xpath("//NeverExisting").number(888.0));
     }
 
-    // TODO: ICM 2016-10-21: Test multiple numbers match
-    // TODO: ICM 2016-10-21: Test multiple numbers not all matching match
+    @Test
+    public void expect_Number_MutlipleElements() throws XPathExpressionException {
+        XmlDocumentChecker.check(eg).andExpect(xpath("//Duplicate").nodeCount(2));
+
+        XmlDocumentChecker.check(eg).andExpect(xpath("//Duplicate").number(123.0));
+    }
+
+    @Test
+    public void expect_Number_MutlipleElements_NotAllMatch() throws XPathExpressionException {
+        thrown.expect(AssertionError.class);
+        thrown.expectMessage("Expected a number 123.0 for XPath //DuplicateEleDiffContent, not 456");
+        XmlDocumentChecker.check(eg).andExpect(xpath("//DuplicateEleDiffContent").nodeCount(2));
+
+        XmlDocumentChecker.check(eg).andExpect(xpath("//DuplicateEleDiffContent").number(123.0));
+    }
 
     @Test
     public void expect_Number_Attribute() throws XPathExpressionException {
@@ -216,8 +229,21 @@ public class Examples {
         XmlDocumentChecker.check(eg).andExpect(xpath("//NeverExisting").string("888"));
     }
 
-    // TODO: ICM 2016-10-21: Test multiple strings match
-    // TODO: ICM 2016-10-21: Test multiple strings not all matching match
+    @Test
+    public void expect_String_MutlipleElements() throws XPathExpressionException {
+        XmlDocumentChecker.check(eg).andExpect(xpath("//Duplicate").nodeCount(2));
+
+        XmlDocumentChecker.check(eg).andExpect(xpath("//Duplicate").string("123"));
+    }
+
+    @Test
+    public void expect_String_MutlipleElements_NotAllMatch() throws XPathExpressionException {
+        thrown.expect(AssertionError.class);
+        thrown.expectMessage("Expected a value 123 for XPath //DuplicateEleDiffContent, not 456");
+        XmlDocumentChecker.check(eg).andExpect(xpath("//DuplicateEleDiffContent").nodeCount(2));
+
+        XmlDocumentChecker.check(eg).andExpect(xpath("//DuplicateEleDiffContent").string("123"));
+    }
 
     @Test
     public void expect_String_Attribute() throws XPathExpressionException {
@@ -293,6 +319,29 @@ public class Examples {
             element.setAttribute("attrOf18", "18");
             root.appendChild(element);
         }
+
+        {
+            Element element = doc.createElement("Duplicate");
+            element.setTextContent("123");
+            root.appendChild(element);
+        }
+        {
+            Element element = doc.createElement("Duplicate");
+            element.setTextContent("123");
+            root.appendChild(element);
+        }
+
+        {
+            Element element = doc.createElement("DuplicateEleDiffContent");
+            element.setTextContent("123");
+            root.appendChild(element);
+        }
+        {
+            Element element = doc.createElement("DuplicateEleDiffContent");
+            element.setTextContent("456");
+            root.appendChild(element);
+        }
+
 
         safeDumpXmlToConsole(doc);
 
