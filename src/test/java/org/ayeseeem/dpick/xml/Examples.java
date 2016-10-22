@@ -1,5 +1,6 @@
 package org.ayeseeem.dpick.xml;
 
+import static org.ayeseeem.dpick.matchers.ConvertibleStringMatchers.isNumberOfValue;
 import static org.ayeseeem.dpick.xml.NodeMatchers.xpath;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
@@ -29,14 +30,14 @@ public class Examples extends XmlExampleFixture {
                 .andExpect(xpath("//ContainsSeventeen").value(is("17")))
                 .andExpect(xpath("//ContainsSeventeen").value(containsString("7")))
                 .andExpect(xpath("//ContainsSeventeen").value(StringStartsWith.startsWith("1")))
-                .andExpect(xpath("//ContainsSeventeen").number(17.0))
+                .andExpect(xpath("//ContainsSeventeen").value(isNumberOfValue(17.0)))
                 ;
     }
 
     @Test
     public void exampleHandlingXmlProblem() throws XPathExpressionException {
         try {
-            XmlDocumentChecker.check(eg).andExpect(xpath("/Version").number(3.0));
+            XmlDocumentChecker.check(eg).andExpect(xpath("/Version").value(is("3.0")));
 
             fail("example/test should not reach here");
         } catch (AssertionError e) {

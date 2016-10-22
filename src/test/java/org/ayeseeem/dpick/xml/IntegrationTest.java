@@ -1,5 +1,6 @@
 package org.ayeseeem.dpick.xml;
 
+import static org.ayeseeem.dpick.matchers.ConvertibleStringMatchers.isNumberOfValue;
 import static org.ayeseeem.dpick.xml.NodeMatchers.xpath;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
@@ -96,7 +97,7 @@ public class IntegrationTest extends XmlExampleFixture {
 
     @Test
     public void expect_Number() throws XPathExpressionException {
-        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsSeventeen").number(17.0));
+        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsSeventeen").value(isNumberOfValue(17.0)));
     }
 
     @Test
@@ -105,7 +106,7 @@ public class IntegrationTest extends XmlExampleFixture {
         thrown.expectMessage("Expected: Value parsable as a number of value <888.0>");
         thrown.expectMessage("but: was \"17\"");
 
-        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsSeventeen").number(888.0));
+        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsSeventeen").value(isNumberOfValue(888.0)));
     }
 
     @Test
@@ -114,54 +115,7 @@ public class IntegrationTest extends XmlExampleFixture {
         thrown.expectMessage("Expected: Value parsable as a number of value <888.0>");
         thrown.expectMessage("but: was \"blah blah\"");
 
-        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsAttributeWithEighteen").number(888.0));
-    }
-
-    @Test
-    public void expect_Number_NonExistentElement() throws XPathExpressionException {
-        thrown.expect(AssertionError.class);
-        thrown.expectMessage("XPath //NeverExisting does not exist");
-
-        XmlDocumentChecker.check(eg).andExpect(xpath("//NeverExisting").number(888.0));
-    }
-
-    @Test
-    public void expect_Number_MutlipleElements() throws XPathExpressionException {
-        XmlDocumentChecker.check(eg).andExpect(xpath("//Duplicate").nodeCount(2));
-
-        XmlDocumentChecker.check(eg).andExpect(xpath("//Duplicate").number(123.0));
-    }
-
-    @Test
-    public void expect_Number_MutlipleElements_NotAllMatch() throws XPathExpressionException {
-        thrown.expect(AssertionError.class);
-        thrown.expectMessage("Expected: Value parsable as a number of value <123.0>");
-        thrown.expectMessage("but: was \"456\"");
-        XmlDocumentChecker.check(eg).andExpect(xpath("//DuplicateEleDiffContent").nodeCount(2));
-
-        XmlDocumentChecker.check(eg).andExpect(xpath("//DuplicateEleDiffContent").number(123.0));
-    }
-
-    @Test
-    public void expect_Number_Attribute() throws XPathExpressionException {
-        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsAttributeWithEighteen/@attrOf18").number(18.0));
-    }
-
-    @Test
-    public void expect_Number_Attribute_WrongValue() throws XPathExpressionException {
-        thrown.expect(AssertionError.class);
-        thrown.expectMessage("Expected: Value parsable as a number of value");
-        thrown.expectMessage("but: was \"18\"");
-
-        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsAttributeWithEighteen/@attrOf18").number(888.0));
-    }
-
-    @Test
-    public void expect_Number_NonExistentAttribute() throws XPathExpressionException {
-        thrown.expect(AssertionError.class);
-        thrown.expectMessage("XPath //ContainsAttributeWithEighteen/@nonExistentAttribute does not exist");
-
-        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsAttributeWithEighteen/@nonExistentAttribute").number(888.0));
+        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsAttributeWithEighteen").value(isNumberOfValue(888.0)));
     }
 
     @Test
@@ -212,6 +166,23 @@ public class IntegrationTest extends XmlExampleFixture {
     }
 
     @Test
+    public void expect_Value_Attribute_WrongValue() throws XPathExpressionException {
+        thrown.expect(AssertionError.class);
+        thrown.expectMessage("Expected: is \"888\"");
+        thrown.expectMessage("but: was \"18\"");
+
+        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsAttributeWithEighteen/@attrOf18").value(is("888")));
+    }
+
+    @Test
+    public void expect_Value_NonExistentAttribute() throws XPathExpressionException {
+        thrown.expect(AssertionError.class);
+        thrown.expectMessage("XPath //ContainsAttributeWithEighteen/@nonExistentAttribute does not exist");
+
+        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsAttributeWithEighteen/@nonExistentAttribute").value(is("888")));
+    }
+
+    @Test
     public void invalidXpath() throws XPathExpressionException {
         thrown.expect(XPathExpressionException.class);
         thrown.expectCause(IsInstanceOf.<Throwable>instanceOf(TransformerException.class));
@@ -226,7 +197,6 @@ public class IntegrationTest extends XmlExampleFixture {
 
         XmlDocumentChecker.check(eg).andExpect(xpath("/AlwaysTrue").booleanValue(true));
     }
-
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
