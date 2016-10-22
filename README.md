@@ -20,6 +20,13 @@ TODO
       [XMLUnit](http://www.xmlunit.org/) - use to implement some of the internal
       XPath evaluations etc, and/or document using it explicitly in parallel
       with `dpickx` to check the XML is valid etc.
+- [ ] There was an intention to be able to apply checks to just part of a
+      document tree. Check if this works, and check/change examples and tests
+      to show this
+- [ ] Support XML Namespaces. The original code had some capabilities to handle
+      namespaces: does the current code?
+- [ ] Original code had helper methods to create XML documents. Consider
+      bringing some in here. 
 
 Origin
 ------
