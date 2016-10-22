@@ -68,11 +68,14 @@ public class NodeSelectionChecker {
         });
     }
 
-    public void assertString(String expectedValue) {
+    public void assertMatch(final Matcher<String> matcher) {
         final List<String> valueStrings = getValueStrings(nodes);
         valueStrings.forEach(valueString -> {
             final String value = valueString;
-            assertTrue(value == expectedValue, "Expected a value " + expectedValue + " for " + this.selectionExpression + ", not " + value);
+            assertThat(value, matcher);
+            // TODO: ICM 2016-10-22: Use Hamcrest MatcherAssert.assertThat directly: remove dependency on JUnit
+            // TODO: ICM 2016-10-22: Add a reason arg using Hamcrest MatcherAssert.assertThat:
+            //MatcherAssert.assertThat("Ooops!", value, matcher);
         });
     }
 

@@ -1,6 +1,7 @@
 package org.ayeseeem.dpick.xml;
 
 import static org.ayeseeem.dpick.xml.NodeMatchers.xpath;
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.fail;
 
@@ -17,7 +18,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.XPathExpressionException;
 
-import org.hamcrest.Matcher;
 import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
@@ -217,54 +217,50 @@ public class Examples {
     // TODO: ICM 2016-10-21: All other versions of tests, along lines of Number/String tests
 
     @Test
-    public void expect_String() throws XPathExpressionException {
-        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsSeventeen").string("17"));
+    public void expect_Value() throws XPathExpressionException {
+        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsSeventeen").value(is("17")));
+
+        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsSeventeen").value(containsString("1")));
+        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsSeventeen").value(containsString("7")));
     }
 
     @Test
-    public void expect_String_WrongValue() throws XPathExpressionException {
+    public void expect_Value_WrongValue() throws XPathExpressionException {
         thrown.expect(AssertionError.class);
-        thrown.expectMessage("Expected a value 888 for XPath //ContainsSeventeen, not 17");
+        thrown.expectMessage("Expected: is \"888\"");
+        thrown.expectMessage("but: was \"17\"");
 
-        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsSeventeen").string("888"));
+        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsSeventeen").value(is("888")));
     }
 
     @Test
-    public void expect_String_NonExistentElement() throws XPathExpressionException {
+    public void expect_Value_NonExistentElement() throws XPathExpressionException {
         thrown.expect(AssertionError.class);
         thrown.expectMessage("XPath //NeverExisting does not exist");
 
-        XmlDocumentChecker.check(eg).andExpect(xpath("//NeverExisting").string("888"));
+        XmlDocumentChecker.check(eg).andExpect(xpath("//NeverExisting").value(null));
     }
 
     @Test
-    public void expect_String_MutlipleElements() throws XPathExpressionException {
+    public void expect_Value_MutlipleElements() throws XPathExpressionException {
         XmlDocumentChecker.check(eg).andExpect(xpath("//Duplicate").nodeCount(2));
 
-        XmlDocumentChecker.check(eg).andExpect(xpath("//Duplicate").string("123"));
+        XmlDocumentChecker.check(eg).andExpect(xpath("//Duplicate").value(is("123")));
     }
 
     @Test
-    public void expect_String_MutlipleElements_NotAllMatch() throws XPathExpressionException {
+    public void expect_Value_MutlipleElements_NotAllMatch() throws XPathExpressionException {
         thrown.expect(AssertionError.class);
-        thrown.expectMessage("Expected a value 123 for XPath //DuplicateEleDiffContent, not 456");
+        thrown.expectMessage("Expected: is \"123\"");
+        thrown.expectMessage("but: was \"456\"");
         XmlDocumentChecker.check(eg).andExpect(xpath("//DuplicateEleDiffContent").nodeCount(2));
 
-        XmlDocumentChecker.check(eg).andExpect(xpath("//DuplicateEleDiffContent").string("123"));
+        XmlDocumentChecker.check(eg).andExpect(xpath("//DuplicateEleDiffContent").value(is("123")));
     }
 
     @Test
-    public void expect_String_Attribute() throws XPathExpressionException {
-        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsAttributeWithEighteen/@attrOf18").string("18"));
-    }
-
-    @Test
-    public void expect_String_Matcher() throws XPathExpressionException {
-        thrown.expect(UnsupportedOperationException.class);
-        thrown.expectMessage("Not implemented yet");
-
-        Matcher<? super String> dummyMatcher = null;
-        XmlDocumentChecker.check(eg).andExpect(xpath("//Repeated").string(dummyMatcher));
+    public void expect_Value_Attribute() throws XPathExpressionException {
+        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsAttributeWithEighteen/@attrOf18").value(is("18")));
     }
 
     @Test

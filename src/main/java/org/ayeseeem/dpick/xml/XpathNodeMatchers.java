@@ -109,38 +109,18 @@ public class XpathNodeMatchers {
 
     /**
      * Evaluates the XPath on the root node and checks the node's text content
-     * matches the expected value.
-     * <p>
-     * TODO: ICM 2015-10-12: Need different implementations according to node
-     * type? E.g. {@link Node#getNodeValue()} or {@link Node#getTextContent()}
-     *
-     * @param expectedValue
-     *            the expected string value
-     * @return a node matcher that implements the check
-     */
-    public XmlNodeMatcher string(final String expectedValue) {
-        return rootNode -> {
-            NodeSelectionChecker checker = getChecker(rootNode);
-            checker.exists();
-            checker.assertString(expectedValue);
-        };
-    }
-
-    /**
-     * Evaluates the XPath on the root node and checks the node's text content
      * with the given Hamcrest {@link Matcher}
      * <p>
-     * TODO: ICM 2015-10-12: Need different implementations according to node
-     * type? E.g. {@link Node#getNodeValue()} or {@link Node#getTextContent()}
      *
      * @param matcher
      *            a matcher to check the string value
      * @return a node matcher that implements the check
      */
-    public XmlNodeMatcher string(final Matcher<? super String> matcher) {
+    public XmlNodeMatcher value(final Matcher<String> matcher) {
         return rootNode -> {
-            throwNotImplementedYet();
-            //getChecker(rootNode).assertString(matcher);
+            NodeSelectionChecker checker = getChecker(rootNode);
+            checker.exists();
+            checker.assertMatch(matcher);
         };
     }
 
