@@ -124,22 +124,6 @@ public class XpathNodeMatchers {
         };
     }
 
-    /**
-     * Evaluate the XPath on the root node and check the {@link Double} value
-     * with the given Hamcrest {@link Matcher}
-     *
-     * @param matcher
-     *            a matcher to check the value
-     * @return a node matcher that implements the check
-     */
-    public XmlNodeMatcher number(final Matcher<? super Double> matcher) {
-        return rootNode -> {
-            NodeSelectionChecker checker = getChecker(rootNode);
-            checker.exists();
-            checker.assertNumber(matcher);
-        };
-    }
-
     // TODO: ICM 2015-10-12: create true() and false() instead, or as well as.
     /**
      * Evaluate the XPath on the root node and assert the {@link Boolean} value

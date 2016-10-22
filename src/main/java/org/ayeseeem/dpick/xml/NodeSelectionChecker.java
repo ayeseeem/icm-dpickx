@@ -57,17 +57,6 @@ public class NodeSelectionChecker {
         });
     }
 
-    public void assertNumber(final Matcher<? super Double> matcher) {
-        final List<String> valueStrings = getValueStrings(nodes);
-        valueStrings.forEach(valueString -> {
-            final double value = Double.parseDouble(valueString);
-            assertThat(value, matcher);
-            // TODO: ICM 2016-10-22: Use Hamcrest MatcherAssert.assertThat directly: remove dependency on JUnit
-            // TODO: ICM 2016-10-22: Add a reason arg using Hamcrest MatcherAssert.assertThat:
-            //MatcherAssert.assertThat("Ooops!", value, matcher);
-        });
-    }
-
     public void assertMatch(final Matcher<String> matcher) {
         final List<String> valueStrings = getValueStrings(nodes);
         valueStrings.forEach(valueString -> {

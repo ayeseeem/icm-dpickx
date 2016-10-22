@@ -153,22 +153,6 @@ public class IntegrationTest extends XmlExampleFixture {
     }
 
     @Test
-    public void expect_Number_Matcher() throws XPathExpressionException {
-        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsSeventeen").number(is(17.0)));
-    }
-
-    @Test
-    public void expect_Number_Matcher_NotMatched() throws XPathExpressionException {
-        thrown.expect(AssertionError.class);
-        thrown.expectMessage("Expected: is <888.0>");
-        thrown.expectMessage("but: was <17.0>");
-
-        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsSeventeen").number(is(888.0)));
-    }
-
-    // TODO: ICM 2016-10-21: All other versions of tests, along lines of Number/String tests
-
-    @Test
     public void expect_Value() throws XPathExpressionException {
         XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsSeventeen").value(is("17")));
 
