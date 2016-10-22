@@ -1,6 +1,7 @@
 package org.ayeseeem.dpick.xml;
 
 import static org.ayeseeem.dpick.xml.NodeMatchers.xpath;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.fail;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -201,12 +202,19 @@ public class Examples {
 
     @Test
     public void expect_Number_Matcher() throws XPathExpressionException {
-        thrown.expect(UnsupportedOperationException.class);
-        thrown.expectMessage("Not implemented yet");
-
-        Matcher<? super Double> dummyMatcher = null;
-        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsSeventeen").number(dummyMatcher));
+        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsSeventeen").number(is(17.0)));
     }
+
+    @Test
+    public void expect_Number_Matcher_NotMatched() throws XPathExpressionException {
+        thrown.expect(AssertionError.class);
+        thrown.expectMessage("Expected: is <888.0>");
+        thrown.expectMessage("but: was <17.0>");
+
+        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsSeventeen").number(is(888.0)));
+    }
+
+    // TODO: ICM 2016-10-21: All other versions of tests, along lines of Number/String tests
 
     @Test
     public void expect_String() throws XPathExpressionException {

@@ -169,8 +169,9 @@ public class XpathNodeMatchers {
      */
     public XmlNodeMatcher number(final Matcher<? super Double> matcher) {
         return rootNode -> {
-            throwNotImplementedYet();
-            //getChecker(rootNode).assertNumber(matcher);
+            NodeSelectionChecker checker = getChecker(rootNode);
+            checker.exists();
+            checker.assertNumber(matcher);
         };
     }
 
