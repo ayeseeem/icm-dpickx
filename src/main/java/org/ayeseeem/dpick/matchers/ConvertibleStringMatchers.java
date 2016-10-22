@@ -1,6 +1,7 @@
 package org.ayeseeem.dpick.matchers;
 
 import org.ayeseeem.dpick.xml.XpathNodeMatchers;
+import org.hamcrest.CoreMatchers;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
@@ -21,15 +22,18 @@ public class ConvertibleStringMatchers {
     /**
      * Factory method for a matcher that checks if a string can be converted to
      * the specified number
+     * <p>
+     * Usually it is clearer to wrap this with the syntactic sugar of
+     * {@link CoreMatchers#is(Matcher)}, for example
+     * {@code is(numberOfValue(12.3))}
      *
      * @param expected
      *            the expected number
      * @return {@code true} if it can be converted to a number and matches the
      *         value; {@code false} if it does not match, or cannot be converted
      */
-    // TODO: ICM 2016-10-22: Convert to something like is(number().ofValue())?
     @Factory
-    public static Matcher<String> isNumberOfValue(final double expected) {
+    public static Matcher<String> numberOfValue(final double expected) {
         return new TypeSafeMatcher<String>() {
             @Override
             public boolean matchesSafely(final String s) {
@@ -43,7 +47,7 @@ public class ConvertibleStringMatchers {
 
             @Override
             public void describeTo(final Description description) {
-                description.appendText("Value parsable as a number of value ").appendValue(expected);
+                description.appendText("value parsable as a number of value ").appendValue(expected);
             }
         };
     }

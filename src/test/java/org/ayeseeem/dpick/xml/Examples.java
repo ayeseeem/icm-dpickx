@@ -1,6 +1,6 @@
 package org.ayeseeem.dpick.xml;
 
-import static org.ayeseeem.dpick.matchers.ConvertibleStringMatchers.isNumberOfValue;
+import static org.ayeseeem.dpick.matchers.ConvertibleStringMatchers.numberOfValue;
 import static org.ayeseeem.dpick.xml.NodeMatchers.xpath;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
@@ -30,7 +30,7 @@ public class Examples extends XmlExampleFixture {
                 .andExpect(xpath("//ContainsSeventeen").value(is("17")))
                 .andExpect(xpath("//ContainsSeventeen").value(containsString("7")))
                 .andExpect(xpath("//ContainsSeventeen").value(StringStartsWith.startsWith("1")))
-                .andExpect(xpath("//ContainsSeventeen").value(isNumberOfValue(17.0)))
+                .andExpect(xpath("//ContainsSeventeen").value(is(numberOfValue(17.0))))
                 ;
     }
 
