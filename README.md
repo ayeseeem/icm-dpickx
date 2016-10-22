@@ -17,9 +17,9 @@ TODO
 - [ ] Capture First or Capture Sole? (=> node count == 1)
 - [ ] Capture All for multiple nodes
 - [ ] Consider
-     [XMLUnit](http://www.xmlunit.org/) - use to implement some of the internal
-     XPath evaluations etc, and/or document using it explicitly in parallel
-     with `dpickx` to check the XML is valid etc. 
+      [XMLUnit](http://www.xmlunit.org/) - use to implement some of the internal
+      XPath evaluations etc, and/or document using it explicitly in parallel
+      with `dpickx` to check the XML is valid etc.
 
 Origin
 ------
