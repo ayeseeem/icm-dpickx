@@ -127,14 +127,6 @@ public class Examples {
     }
 
     @Test
-    public void expect_NodeCount_Matcher() throws XPathExpressionException {
-        thrown.expect(UnsupportedOperationException.class);
-        thrown.expectMessage("Not implemented yet");
-
-        XmlDocumentChecker.check(eg).andExpect(xpath("//Repeated").nodeCount(null));
-    }
-
-    @Test
     public void expect_Node_Matcher() throws XPathExpressionException {
         thrown.expect(UnsupportedOperationException.class);
         thrown.expectMessage("Not implemented yet");

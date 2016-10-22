@@ -93,21 +93,6 @@ public class XpathNodeMatchers {
     }
 
     /**
-     * Evaluates the XPath on the root node and checks the number of nodes found
-     * with the given Hamcrest {@link Matcher}.
-     *
-     * @param matcher
-     *            a matcher to check the node count
-     * @return a node matcher that implements the check
-     */
-    public XmlNodeMatcher nodeCount(final Matcher<Integer> matcher) {
-        return rootNode -> {
-            throwNotImplementedYet();
-            //getChecker(rootNode).hasNodes(matcher);
-        };
-    }
-
-    /**
      * Evaluates the XPath on the root node and checks the node's text content
      * with the given Hamcrest {@link Matcher}
      * <p>
