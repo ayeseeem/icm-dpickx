@@ -4,6 +4,7 @@ import java.util.Map;
 
 import javax.xml.xpath.XPathExpressionException;
 
+import org.ayeseeem.dpick.matchers.ConvertibleStringMatchers;
 import org.hamcrest.Matcher;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -117,11 +118,7 @@ public class XpathNodeMatchers {
      * @return a node matcher that implements the check
      */
     public XmlNodeMatcher number(final Double expectedValue) {
-        return rootNode -> {
-            NodeSelectionChecker checker = getChecker(rootNode);
-            checker.exists();
-            checker.assertNumber(expectedValue);
-        };
+        return value(ConvertibleStringMatchers.isNumberOfValue(expectedValue));
     }
 
     // TODO: ICM 2015-10-12: create true() and false() instead, or as well as.

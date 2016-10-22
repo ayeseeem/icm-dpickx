@@ -102,9 +102,19 @@ public class IntegrationTest extends XmlExampleFixture {
     @Test
     public void expect_Number_WrongValue() throws XPathExpressionException {
         thrown.expect(AssertionError.class);
-        thrown.expectMessage("Expected a number 888.0 for XPath //ContainsSeventeen, not 17");
+        thrown.expectMessage("Expected: Value parsable as a number of value <888.0>");
+        thrown.expectMessage("but: was \"17\"");
 
         XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsSeventeen").number(888.0));
+    }
+
+    @Test
+    public void expect_Number_NotANumber() throws XPathExpressionException {
+        thrown.expect(AssertionError.class);
+        thrown.expectMessage("Expected: Value parsable as a number of value <888.0>");
+        thrown.expectMessage("but: was \"blah blah\"");
+
+        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsAttributeWithEighteen").number(888.0));
     }
 
     @Test
@@ -125,7 +135,8 @@ public class IntegrationTest extends XmlExampleFixture {
     @Test
     public void expect_Number_MutlipleElements_NotAllMatch() throws XPathExpressionException {
         thrown.expect(AssertionError.class);
-        thrown.expectMessage("Expected a number 123.0 for XPath //DuplicateEleDiffContent, not 456");
+        thrown.expectMessage("Expected: Value parsable as a number of value <123.0>");
+        thrown.expectMessage("but: was \"456\"");
         XmlDocumentChecker.check(eg).andExpect(xpath("//DuplicateEleDiffContent").nodeCount(2));
 
         XmlDocumentChecker.check(eg).andExpect(xpath("//DuplicateEleDiffContent").number(123.0));
@@ -139,7 +150,8 @@ public class IntegrationTest extends XmlExampleFixture {
     @Test
     public void expect_Number_Attribute_WrongValue() throws XPathExpressionException {
         thrown.expect(AssertionError.class);
-        thrown.expectMessage("Expected a number 888.0 for XPath //ContainsAttributeWithEighteen/@attrOf18, not 18");
+        thrown.expectMessage("Expected: Value parsable as a number of value");
+        thrown.expectMessage("but: was \"18\"");
 
         XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsAttributeWithEighteen/@attrOf18").number(888.0));
     }

@@ -49,14 +49,6 @@ public class NodeSelectionChecker {
         assertTrue(length == expectedCount, "Expected " + expectedCount + " nodes for " + this.selectionExpression + ", not " + length);
     }
 
-    public void assertNumber(Double expectedValue) {
-        final List<String> valueStrings = getValueStrings(nodes);
-        valueStrings.forEach(valueString -> {
-            final double value = Double.parseDouble(valueString);
-            assertTrue(value == expectedValue, "Expected a number " + expectedValue + " for " + this.selectionExpression + ", not " + value);
-        });
-    }
-
     public void assertMatch(final Matcher<String> matcher) {
         final List<String> valueStrings = getValueStrings(nodes);
         valueStrings.forEach(valueString -> {
