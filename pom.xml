@@ -25,10 +25,10 @@
     <url>https://ayeseeem.org/</url>
   </organization>
 
-  <!-- TODO: Replace with GitHub? -->
   <scm>
-    <connection>scm:svn:http://svn.ayeseeem.org/dpickx/trunk/icm-dpickx</connection>
-    <developerConnection>scm:svn:http://svn.ayeseeem.org/dpickx/trunk/icm-dpickx</developerConnection>
+    <url>https://github.com/ayeseeem/icm-dpickx/</url>
+    <connection>scm:git:git://github.com/ayeseeem/icm-dpickx.git</connection>
+    <developerConnection>scm:git:git@github.com:ayeseeem/icm-dpickx.git</developerConnection>
   </scm>
 
   <distributionManagement>
