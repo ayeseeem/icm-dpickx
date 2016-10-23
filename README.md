@@ -7,7 +7,6 @@ Library for extracting and checking parts of an XML document
 TODO
 ----
 
-- [ ] Add the XPath (back) into error messages
 - [ ] Include failing node number in error messages
 - [ ] Throw a library-specific `Error` instead of (or perhaps extension of)
       `AssertionError`

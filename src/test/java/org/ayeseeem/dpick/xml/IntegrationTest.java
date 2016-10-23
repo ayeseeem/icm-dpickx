@@ -137,6 +137,15 @@ public class IntegrationTest extends XmlExampleFixture {
     }
 
     @Test
+    public void expect_Value_WrongValue_ErrorMessageIncludesXPath() throws XPathExpressionException {
+        thrown.expect(AssertionError.class);
+        thrown.expectMessage("//ContainsSeventeen");
+        thrown.expectMessage("XPath //ContainsSeventeen");
+
+        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsSeventeen").value(is("888")));
+    }
+
+    @Test
     public void expect_Value_NonExistentElement() throws XPathExpressionException {
         thrown.expect(AssertionError.class);
         thrown.expectMessage("XPath //NeverExisting does not exist");
