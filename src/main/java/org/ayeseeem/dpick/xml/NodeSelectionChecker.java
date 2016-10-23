@@ -1,11 +1,10 @@
 package org.ayeseeem.dpick.xml;
 
-import static org.junit.Assert.assertThat;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import org.hamcrest.Matcher;
+import org.hamcrest.MatcherAssert;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -53,8 +52,7 @@ public class NodeSelectionChecker {
         final List<String> valueStrings = getValueStrings(nodes);
         valueStrings.forEach(valueString -> {
             final String value = valueString;
-            assertThat(value, matcher);
-            // TODO: ICM 2016-10-22: Use Hamcrest MatcherAssert.assertThat directly: remove dependency on JUnit
+            MatcherAssert.assertThat(value, matcher);
             // TODO: ICM 2016-10-22: Add a reason arg using Hamcrest MatcherAssert.assertThat:
             //MatcherAssert.assertThat("Ooops!", value, matcher);
         });

@@ -71,11 +71,10 @@
       <scope>test</scope>
     </dependency>
 
-    <!-- Not just test scope, at the moment - used in our checks -->
-    <!-- TODO: ICM 2016-10-22: Limit to test scope, eventually -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 

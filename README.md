@@ -14,8 +14,6 @@ TODO
 - [ ] Do something with `andDo` - come up with an example usage?
 - [ ] Ensure that partial or poor implementations of `NodeSelectionChecker`
       methods fail by default, rather than pass by default
-- [ ] Use Hamcrest `MatcherAssert.assertThat` directly: remove dependency on
-      JUnit
 - [ ] Capture required value
 - [ ] Capture optional value
 - [ ] Capture First or Capture Sole? (=> node count == 1)
