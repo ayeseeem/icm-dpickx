@@ -18,9 +18,11 @@
 
   <name>Data Pickaxe for XML</name>
   <description>Library for extracting and checking parts of an XML document</description>
+  <url>https://github.com/ayeseeem/icm-dpickx</url>
 
   <organization>
     <name>${osgi.bundle.vendor}</name>
+    <url>https://ayeseeem.org/</url>
   </organization>
 
   <!-- TODO: Replace with GitHub? -->
