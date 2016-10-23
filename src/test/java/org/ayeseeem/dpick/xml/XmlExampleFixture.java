@@ -28,9 +28,18 @@ public class XmlExampleFixture {
 
     protected final Node eg = createExampleDom();
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final Logger logger = LoggerFactory.getLogger(XmlExampleFixture.class);
 
-    private Node createExampleDom() {
+    static {
+        Document doc = createExampleDocument();
+        safeDumpXmlToConsole(doc);
+    }
+
+    private static Node createExampleDom() {
+        return createExampleDocument().getDocumentElement();
+    }
+
+    private static Document createExampleDocument() {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder;
         try {
@@ -95,12 +104,10 @@ public class XmlExampleFixture {
             root.appendChild(element);
         }
 
-        safeDumpXmlToConsole(doc);
-
-        return doc.getDocumentElement();
+        return doc;
     }
 
-    private void safeDumpXmlToConsole(Document doc) {
+    private static void safeDumpXmlToConsole(Document doc) {
         try {
             dumpXmlToConsole(doc);
         } catch (TransformerFactoryConfigurationError | TransformerException e) {
@@ -108,7 +115,7 @@ public class XmlExampleFixture {
         }
     }
 
-    private void dumpXmlToConsole(Document doc)
+    private static void dumpXmlToConsole(Document doc)
             throws TransformerConfigurationException, TransformerFactoryConfigurationError, TransformerException {
         Transformer transformer = TransformerFactory.newInstance().newTransformer();
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
