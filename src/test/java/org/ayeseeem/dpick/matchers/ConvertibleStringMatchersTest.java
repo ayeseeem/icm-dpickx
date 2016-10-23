@@ -1,5 +1,6 @@
 package org.ayeseeem.dpick.matchers;
 
+import static org.ayeseeem.dpick.matchers.ConvertibleStringMatchers.booleanOfValue;
 import static org.ayeseeem.dpick.matchers.ConvertibleStringMatchers.numberOfValue;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -48,6 +49,47 @@ public class ConvertibleStringMatchersTest {
     @Test
     public void testNumberOfValue_WorksWithSyntacticSugar_Is() {
         assertThat("12.3", is(numberOfValue(12.3)));
+    }
+
+    @Test
+    public void testBooleanOfValue() {
+        assertThat("true", booleanOfValue(true));
+        assertThat("false", booleanOfValue(false));
+    }
+
+    @Test
+    public void testBooleanOfValue_ValueNotMatched() {
+        thrown.expect(AssertionError.class);
+
+        assertThat("false", booleanOfValue(true));
+    }
+
+    @Test
+    public void testBooleanOfValue_ValueNotMatched_MessageDetails() {
+        thrown.expectMessage("Expected: value parsable as a boolean of value <true>");
+        thrown.expectMessage("but: was \"false\"");
+
+        assertThat("false", booleanOfValue(true));
+    }
+
+    @Test
+    public void testBooleanOfValue_ValueNotConvertible() {
+        thrown.expect(AssertionError.class);
+
+        assertThat("I am not a boolean", booleanOfValue(true));
+    }
+
+    @Test
+    public void testBooleanOfValue_ValueNotConvertible_MessageDetails() {
+        thrown.expectMessage("Expected: value parsable as a boolean of value <true>");
+        thrown.expectMessage("but: was \"I am not a boolean\"");
+
+        assertThat("I am not a boolean", booleanOfValue(true));
+    }
+
+    @Test
+    public void testBooleanOfValue_WorksWithSyntacticSugar_Is() {
+        assertThat("true", is(booleanOfValue(true)));
     }
 
     @Rule

@@ -109,21 +109,6 @@ public class XpathNodeMatchers {
         };
     }
 
-    // TODO: ICM 2015-10-12: create true() and false() instead, or as well as.
-    /**
-     * Evaluate the XPath on the root node and assert the {@link Boolean} value
-     *
-     * @param expectedValue
-     *            expected value
-     * @return a node matcher that implements the check
-     */
-    public XmlNodeMatcher booleanValue(final Boolean expectedValue) {
-        return rootNode -> {
-            throwNotImplementedYet();
-            //getChecker(rootNode).assertBoolean(expectedValue);
-        };
-    }
-
     /**
      * Creates a helper for testing the node(s) selected by the XPath
      *

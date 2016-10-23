@@ -89,6 +89,11 @@ public class XmlExampleFixture {
             root.appendChild(element);
         }
 
+        {
+            Element element = doc.createElement("AlwaysTrue");
+            element.setTextContent("true");
+            root.appendChild(element);
+        }
 
         safeDumpXmlToConsole(doc);
 

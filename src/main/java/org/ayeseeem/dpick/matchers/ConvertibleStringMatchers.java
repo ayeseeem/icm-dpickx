@@ -52,4 +52,37 @@ public class ConvertibleStringMatchers {
         };
     }
 
+    /**
+     * Factory method for a matcher that checks if a string can be converted to
+     * the specified boolean
+     * <p>
+     * Usually it is clearer to wrap this with the syntactic sugar of
+     * {@link CoreMatchers#is(Matcher)}, for example
+     * {@code is(booleanOfValue(true))}
+     *
+     * @param expected
+     *            the expected boolean
+     * @return {@code true} if it can be converted to a boolean and matches the
+     *         value; {@code false} if it does not match, or cannot be converted
+     */
+    @Factory
+    public static Matcher<String> booleanOfValue(final boolean expected) {
+        return new TypeSafeMatcher<String>() {
+            @Override
+            public boolean matchesSafely(final String s) {
+                try {
+                    final boolean actual = Boolean.valueOf(s);
+                    return actual == expected;
+                } catch (NumberFormatException e) {
+                    return false;
+                }
+            }
+
+            @Override
+            public void describeTo(final Description description) {
+                description.appendText("value parsable as a boolean of value ").appendValue(expected);
+            }
+        };
+    }
+
 }

@@ -1,5 +1,6 @@
 package org.ayeseeem.dpick.xml;
 
+import static org.ayeseeem.dpick.matchers.ConvertibleStringMatchers.booleanOfValue;
 import static org.ayeseeem.dpick.matchers.ConvertibleStringMatchers.numberOfValue;
 import static org.ayeseeem.dpick.xml.NodeMatchers.xpath;
 import static org.hamcrest.CoreMatchers.containsString;
@@ -191,11 +192,8 @@ public class IntegrationTest extends XmlExampleFixture {
     }
 
     @Test
-    public void expect_BooleanValue() throws XPathExpressionException {
-        thrown.expect(UnsupportedOperationException.class);
-        thrown.expectMessage("Not implemented yet");
-
-        XmlDocumentChecker.check(eg).andExpect(xpath("/AlwaysTrue").booleanValue(true));
+    public void expect_Value_BooleanMatcher() throws XPathExpressionException {
+        XmlDocumentChecker.check(eg).andExpect(xpath("//AlwaysTrue").value(is(booleanOfValue(true))));
     }
 
     @Rule
