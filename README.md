@@ -7,16 +7,16 @@ Library for extracting and checking parts of an XML document
 TODO
 ----
 
-- [ ] Include failing node number in error messages
-- [ ] Throw a library-specific `Error` instead of (or perhaps extension of)
-      `AssertionError`
-- [ ] Do something with `andDo` - come up with an example usage?
-- [ ] Ensure that partial or poor implementations of `NodeSelectionChecker`
-      methods fail by default, rather than pass by default
+- [ ] Include failing node number in error messages?
 - [ ] Capture required value
 - [ ] Capture optional value
 - [ ] Capture First or Capture Sole? (=> node count == 1)
 - [ ] Capture All for multiple nodes
+- [ ] Throw a library-specific `Error` instead of (or perhaps extension of)
+      `AssertionError`?
+- [ ] Do something with `andDo` - come up with an example usage?
+- [ ] Ensure that partial or poor implementations of `NodeSelectionChecker`
+      methods fail by default, rather than pass by default
 - [ ] Consider
       [XMLUnit](http://www.xmlunit.org/) - use to implement some of the internal
       XPath evaluations etc, and/or document using it explicitly in parallel
