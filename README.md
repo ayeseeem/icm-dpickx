@@ -120,9 +120,19 @@ TODO
       document tree. Check if this works, and check/change examples and tests
       to show this
 - [ ] Support XML Namespaces. The original code had some capabilities to handle
-      namespaces: does the current code?
-- [ ] Original code had helper methods to create XML documents. Consider
+      namespaces: does the current code? There is the unused, helper class
+      `DomHelper`, which shows an approach that might work. Compare it to how
+      `XpathHelper` works.
+- [x] Original code had helper methods to create XML documents. Consider
       bringing some in here.
+- [ ] Improve the documentation of the added `DomHelper` and `XmlUnmarshaller`,
+      as they are unused at the moment. This README and/or their Javadocs
+      should explain what they are for and why they've been added - see
+      preceding and following TODOs about namespaces and a command-line tool
+- [ ] **Create a tool!** - Make a command-line utility that can extract a value
+      from an XML file (using a given XPath).
+  - Use the added helper class `XmlUnmarshaller` to convert the XML file into
+      a DOM.
 - [ ] Investigate using Hamcrest
       [HasXPath](http://hamcrest.org/JavaHamcrest/javadoc/1.3/org/hamcrest/xml/HasXPath.html)
 - [ ] Investigate using Hamcrest
