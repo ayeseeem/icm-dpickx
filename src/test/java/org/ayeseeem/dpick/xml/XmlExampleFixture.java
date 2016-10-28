@@ -3,17 +3,8 @@ package org.ayeseeem.dpick.xml;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.TransformerFactoryConfigurationError;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.ayeseeem.dpick.util.xml.DomDump;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -28,11 +19,9 @@ public class XmlExampleFixture {
 
     protected final Node eg = createExampleDom();
 
-    private static final Logger logger = LoggerFactory.getLogger(XmlExampleFixture.class);
-
     static {
         Document doc = createExampleDocument();
-        safeDumpXmlToConsole(doc);
+        DomDump.safeDumpToConsole(doc);
     }
 
     private static Node createExampleDom() {
@@ -107,20 +96,4 @@ public class XmlExampleFixture {
         return doc;
     }
 
-    private static void safeDumpXmlToConsole(Document doc) {
-        try {
-            dumpXmlToConsole(doc);
-        } catch (TransformerFactoryConfigurationError | TransformerException e) {
-            logger.error("Problem dumping XML", e);
-        }
-    }
-
-    private static void dumpXmlToConsole(Document doc)
-            throws TransformerConfigurationException, TransformerFactoryConfigurationError, TransformerException {
-        Transformer transformer = TransformerFactory.newInstance().newTransformer();
-        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-        DOMSource source = new DOMSource(doc);
-        StreamResult console = new StreamResult(System.out);
-        transformer.transform(source, console);
-    }
 }
