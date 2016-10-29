@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.w3c.dom.Node;
 
 /**
- * Helper for examing XML
+ * Helper for examining XML and HTML DOMs
  *
  * @author ayeseeem@gmail.com
  *
@@ -26,20 +26,20 @@ public class DomDump {
     private static final Logger logger = LoggerFactory.getLogger(DomDump.class);
 
     /**
-     * Safely prints part of an XML DOM to the console, logging any errors
+     * Safely prints (part of) a DOM to the console, logging any errors
      *
      * @param node
-     *            part of XML DOM to print
+     *            part of DOM to print
      */
     public static void safeDumpToConsole(final Node node) {
         safeDump(node, System.out);
     }
 
     /**
-     * Safely prints part of an XML DOM, logging any errors
+     * Safely prints (part of) a DOM, logging any errors
      *
      * @param node
-     *            part of XML DOM to print
+     *            part of DOM to print
      * @param sink
      *            where to print to
      */
@@ -47,7 +47,7 @@ public class DomDump {
         try {
             dump(node, sink);
         } catch (TransformerFactoryConfigurationError | TransformerException e) {
-            logger.error("Problem dumping XML", e);
+            logger.error("Problem dumping DOM", e);
         }
     }
 
@@ -57,8 +57,8 @@ public class DomDump {
         Transformer transformer = TransformerFactory.newInstance().newTransformer();
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
         DOMSource source = new DOMSource(node);
-        StreamResult console = new StreamResult(sink);
-        transformer.transform(source, console);
+        StreamResult outputTarget = new StreamResult(sink);
+        transformer.transform(source, outputTarget);
     }
 
 }
