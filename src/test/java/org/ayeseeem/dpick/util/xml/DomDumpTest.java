@@ -1,6 +1,7 @@
 package org.ayeseeem.dpick.util.xml;
 
 import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.startsWith;
 import static org.junit.Assert.assertThat;
 
@@ -62,6 +63,19 @@ public class DomDumpTest {
         DomDump.safeDump(doc, sink);
         DomDump.safeDumpToConsole(doc);
         assertThat(dumpedString(), containsString("<SomethingUnique"));
+    }
+
+    @Test
+    public void testSafeDump_XmlDocument_Indents_2Spaces() {
+        Element root = doc.createElement("RootElement");
+        doc.appendChild(root);
+
+        root.appendChild(doc.createElement("SomethingUnique"));
+
+        DomDump.safeDump(doc, sink);
+        DomDump.safeDumpToConsole(doc);
+        assertThat(dumpedString(), containsString(" " + " " + "<SomethingUnique"));
+        assertThat(dumpedString(), not(containsString(" " + " " + " " + "<SomethingUnique")));
     }
 
     private Document doc;

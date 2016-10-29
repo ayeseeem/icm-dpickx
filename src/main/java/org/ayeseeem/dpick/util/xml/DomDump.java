@@ -55,7 +55,10 @@ public class DomDump {
     private static void dump(final Node node, final OutputStream sink)
             throws TransformerConfigurationException, TransformerFactoryConfigurationError, TransformerException {
         Transformer transformer = TransformerFactory.newInstance().newTransformer();
+
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+        transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+
         DOMSource source = new DOMSource(node);
         StreamResult outputTarget = new StreamResult(sink);
         transformer.transform(source, outputTarget);
