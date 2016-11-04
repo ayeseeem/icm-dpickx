@@ -6,6 +6,52 @@ Data Pickaxe for XML
 Library for extracting and checking parts of an XML document
 
 
+Quick Start
+-----------
+
+`icm-dpickx` lets you make assertions about your expectations for an XML
+document. The following snippets give an idea of what you can do.
+
+For an XML document like this (which you then convert to a DOM):
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<RootElement>
+  <SomethingUnique/>
+  <Repeated/>
+  <Repeated/>
+  <ElementWithSizeAttribute size="15"/>
+  <ContainsSeventeen>17</ContainsSeventeen>
+  <ContainsAttributeWithEighteen attrOf18="18">blah blah</ContainsAttributeWithEighteen>
+  <Duplicate>123</Duplicate>
+  <Duplicate>123</Duplicate>
+  <DuplicateEleDiffContent>123</DuplicateEleDiffContent>
+  <DuplicateEleDiffContent>456</DuplicateEleDiffContent>
+  <AlwaysTrue>true</AlwaysTrue>
+</RootElement>
+```
+
+You can make assertions like this:
+
+```java
+Node eg = topLevelDocumentOrSomeNodeFromXml();
+XmlDocumentChecker.check(eg)
+        .andExpect(xpath("/RootElement/SomethingUnique").exists())
+        .andExpect(xpath("//NeverExisting").doesNotExist())
+        .andExpect(xpath("//Repeated").exists())
+        .andExpect(xpath("//Repeated").nodeCount(2))
+        .andExpect(xpath("/NeverExistingTopLevel").doesNotExist())
+        .andExpect(xpath("//ContainsSeventeen").value(is("17")))
+        .andExpect(xpath("//ContainsSeventeen").value(containsString("7")))
+        .andExpect(xpath("//ContainsSeventeen").value(StringStartsWith.startsWith("1")))
+        .andExpect(xpath("//ContainsSeventeen").value(is(numberOfValue(17.0))))
+        .andExpect(xpath("//ElementWithSizeAttribute/@size").exists())
+        .andExpect(xpath("//ElementWithSizeAttribute/@size").value(is("15")))
+        ;
+```
+
+To see more examples, see [Examples.java](https://github.com/ayeseeem/icm-dpickx/blob/master/src/test/java/org/ayeseeem/dpick/xml/Examples.java "Examples")
+
+
 TODO
 ----
 

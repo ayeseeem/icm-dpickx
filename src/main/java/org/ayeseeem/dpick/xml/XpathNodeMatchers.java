@@ -95,7 +95,6 @@ public class XpathNodeMatchers {
     /**
      * Evaluates the XPath on the root node and checks the node's text content
      * with the given Hamcrest {@link Matcher}
-     * <p>
      *
      * @param matcher
      *            a matcher to check the string value

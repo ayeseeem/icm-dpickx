@@ -21,16 +21,18 @@ public class Examples extends XmlExampleFixture {
 
     @Test
     public void exampleComplexCheck_ValidXml() throws XPathExpressionException {
-        XmlDocumentChecker.check(eg).andExpect(xpath("/RootElement/SomethingUnique").exists())
+        XmlDocumentChecker.check(eg)
+                .andExpect(xpath("/RootElement/SomethingUnique").exists())
+                .andExpect(xpath("//NeverExisting").doesNotExist())
                 .andExpect(xpath("//Repeated").exists())
                 .andExpect(xpath("//Repeated").nodeCount(2))
-                .andExpect(xpath("//NeverExisting").doesNotExist())
                 .andExpect(xpath("/NeverExistingTopLevel").doesNotExist())
-                .andExpect(xpath("//ElementWithSizeAttribute/@size").exists())
                 .andExpect(xpath("//ContainsSeventeen").value(is("17")))
                 .andExpect(xpath("//ContainsSeventeen").value(containsString("7")))
                 .andExpect(xpath("//ContainsSeventeen").value(StringStartsWith.startsWith("1")))
                 .andExpect(xpath("//ContainsSeventeen").value(is(numberOfValue(17.0))))
+                .andExpect(xpath("//ElementWithSizeAttribute/@size").exists())
+                .andExpect(xpath("//ElementWithSizeAttribute/@size").value(is("15")))
                 ;
     }
 
