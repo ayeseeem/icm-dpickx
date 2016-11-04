@@ -4,12 +4,17 @@ import static org.ayeseeem.dpick.matchers.ConvertibleStringMatchers.numberOfValu
 import static org.ayeseeem.dpick.xml.NodeMatchers.xpath;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.xpath.XPathExpressionException;
 
 import org.hamcrest.core.StringStartsWith;
 import org.junit.Test;
+import org.w3c.dom.Node;
 
 /**
  * Examples of usage as JUnit tests
@@ -47,6 +52,21 @@ public class Examples extends XmlExampleFixture {
             final String status = "Document is not Version 3";
             // Do something about it
         }
+    }
+
+    @Test
+    public void exampleProcessingSelectedNodes() throws XPathExpressionException {
+        List<Node> fakeConsumer = new ArrayList<>();
+
+        XmlDocumentChecker.check(eg)
+                .andExpect(xpath("//Repeated").nodeCount(2))
+                .andDo(xpath("//Repeated").processEach(node -> fakeConsumer.add(node)))
+                .andDo(xpath("//Repeated").processEach(node -> {
+                    // do something complicated with node
+                }))
+                ;
+
+        assertThat(fakeConsumer.size(), is(2));
     }
 
 }

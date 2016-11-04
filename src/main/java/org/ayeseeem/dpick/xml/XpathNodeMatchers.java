@@ -109,6 +109,26 @@ public class XpathNodeMatchers {
     }
 
     /**
+     * Evaluates the XPath on the root node and then processes each matching
+     * node with the given {@link XmlNodeHandler}
+     *
+     * @param nodeHandler
+     *            a handler to process a {@link Node}
+     * @return a new node handler that applies {@code nodeHander} to each
+     *         matched node
+     */
+    public XmlNodeHandler processEach(XmlNodeHandler nodeHandler) {
+        return rootNode -> {
+            final NodeList nodeList = selectNodes(rootNode);
+            assert nodeList != null;
+            for (int i = 0; i < nodeList.getLength(); i++) {
+                final Node node = nodeList.item(i);
+                nodeHandler.handle(node);
+            }
+        };
+    }
+
+    /**
      * Creates a helper for testing the node(s) selected by the XPath
      *
      * @param rootNode
@@ -116,12 +136,17 @@ public class XpathNodeMatchers {
      * @return a helper object
      */
     private NodeSelectionChecker getChecker(Node rootNode) {
-        final NodeList nodes = xpathHelper.getNodes(rootNode);
+        final NodeList nodes = selectNodes(rootNode);
         return new NodeSelectionChecker(nodes, "XPath " + xpathHelper.getXPath());
     }
 
+    private NodeList selectNodes(Node rootNode) {
+        final NodeList nodes = xpathHelper.getNodes(rootNode);
+        return nodes;
+    }
+
     /**
-     * common way to mark the methods that have not been implemented yet
+     * Common way to mark the methods that have not been implemented yet
      *
      * @throws UnsupportedOperationException
      *             always

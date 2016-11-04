@@ -5,6 +5,11 @@ import static org.ayeseeem.dpick.matchers.ConvertibleStringMatchers.numberOfValu
 import static org.ayeseeem.dpick.xml.NodeMatchers.xpath;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.xml.transform.TransformerException;
 import javax.xml.xpath.XPathExpressionException;
@@ -13,6 +18,7 @@ import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.w3c.dom.Node;
 
 /**
  * Test all main usages using end-to-end examples
@@ -203,6 +209,29 @@ public class IntegrationTest extends XmlExampleFixture {
     @Test
     public void expect_Value_BooleanMatcher() throws XPathExpressionException {
         XmlDocumentChecker.check(eg).andExpect(xpath("//AlwaysTrue").value(is(booleanOfValue(true))));
+    }
+
+    @Test
+    public void do_ProcessEach() throws XPathExpressionException {
+        List<String> spy = new ArrayList<>();
+
+        XmlDocumentChecker.check(eg)
+                .andExpect(xpath("//DuplicateEleDiffContent").nodeCount(2))
+                .andDo(xpath("//DuplicateEleDiffContent")
+                        .processEach(node -> spy.add(node.getTextContent())));
+
+        assertThat(spy, is(Arrays.asList("123", "456")));
+    }
+
+    @Test
+    public void do_ProcessEach_NoNodesFound() throws XPathExpressionException {
+        List<Node> spy = new ArrayList<>();
+
+        XmlDocumentChecker.check(eg)
+                .andExpect(xpath("//NeverExisting").nodeCount(0))
+                .andDo(xpath("//NeverExisting").processEach(spy::add));
+
+        assertThat(spy.isEmpty(), is(true));
     }
 
     @Rule

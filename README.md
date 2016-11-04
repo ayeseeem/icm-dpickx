@@ -10,7 +10,8 @@ Quick Start
 -----------
 
 `icm-dpickx` lets you make assertions about your expectations for an XML
-document. The following snippets give an idea of what you can do.
+document, and lets you process nodes, as selected by an XPath. The following
+snippets give an idea of what you can do.
 
 For an XML document like this (which you then convert to a DOM):
 ```xml
@@ -49,6 +50,19 @@ XmlDocumentChecker.check(eg)
         ;
 ```
 
+And you can select and process nodes like this:
+
+```java
+List<Node> fakeConsumer = new ArrayList<>();
+XmlDocumentChecker.check(eg)
+        .andExpect(xpath("//Repeated").nodeCount(2))
+        .andDo(xpath("//Repeated").processEach(node -> fakeConsumer.add(node)))
+        .andDo(xpath("//Repeated").processEach(node -> {
+            // do something complicated with node
+        }))
+        ;
+```
+
 To see more examples, see [Examples.java](https://github.com/ayeseeem/icm-dpickx/blob/master/src/test/java/org/ayeseeem/dpick/xml/Examples.java "Examples")
 
 
@@ -62,7 +76,6 @@ TODO
 - [ ] Capture All for multiple nodes
 - [ ] Throw a library-specific `Error` instead of (or perhaps extension of)
       `AssertionError`?
-- [ ] Do something with `andDo` - come up with an example usage?
 - [ ] Ensure that partial or poor implementations of `NodeSelectionChecker`
       methods fail by default, rather than pass by default
 - [ ] Consider
