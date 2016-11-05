@@ -9,11 +9,16 @@ Library for extracting and checking parts of an XML document
 Quick Start
 -----------
 
-`icm-dpickx` lets you make assertions about your expectations for an XML
-document, and lets you process nodes, as selected by an XPath. The following
-snippets give an idea of what you can do.
+`icm-dpickx` lets you use XPaths to select nodes in an XML document and then
+do the following:
 
-For an XML document like this (which you then convert to a DOM):
+  - Express your expectations/make assertions about the selected nodes
+  - Process the selected nodes
+  - Capture the values of selected nodes
+  
+The following snippets give an idea of what you can do.
+
+For an XML document like this:
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <RootElement>
@@ -31,7 +36,7 @@ For an XML document like this (which you then convert to a DOM):
 </RootElement>
 ```
 
-You can make assertions like this:
+Convert it to a DOM, then you can make assertions like this:
 
 ```java
 Node eg = topLevelDocumentOrSomeNodeFromXml();
@@ -63,6 +68,18 @@ XmlDocumentChecker.check(eg)
         ;
 ```
 
+And you can capture a node's value like this:
+
+```java
+final Capturer drivingAge = new Capturer();
+
+XmlDocumentChecker.check(eg)
+        .andDo(xpath("//ContainsSeventeen").captureSoleRequired(drivingAge));
+
+// do something with captured value...
+assertThat(drivingAge.value().get(), is("17"));
+```
+
 To see more examples, see [Examples.java](https://github.com/ayeseeem/icm-dpickx/blob/master/src/test/java/org/ayeseeem/dpick/xml/Examples.java "Examples")
 
 
@@ -70,10 +87,11 @@ TODO
 ----
 
 - [ ] Include failing node number in error messages?
-- [ ] Capture required value
 - [ ] Capture optional value
-- [ ] Capture First or Capture Sole? (=> node count == 1)
+- [ ] Capture First value (c.f. Capture Sole)? (=> node count >= 1)
 - [ ] Capture All for multiple nodes
+- [ ] Consider a cleaner way to do capture, just returning an `Optional`,
+      rather than passing in a `Capturer`?
 - [ ] Throw a library-specific `Error` instead of (or perhaps extension of)
       `AssertionError`?
 - [ ] Ensure that partial or poor implementations of `NodeSelectionChecker`

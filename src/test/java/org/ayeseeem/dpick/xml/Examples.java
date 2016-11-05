@@ -69,4 +69,15 @@ public class Examples extends XmlExampleFixture {
         assertThat(fakeConsumer.size(), is(2));
     }
 
+    @Test
+    public void exampleCapturingRequiredValue() throws XPathExpressionException {
+        final Capturer drivingAge = new Capturer();
+
+        XmlDocumentChecker.check(eg)
+                .andDo(xpath("//ContainsSeventeen").captureSoleRequired(drivingAge));
+
+        // do something with captured value...
+        assertThat(drivingAge.value().get(), is("17"));
+    }
+
 }

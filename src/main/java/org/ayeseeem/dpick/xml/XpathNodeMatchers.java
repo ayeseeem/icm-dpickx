@@ -129,6 +129,25 @@ public class XpathNodeMatchers {
     }
 
     /**
+     * Creates a helper for capturing a single, required node specified by the
+     * XPath
+     *
+     * @param capturer
+     *            a capturer to capture the node's value
+     * @return a new node handler that uses the {@code capturer} to capture the
+     *         node's value
+     */
+    public XmlNodeHandler captureSoleRequired(Capturer capturer) {
+        return rootNode -> {
+            getChecker(rootNode).exists();
+            getChecker(rootNode).hasNodes(1);
+
+            final NodeList nodes = selectNodes(rootNode);
+            capturer.capture(nodes.item(0));
+        };
+    }
+
+    /**
      * Creates a helper for testing the node(s) selected by the XPath
      *
      * @param rootNode

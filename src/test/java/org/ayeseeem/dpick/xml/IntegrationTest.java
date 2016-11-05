@@ -234,6 +234,55 @@ public class IntegrationTest extends XmlExampleFixture {
         assertThat(spy.isEmpty(), is(true));
     }
 
+    @Test
+    public void do_CaptureSoleRequired() throws XPathExpressionException {
+        final Capturer capturer = new Capturer();
+        assertThat(capturer.value().isPresent(), is(false));
+
+        XmlDocumentChecker.check(eg)
+                .andDo(xpath("//ContainsSeventeen").captureSoleRequired(capturer));
+
+        assertThat(capturer.value().isPresent(), is(true));
+        assertThat(capturer.value().get(), is("17"));
+    }
+
+    @Test
+    public void do_CaptureSoleRequired_MoreThanOneNodeFound() throws XPathExpressionException {
+        thrown.expect(AssertionError.class);
+        thrown.expectMessage("Expected 1 nodes for XPath //Repeated, not 2");
+
+        XmlDocumentChecker.check(eg)
+                .andDo(xpath("//Repeated").captureSoleRequired(null));
+    }
+
+    @Test
+    public void do_CaptureSoleRequired_NonExistentElement() throws XPathExpressionException {
+        thrown.expect(AssertionError.class);
+        thrown.expectMessage("XPath //NeverExisting does not exist");
+
+        XmlDocumentChecker.check(eg)
+                .andDo(xpath("//NeverExisting").captureSoleRequired(null));
+    }
+
+    @Test
+    public void do_CaptureSoleRequired_Attribute() throws XPathExpressionException {
+        final Capturer capturer = new Capturer();
+
+        XmlDocumentChecker.check(eg)
+                .andDo(xpath("//ElementWithSizeAttribute/@size").captureSoleRequired(capturer));
+
+        assertThat(capturer.value().get(), is("15"));
+    }
+
+    @Test
+    public void do_CaptureSoleRequired_NonExistentAttribute() throws XPathExpressionException {
+        thrown.expect(AssertionError.class);
+        thrown.expectMessage("XPath //ElementWithSizeAttribute/@nonExistentAttribute does not exist");
+
+        XmlDocumentChecker.check(eg)
+                .andDo(xpath("//ElementWithSizeAttribute/@nonExistentAttribute").captureSoleRequired(null));
+    }
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 

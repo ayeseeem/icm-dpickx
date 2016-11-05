@@ -13,7 +13,7 @@
 
   <groupId>org.ayeseeem</groupId>
   <artifactId>icm-dpickx</artifactId>
-  <version>0.5.0</version>
+  <version>0.6.0</version>
   <packaging>jar</packaging>
 
   <name>Data Pickaxe for XML</name>
