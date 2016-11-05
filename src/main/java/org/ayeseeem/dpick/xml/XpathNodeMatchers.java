@@ -9,7 +9,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- * Static methods for making assertions about XML Nodes found by XPath
+ * Static methods for making assertions about DOM {@link Node}s found by XPath
  * expressions
  *
  * @author ayeseeem@gmail.com
@@ -50,7 +50,7 @@ public class XpathNodeMatchers {
      *            a matcher to check the node
      * @return a node matcher that implements the check
      */
-    public XmlNodeMatcher node(final Matcher<? super Node> matcher) {
+    public NodeMatcher node(final Matcher<? super Node> matcher) {
         return rootNode -> {
             throwNotImplementedYet();
             //getChecker(rootNode).assertNode(matcher);
@@ -62,7 +62,7 @@ public class XpathNodeMatchers {
      *
      * @return a node matcher that checks the node exists
      */
-    public XmlNodeMatcher exists() {
+    public NodeMatcher exists() {
         return rootNode -> {
             getChecker(rootNode).exists();
         };
@@ -73,7 +73,7 @@ public class XpathNodeMatchers {
      *
      * @return a node matcher that checks the node does not exist
      */
-    public XmlNodeMatcher doesNotExist() {
+    public NodeMatcher doesNotExist() {
         return rootNode -> {
             getChecker(rootNode).doesNotExist();
         };
@@ -86,7 +86,7 @@ public class XpathNodeMatchers {
      *            the expected node count
      * @return a node matcher that implements the check
      */
-    public XmlNodeMatcher nodeCount(final int expectedCount) {
+    public NodeMatcher nodeCount(final int expectedCount) {
         return rootNode -> {
             getChecker(rootNode).hasNodes(expectedCount);
         };
@@ -100,7 +100,7 @@ public class XpathNodeMatchers {
      *            a matcher to check the string value
      * @return a node matcher that implements the check
      */
-    public XmlNodeMatcher value(final Matcher<String> matcher) {
+    public NodeMatcher value(final Matcher<String> matcher) {
         return rootNode -> {
             NodeSelectionChecker checker = getChecker(rootNode);
             checker.exists();
@@ -110,14 +110,14 @@ public class XpathNodeMatchers {
 
     /**
      * Evaluates the XPath on the root node and then processes each matching
-     * node with the given {@link XmlNodeHandler}
+     * node with the given {@link NodeHandler}
      *
      * @param nodeHandler
      *            a handler to process a {@link Node}
      * @return a new node handler that applies {@code nodeHander} to each
      *         matched node
      */
-    public XmlNodeHandler processEach(XmlNodeHandler nodeHandler) {
+    public NodeHandler processEach(NodeHandler nodeHandler) {
         return rootNode -> {
             final NodeList nodeList = selectNodes(rootNode);
             assert nodeList != null;
@@ -137,7 +137,7 @@ public class XpathNodeMatchers {
      * @return a new node handler that uses the {@code capturer} to capture the
      *         node's value
      */
-    public XmlNodeHandler captureSoleRequired(Capturer capturer) {
+    public NodeHandler captureSoleRequired(Capturer capturer) {
         return rootNode -> {
             getChecker(rootNode).exists();
             getChecker(rootNode).hasNodes(1);

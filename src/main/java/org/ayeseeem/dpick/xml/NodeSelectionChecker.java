@@ -9,8 +9,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- * Class to help make assertions about a selection of XML Nodes, for example
- * when selected by XPath expressions
+ * Class to help make assertions about a selection of DOM {@link Node}s, for
+ * example when selected by XPath expressions
  *
  * @author ayeseeem@gmail.com
  *
