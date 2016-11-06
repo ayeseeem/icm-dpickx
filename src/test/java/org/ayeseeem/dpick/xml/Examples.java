@@ -17,7 +17,8 @@ import org.junit.Test;
 import org.w3c.dom.Node;
 
 /**
- * Examples of usage as JUnit tests
+ * Examples of usage as JUnit tests. For more examples, see the
+ * {@link IntegrationTest}s.
  *
  * @author ayeseeem@gmail.com
  *
@@ -71,13 +72,11 @@ public class Examples extends XmlExampleFixture {
 
     @Test
     public void exampleCapturingRequiredValue() throws XPathExpressionException {
-        final Capturer drivingAge = new Capturer();
-
-        XmlDocumentChecker.check(eg)
-                .andDo(xpath("//ContainsSeventeen").captureSoleRequired(drivingAge));
+        XmlDocumentChecker checker = new XmlDocumentChecker(eg);
+        String drivingAge = checker.captureSoleRequired(xpath("//ContainsSeventeen"));
 
         // do something with captured value...
-        assertThat(drivingAge.value().get(), is("17"));
+        assertThat(drivingAge, is("17"));
     }
 
 }

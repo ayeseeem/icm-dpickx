@@ -235,6 +235,32 @@ public class IntegrationTest extends XmlExampleFixture {
     }
 
     @Test
+    public void direct_CaptureSoleRequired() throws XPathExpressionException {
+        XmlDocumentChecker checker = new XmlDocumentChecker(eg);
+        String textValue = checker.captureSoleRequired(xpath("//ContainsSeventeen"));
+
+        assertThat(textValue, is("17"));
+    }
+
+    @Test
+    public void direct_CaptureSoleRequired_MoreThanOneNodeFound() throws XPathExpressionException {
+        thrown.expect(AssertionError.class);
+        thrown.expectMessage("Expected 1 nodes for XPath //Repeated, not 2");
+
+        XmlDocumentChecker checker = new XmlDocumentChecker(eg);
+        checker.captureSoleRequired(xpath("//Repeated"));
+    }
+
+    @Test
+    public void direct_CaptureSoleRequired_NonExistentElement() throws XPathExpressionException {
+        thrown.expect(AssertionError.class);
+        thrown.expectMessage("XPath //NeverExisting does not exist");
+
+        XmlDocumentChecker checker = new XmlDocumentChecker(eg);
+        checker.captureSoleRequired(xpath("//NeverExisting"));
+    }
+
+    @Test
     public void do_CaptureSoleRequired() throws XPathExpressionException {
         final Capturer capturer = new Capturer();
         assertThat(capturer.value().isPresent(), is(false));

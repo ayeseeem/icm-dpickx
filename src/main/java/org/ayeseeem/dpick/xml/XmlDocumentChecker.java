@@ -10,6 +10,23 @@ import org.w3c.dom.Node;
  *
  */
 public class XmlDocumentChecker {
+
+    private final Node rootNode;
+
+    public XmlDocumentChecker(Node rootNode) {
+        this.rootNode = rootNode;
+    }
+
+    public String captureSoleRequired(XpathNodeMatchers xpathNodeMatchers) {
+        final Capturer capturer = new Capturer();
+
+        XmlDocumentChecker.check(rootNode)
+                .andDo(xpathNodeMatchers.captureSoleRequired(capturer));
+
+        assert capturer.value().isPresent();
+        return capturer.value().get();
+    }
+
     public static NodeActions check(Node rootNode) {
         return new NodeActions() {
             @Override

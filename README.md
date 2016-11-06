@@ -71,13 +71,11 @@ XmlDocumentChecker.check(eg)
 And you can capture a node's value like this:
 
 ```java
-final Capturer drivingAge = new Capturer();
-
-XmlDocumentChecker.check(eg)
-        .andDo(xpath("//ContainsSeventeen").captureSoleRequired(drivingAge));
+XmlDocumentChecker checker = new XmlDocumentChecker(eg);
+String drivingAge = checker.captureSoleRequired(xpath("//ContainsSeventeen"));
 
 // do something with captured value...
-assertThat(drivingAge.value().get(), is("17"));
+assertThat(drivingAge, is("17"));
 ```
 
 To see more examples, see [Examples.java](https://github.com/ayeseeem/icm-dpickx/blob/master/src/test/java/org/ayeseeem/dpick/xml/Examples.java "Examples")
@@ -90,8 +88,10 @@ TODO
 - [ ] Capture optional value
 - [ ] Capture First value (c.f. Capture Sole)? (=> node count >= 1)
 - [ ] Capture All for multiple nodes
-- [ ] Consider a cleaner way to do capture, just returning an `Optional`,
-      rather than passing in a `Capturer`?
+- [ ] Templatize the capture methods to return specific types, not just
+      `String`s
+- [ ] Consider if the more complicated ways of doing capture are still needed:
+      can the whole mechanism be simplified?
 - [ ] Throw a library-specific `Error` instead of (or perhaps extension of)
       `AssertionError`?
 - [ ] Ensure that partial or poor implementations of `NodeSelectionChecker`
