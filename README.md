@@ -15,10 +15,11 @@ do the following:
   - Express your expectations/make assertions about the selected nodes
   - Process the selected nodes
   - Capture the values of selected nodes
-  
+
 The following snippets give an idea of what you can do.
 
 For an XML document like this:
+
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <RootElement>
