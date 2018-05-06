@@ -71,7 +71,7 @@ public class ConvertibleStringMatchers {
             @Override
             public boolean matchesSafely(final String s) {
                 try {
-                    final boolean actual = Boolean.valueOf(s);
+                    final boolean actual = Boolean.parseBoolean(s);
                     return actual == expected;
                 } catch (NumberFormatException e) {
                     return false;
