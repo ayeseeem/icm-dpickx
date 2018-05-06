@@ -1,3 +1,6 @@
+License
+=======
+
 The intention is to license this software under the common open source licenses.
 
 It is explicitly licensed under the following licenses:
