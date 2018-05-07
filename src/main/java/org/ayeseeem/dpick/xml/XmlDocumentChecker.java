@@ -26,6 +26,24 @@ public class XmlDocumentChecker {
         return value.get();
     }
 
+    /**
+     * Captures the value of the single, optional node specified by the XPath
+     * matchers. The current definition is that there can be one or zero values; it
+     * does not have to be there - it's optional - but if it's there, it must be the
+     * only one: there cannot be more than one.
+     * 
+     * @param xpathNodeMatchers the XPath to capture from
+     * @return an {@code Optional} for the possible value 
+     */
+    public Optional<String> captureSoleOptional(XpathNodeMatchers xpathNodeMatchers) {
+        final Capturer capturer = new Capturer();
+
+        XmlDocumentChecker.check(rootNode)
+                .andDo(xpathNodeMatchers.captureSoleOptional(capturer));
+
+        return capturer.value();
+    }
+
     public static NodeActions check(Node rootNode) {
         return new NodeActions() {
             @Override

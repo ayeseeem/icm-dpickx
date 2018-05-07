@@ -12,6 +12,7 @@ import static org.hamcrest.core.IsInstanceOf.instanceOf;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.xml.transform.TransformerException;
 import javax.xml.xpath.XPathExpressionException;
@@ -268,6 +269,32 @@ public class IntegrationTest extends XmlExampleFixture {
     }
 
     @Test
+    public void direct_CaptureSoleOptional() throws XPathExpressionException {
+        XmlDocumentChecker checker = new XmlDocumentChecker(eg);
+        Optional<?> textValue = checker.captureSoleOptional(xpath("//ContainsSeventeen"));
+
+        assertThat(textValue.isPresent(), is(true));
+        assertThat(textValue.get(), is("17"));
+    }
+
+    @Test
+    public void direct_CaptureSoleOptional_MoreThanOneNodeFound() throws XPathExpressionException {
+        thrown.expect(AssertionError.class);
+        thrown.expectMessage("Expected 1 nodes for XPath //Repeated, not 2");
+
+        XmlDocumentChecker checker = new XmlDocumentChecker(eg);
+        checker.captureSoleOptional(xpath("//Repeated"));
+    }
+
+    @Test
+    public void direct_CaptureSoleOptional_NonExistentElement() throws XPathExpressionException {
+        XmlDocumentChecker checker = new XmlDocumentChecker(eg);
+        Optional<?> textValue = checker.captureSoleOptional(xpath("//NeverExisting"));
+
+        assertThat(textValue.isPresent(), is(false));
+    }
+
+    @Test
     public void do_CaptureSoleRequired() throws XPathExpressionException {
         final Capturer capturer = new Capturer();
         assertThat(capturer.value().isPresent(), is(false));
@@ -314,6 +341,57 @@ public class IntegrationTest extends XmlExampleFixture {
 
         XmlDocumentChecker.check(eg)
                 .andDo(xpath("//ElementWithSizeAttribute/@nonExistentAttribute").captureSoleRequired(null));
+    }
+
+    @Test
+    public void do_CaptureSoleOptional() throws XPathExpressionException {
+        final Capturer capturer = new Capturer();
+        assertThat(capturer.value().isPresent(), is(false));
+
+        XmlDocumentChecker.check(eg)
+                .andDo(xpath("//ContainsSeventeen").captureSoleOptional(capturer));
+
+        assertThat(capturer.value().isPresent(), is(true));
+        assertThat(capturer.value().get(), is("17"));
+    }
+
+    @Test
+    public void do_CaptureSoleOptional_MoreThanOneNodeFound() throws XPathExpressionException {
+        thrown.expect(AssertionError.class);
+        thrown.expectMessage("Expected 1 nodes for XPath //Repeated, not 2");
+
+        XmlDocumentChecker.check(eg)
+                .andDo(xpath("//Repeated").captureSoleOptional(null));
+    }
+
+    @Test
+    public void do_CaptureSoleOptional_NonExistentElement() throws XPathExpressionException {
+        final Capturer capturer = new Capturer();
+
+        XmlDocumentChecker.check(eg)
+                .andDo(xpath("//NeverExisting").captureSoleOptional(capturer));
+
+        assertThat(capturer.value().isPresent(), is(false));
+    }
+
+    @Test
+    public void do_CaptureSoleOptional_Attribute() throws XPathExpressionException {
+        final Capturer capturer = new Capturer();
+
+        XmlDocumentChecker.check(eg)
+                .andDo(xpath("//ElementWithSizeAttribute/@size").captureSoleOptional(capturer));
+
+        assertThat(capturer.value().get(), is("15"));
+    }
+
+    @Test
+    public void do_CaptureSoleOptional_NonExistentAttribute() throws XPathExpressionException {
+        final Capturer capturer = new Capturer();
+
+        XmlDocumentChecker.check(eg)
+                .andDo(xpath("//ElementWithSizeAttribute/@nonExistentAttribute").captureSoleOptional(capturer));
+
+        assertThat(capturer.value().isPresent(), is(false));
     }
 
     @Rule

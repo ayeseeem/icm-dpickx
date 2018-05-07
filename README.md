@@ -80,6 +80,17 @@ String drivingAge = checker.captureSoleRequired(xpath("//ContainsSeventeen"));
 assertThat(drivingAge, is("17"));
 ```
 
+You can also capture optional values, like this:
+
+```java
+String drivingAge = checker.captureSoleOptional(xpath("//ContainsSeventeen")).orElse("21");
+assertThat(drivingAge, is("17"));
+
+String votingAge = checker.captureSoleOptional(xpath("//DoesContainVotingAge")).orElse("18");
+assertThat(votingAge, is("18"));
+```
+
+
 To see more examples, see [`Examples.java`](https://github.com/ayeseeem/icm-dpickx/blob/master/src/test/java/org/ayeseeem/dpick/xml/test/Examples.java "Examples")
 
 

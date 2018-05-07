@@ -99,4 +99,15 @@ public class Examples extends XmlExampleFixture {
         }
     }
 
+    @Test
+    public void exampleCapturingOptionalValues() throws XPathExpressionException {
+        XmlDocumentChecker checker = new XmlDocumentChecker(eg);
+
+        String drivingAge = checker.captureSoleOptional(xpath("//ContainsSeventeen")).orElse("21");
+        assertThat(drivingAge, is("17"));
+
+        String votingAge = checker.captureSoleOptional(xpath("//DoesContainVotingAge")).orElse("18");
+        assertThat(votingAge, is("18"));
+    }
+
 }

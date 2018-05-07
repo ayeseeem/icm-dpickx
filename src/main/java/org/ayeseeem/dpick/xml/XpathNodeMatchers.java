@@ -141,6 +141,32 @@ public class XpathNodeMatchers {
         };
     }
 
+    /**
+     * Creates a helper for capturing a single, optional node specified by the
+     * XPath. The precise definition of "single, optional node" is specified is
+     * {@link XmlDocumentChecker#captureSoleOptional(XpathNodeMatchers)}, but it is
+     * implemented here.
+     *
+     * @param capturer
+     *            a capturer to capture the node's value
+     * @return a new node handler that uses the {@code capturer} to capture the
+     *         node's value
+     */
+    public NodeHandler captureSoleOptional(Capturer capturer) {
+        return rootNode -> {
+            final NodeList nodes = selectNodes(rootNode);
+            if (nodes.getLength() > 0) {
+                matcherFromHandler(selection -> {
+                    selection.exists();
+                    selection.hasNodes(1);
+                }).match(rootNode);
+                capturer.capture(nodes.item(0));
+            } else {
+                matcherFromHandler(NodeSelectionChecker::doesNotExist).match(rootNode);
+            }
+        };
+    }
+
     private NodeList selectCheckedNodes(Node rootNode, Checks checks) {
         final NodeList nodes = selectNodes(rootNode);
         NodeSelectionChecker checker = new NodeSelectionChecker(nodes, "XPath " + xpathHelper.getXPath());
