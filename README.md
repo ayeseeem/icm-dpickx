@@ -107,7 +107,8 @@ TODO
 - [ ] Support XML Namespaces. The original code had some capabilities to handle
       namespaces: does the current code?
 - [ ] Original code had helper methods to create XML documents. Consider
-      bringing some in here. 
+      bringing some in here.
+
 
 Origin
 ------
@@ -121,3 +122,12 @@ It was originally inspired by some of the XPath matching in
 but I needed something more general for XML (and JSON), and I wanted
 something that would eventually allow me to capture required or optional
 values from the node too.
+
+
+Coding Standard
+---------------
+
+Currently uses the "Eclipse [Built-in]" settings in Eclipse/Spring STS, for
+Java > Code Style's Clean Up and Formatter.
+
+- **Except** uses 4 spaces for indentation, not tab.
