@@ -3,7 +3,7 @@ package org.ayeseeem.dpick.matchers;
 import static org.ayeseeem.dpick.matchers.ConvertibleStringMatchers.booleanOfValue;
 import static org.ayeseeem.dpick.matchers.ConvertibleStringMatchers.numberOfValue;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.junit.Rule;
 import org.junit.Test;

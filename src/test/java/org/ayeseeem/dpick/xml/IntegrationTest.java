@@ -5,8 +5,8 @@ import static org.ayeseeem.dpick.matchers.ConvertibleStringMatchers.numberOfValu
 import static org.ayeseeem.dpick.xml.NodeMatchers.xpath;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
-import static org.junit.Assert.assertThat;
 
 import java.util.ArrayList;
 import java.util.Arrays;

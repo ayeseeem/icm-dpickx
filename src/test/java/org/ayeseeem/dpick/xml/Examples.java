@@ -4,8 +4,8 @@ import static org.ayeseeem.dpick.matchers.ConvertibleStringMatchers.numberOfValu
 import static org.ayeseeem.dpick.xml.NodeMatchers.xpath;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.StringStartsWith.startsWith;
-import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
