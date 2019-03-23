@@ -48,7 +48,7 @@ public class NodeSelectionChecker {
         assertTrue(length == expectedCount, "Expected " + expectedCount + " nodes for " + this.selectionExpression + ", not " + length);
     }
 
-    public void assertMatch(final Matcher<String> matcher) {
+    public void assertMatch(Matcher<String> matcher) {
         final List<String> valueStrings = getValueStrings(nodes);
         valueStrings.forEach(valueString -> {
             final String value = valueString;

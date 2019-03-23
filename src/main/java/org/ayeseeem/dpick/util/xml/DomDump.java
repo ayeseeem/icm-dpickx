@@ -31,7 +31,7 @@ public class DomDump {
      * @param node
      *            part of DOM to print
      */
-    public static void safeDumpToConsole(final Node node) {
+    public static void safeDumpToConsole(Node node) {
         safeDump(node, System.out);
     }
 
@@ -43,7 +43,7 @@ public class DomDump {
      * @param sink
      *            where to print to
      */
-    public static void safeDump(final Node node, final OutputStream sink) {
+    public static void safeDump(Node node, OutputStream sink) {
         try {
             dump(node, sink);
         } catch (TransformerFactoryConfigurationError | TransformerException e) {
@@ -52,7 +52,7 @@ public class DomDump {
     }
 
     // TODO: ICM 2016-10-29: Separate into constructor with exceptions and dump with exceptions
-    private static void dump(final Node node, final OutputStream sink)
+    private static void dump(Node node, OutputStream sink)
             throws TransformerConfigurationException, TransformerFactoryConfigurationError, TransformerException {
         Transformer transformer = TransformerFactory.newInstance().newTransformer();
 

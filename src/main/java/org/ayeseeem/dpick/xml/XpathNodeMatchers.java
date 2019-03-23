@@ -50,7 +50,7 @@ public class XpathNodeMatchers {
      *            a matcher to check the node
      * @return a node matcher that implements the check
      */
-    public NodeMatcher node(final Matcher<? super Node> matcher) {
+    public NodeMatcher node(Matcher<? super Node> matcher) {
         return rootNode -> {
             throwNotImplementedYet();
             //getChecker(rootNode).assertNode(matcher);
@@ -86,7 +86,7 @@ public class XpathNodeMatchers {
      *            the expected node count
      * @return a node matcher that implements the check
      */
-    public NodeMatcher nodeCount(final int expectedCount) {
+    public NodeMatcher nodeCount(int expectedCount) {
         return rootNode -> {
             getChecker(rootNode).hasNodes(expectedCount);
         };
@@ -100,7 +100,7 @@ public class XpathNodeMatchers {
      *            a matcher to check the string value
      * @return a node matcher that implements the check
      */
-    public NodeMatcher value(final Matcher<String> matcher) {
+    public NodeMatcher value(Matcher<String> matcher) {
         return rootNode -> {
             NodeSelectionChecker checker = getChecker(rootNode);
             checker.exists();

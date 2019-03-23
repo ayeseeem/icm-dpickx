@@ -33,12 +33,12 @@ public class ConvertibleStringMatchers {
      *         value; {@code false} if it does not match, or cannot be converted
      */
     @Factory
-    public static Matcher<String> numberOfValue(final double expected) {
+    public static Matcher<String> numberOfValue(double expected) {
         return new TypeSafeMatcher<String>() {
             @Override
-            public boolean matchesSafely(final String s) {
+            public boolean matchesSafely(String possible) {
                 try {
-                    final double actual = Double.parseDouble(s);
+                    final double actual = Double.parseDouble(possible);
                     return actual == expected;
                 } catch (NumberFormatException e) {
                     return false;
@@ -46,7 +46,7 @@ public class ConvertibleStringMatchers {
             }
 
             @Override
-            public void describeTo(final Description description) {
+            public void describeTo(Description description) {
                 description.appendText("value parsable as a number of value ").appendValue(expected);
             }
         };
@@ -66,12 +66,12 @@ public class ConvertibleStringMatchers {
      *         value; {@code false} if it does not match, or cannot be converted
      */
     @Factory
-    public static Matcher<String> booleanOfValue(final boolean expected) {
+    public static Matcher<String> booleanOfValue(boolean expected) {
         return new TypeSafeMatcher<String>() {
             @Override
-            public boolean matchesSafely(final String s) {
+            public boolean matchesSafely(String possible) {
                 try {
-                    final boolean actual = Boolean.parseBoolean(s);
+                    final boolean actual = Boolean.parseBoolean(possible);
                     return actual == expected;
                 } catch (NumberFormatException e) {
                     return false;
@@ -79,7 +79,7 @@ public class ConvertibleStringMatchers {
             }
 
             @Override
-            public void describeTo(final Description description) {
+            public void describeTo(Description description) {
                 description.appendText("value parsable as a boolean of value ").appendValue(expected);
             }
         };

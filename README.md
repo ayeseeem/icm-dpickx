@@ -132,7 +132,6 @@ Java > Code Style's Clean Up and Formatter.
 
 - **Except** uses 4 spaces for indentation, not tab.
 
-Proposed addition/change:
 Don't (usually) modify method parameters.
 But don't (usually) use `final` on (every) method parameter, to prevent
 it - we think it makes the code unhelpfully verbose.
