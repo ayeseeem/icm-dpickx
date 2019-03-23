@@ -71,16 +71,14 @@ public class XpathHelper {
             String message = "Unexpected problem evaluating XPath expression " + this.xPath;
             logger.error(message, e);
 
-            final NodeList noNodes = createEmptyNodeList();
-            return noNodes;
+            return createEmptyNodeList();
         }
     }
 
     private XPathExpression createXpathExpression(String xPath) throws XPathExpressionException {
         XPathFactory xPathFactory = XPathFactory.newInstance();
         XPath xPathObject = xPathFactory.newXPath();
-        XPathExpression expression = xPathObject.compile(xPath);
-        return expression;
+        return xPathObject.compile(xPath);
     }
 
     /**
@@ -100,8 +98,11 @@ public class XpathHelper {
         Document document = builder.newDocument();
         assert document != null;
 
-        final NodeList emptyNodesList = document.getElementsByTagName(UUID.randomUUID().toString());
-        return emptyNodesList;
+        return findDefinitelyNonExistentNodes(document);
+    }
+
+    private static NodeList findDefinitelyNonExistentNodes(Document document) {
+        return document.getElementsByTagName(UUID.randomUUID().toString());
     }
 
 }

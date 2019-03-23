@@ -160,8 +160,7 @@ public class XpathNodeMatchers {
     }
 
     private NodeList selectNodes(Node rootNode) {
-        final NodeList nodes = xpathHelper.getNodes(rootNode);
-        return nodes;
+        return xpathHelper.getNodes(rootNode);
     }
 
     /**
