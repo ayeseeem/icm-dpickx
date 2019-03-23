@@ -5,6 +5,7 @@ import static org.ayeseeem.dpick.matchers.ConvertibleStringMatchers.numberOfValu
 import static org.ayeseeem.dpick.xml.NodeMatchers.xpath;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.junit.Assert.assertThat;
 
 import java.util.ArrayList;
@@ -14,7 +15,6 @@ import java.util.List;
 import javax.xml.transform.TransformerException;
 import javax.xml.xpath.XPathExpressionException;
 
-import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -201,7 +201,7 @@ public class IntegrationTest extends XmlExampleFixture {
     @Test
     public void invalidXpath() throws XPathExpressionException {
         thrown.expect(XPathExpressionException.class);
-        thrown.expectCause(IsInstanceOf.<Throwable>instanceOf(TransformerException.class));
+        thrown.expectCause(instanceOf(TransformerException.class));
 
         XmlDocumentChecker.check(eg).andExpect(xpath("This is an invalid XPath").exists());
     }

@@ -4,6 +4,7 @@ import static org.ayeseeem.dpick.matchers.ConvertibleStringMatchers.numberOfValu
 import static org.ayeseeem.dpick.xml.NodeMatchers.xpath;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.core.StringStartsWith.startsWith;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
@@ -12,7 +13,6 @@ import java.util.List;
 
 import javax.xml.xpath.XPathExpressionException;
 
-import org.hamcrest.core.StringStartsWith;
 import org.junit.Test;
 import org.w3c.dom.Node;
 
@@ -35,7 +35,7 @@ public class Examples extends XmlExampleFixture {
                 .andExpect(xpath("/NeverExistingTopLevel").doesNotExist())
                 .andExpect(xpath("//ContainsSeventeen").value(is("17")))
                 .andExpect(xpath("//ContainsSeventeen").value(containsString("7")))
-                .andExpect(xpath("//ContainsSeventeen").value(StringStartsWith.startsWith("1")))
+                .andExpect(xpath("//ContainsSeventeen").value(startsWith("1")))
                 .andExpect(xpath("//ContainsSeventeen").value(is(numberOfValue(17.0))))
                 .andExpect(xpath("//ElementWithSizeAttribute/@size").exists())
                 .andExpect(xpath("//ElementWithSizeAttribute/@size").value(is("15")))
