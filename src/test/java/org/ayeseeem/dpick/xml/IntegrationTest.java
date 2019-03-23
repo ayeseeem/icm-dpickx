@@ -6,10 +6,10 @@ import static org.ayeseeem.dpick.xml.NodeMatchers.xpath;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.xml.transform.TransformerException;
@@ -220,7 +220,7 @@ public class IntegrationTest extends XmlExampleFixture {
                 .andDo(xpath("//DuplicateEleDiffContent")
                         .processEach(node -> spy.add(node.getTextContent())));
 
-        assertThat(spy, is(Arrays.asList("123", "456")));
+        assertThat(spy, contains("123", "456"));
     }
 
     @Test
