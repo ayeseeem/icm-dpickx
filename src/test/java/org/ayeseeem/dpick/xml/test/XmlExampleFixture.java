@@ -1,4 +1,4 @@
-package org.ayeseeem.dpick.xml;
+package org.ayeseeem.dpick.xml.test;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -15,7 +15,7 @@ import org.w3c.dom.Node;
  * @author ayeseeem@gmail.com
  *
  */
-public class XmlExampleFixture {
+abstract class XmlExampleFixture {
 
     protected final Node eg = createExampleDom();
 

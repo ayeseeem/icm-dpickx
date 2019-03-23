@@ -8,6 +8,6 @@ import org.w3c.dom.Node;
  * @author ayeseeem@gmail.com
  *
  */
-interface NodeHandler {
+public interface NodeHandler {
     void handle(Node rootNode);
 }

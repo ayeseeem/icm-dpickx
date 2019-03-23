@@ -79,7 +79,7 @@ String drivingAge = checker.captureSoleRequired(xpath("//ContainsSeventeen"));
 assertThat(drivingAge, is("17"));
 ```
 
-To see more examples, see [Examples.java](https://github.com/ayeseeem/icm-dpickx/blob/master/src/test/java/org/ayeseeem/dpick/xml/Examples.java "Examples")
+To see more examples, see [`Examples.java`](https://github.com/ayeseeem/icm-dpickx/blob/master/src/test/java/org/ayeseeem/dpick/xml/test/Examples.java "Examples")
 
 
 TODO

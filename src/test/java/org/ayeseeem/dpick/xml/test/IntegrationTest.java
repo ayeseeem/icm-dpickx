@@ -1,10 +1,11 @@
-package org.ayeseeem.dpick.xml;
+package org.ayeseeem.dpick.xml.test;
 
 import static org.ayeseeem.dpick.matchers.ConvertibleStringMatchers.booleanOfValue;
 import static org.ayeseeem.dpick.matchers.ConvertibleStringMatchers.numberOfValue;
 import static org.ayeseeem.dpick.xml.NodeMatchers.xpath;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
@@ -15,6 +16,8 @@ import java.util.List;
 import javax.xml.transform.TransformerException;
 import javax.xml.xpath.XPathExpressionException;
 
+import org.ayeseeem.dpick.xml.Capturer;
+import org.ayeseeem.dpick.xml.XmlDocumentChecker;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -27,6 +30,13 @@ import org.w3c.dom.Node;
  *
  */
 public class IntegrationTest extends XmlExampleFixture {
+
+    @Test
+    public void verifyNotInSamePackage_ToVerifyPublicInterface() {
+        Package testPackage = this.getClass().getPackage();
+        Package codePackage = XmlDocumentChecker.class.getPackage();
+        assertThat(testPackage, is(not(codePackage)));
+    }
 
     @Test
     public void expect_Exists_RootElement() throws XPathExpressionException {
