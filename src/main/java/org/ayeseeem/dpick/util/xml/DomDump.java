@@ -54,14 +54,24 @@ public class DomDump {
     // TODO: ICM 2016-10-29: Separate into constructor with exceptions and dump with exceptions
     private static void dump(Node node, OutputStream sink)
             throws TransformerConfigurationException, TransformerFactoryConfigurationError, TransformerException {
-        Transformer transformer = TransformerFactory.newInstance().newTransformer();
-
-        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-        transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+        int indentationAmount = 2;
+        Transformer transformer = makeIndentingTransformer(indentationAmount);
 
         DOMSource source = new DOMSource(node);
         StreamResult outputTarget = new StreamResult(sink);
         transformer.transform(source, outputTarget);
+    }
+
+    private static Transformer makeIndentingTransformer(int indentationAmount)
+            throws TransformerConfigurationException, TransformerFactoryConfigurationError {
+        Transformer transformer = TransformerFactory.newInstance().newTransformer();
+        setAsIndenting(transformer, indentationAmount);
+        return transformer;
+    }
+
+    private static void setAsIndenting(Transformer transformer, int indentationAmount) {
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+        transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", Integer.toString(indentationAmount));
     }
 
 }
