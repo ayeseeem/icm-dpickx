@@ -51,10 +51,8 @@ public class XpathNodeMatchers {
      * @return a node matcher that implements the check
      */
     public NodeMatcher node(Matcher<? super Node> matcher) {
-        return rootNode -> {
-            throwNotImplementedYet();
-            //getChecker(rootNode).assertNode(matcher);
-        };
+        return rootNode -> throwNotImplementedYet();
+        //return rootNode -> getChecker(rootNode).assertNode(matcher);
     }
 
     /**
@@ -63,9 +61,7 @@ public class XpathNodeMatchers {
      * @return a node matcher that checks the node exists
      */
     public NodeMatcher exists() {
-        return rootNode -> {
-            getChecker(rootNode).exists();
-        };
+        return rootNode -> getChecker(rootNode).exists();
     }
 
     /**
@@ -74,9 +70,7 @@ public class XpathNodeMatchers {
      * @return a node matcher that checks the node does not exist
      */
     public NodeMatcher doesNotExist() {
-        return rootNode -> {
-            getChecker(rootNode).doesNotExist();
-        };
+        return rootNode -> getChecker(rootNode).doesNotExist();
     }
 
     /**
@@ -87,9 +81,7 @@ public class XpathNodeMatchers {
      * @return a node matcher that implements the check
      */
     public NodeMatcher nodeCount(int expectedCount) {
-        return rootNode -> {
-            getChecker(rootNode).hasNodes(expectedCount);
-        };
+        return rootNode -> getChecker(rootNode).hasNodes(expectedCount);
     }
 
     /**
