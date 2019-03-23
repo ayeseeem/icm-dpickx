@@ -1,10 +1,11 @@
 package org.ayeseeem.dpick.xml;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.hamcrest.Matcher;
-import org.hamcrest.MatcherAssert;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -50,10 +51,7 @@ public class NodeSelectionChecker {
 
     public void assertMatch(Matcher<String> matcher) {
         final List<String> valueStrings = getValueStrings(nodes);
-        valueStrings.forEach(valueString -> {
-            final String value = valueString;
-            MatcherAssert.assertThat(this.selectionExpression, value, matcher);
-        });
+        valueStrings.forEach(valueString -> assertThat(this.selectionExpression, valueString, matcher));
     }
 
     // HACK: ICM 2016-10-15: In progress - need better processing of text content?
