@@ -1,7 +1,7 @@
 package org.ayeseeem.dpick.util.xml;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -15,7 +15,7 @@ public class XmlUnmarshallerTest {
     @Test
     public void testDefaultsToNamespaceNotAware(){
         test = new XmlUnmarshaller();
-        assertFalse(test.isNamespaceAware());
+        assertThat(test.isNamespaceAware(), is(false));
     }
 
     @Test
@@ -23,8 +23,8 @@ public class XmlUnmarshallerTest {
         Document document = test.toDocument("<stuff>this is simple XML</stuff>");
 
         Node root = document.getFirstChild();
-        assertEquals("stuff", root.getNodeName());
-        assertEquals("this is simple XML", root.getFirstChild().getNodeValue());
+        assertThat(root.getNodeName(), is("stuff"));
+        assertThat(root.getFirstChild().getNodeValue(), is("this is simple XML"));
     }
 
     @Test
@@ -43,14 +43,14 @@ public class XmlUnmarshallerTest {
     public void testToDocument_HandlesNamespacing_WhenNotNamespaceAware() throws Exception {
         test = new XmlUnmarshaller(false);
         Document document = test.toDocument("<someNameSpace:stuff></someNameSpace:stuff>");
-        assertEquals("someNameSpace:stuff", document.getDocumentElement().getNodeName());
+        assertThat(document.getDocumentElement().getNodeName(), is("someNameSpace:stuff"));
     }
 
     @Test
     public void testToDocument_HandlesNamespacing_WhenNamespaceAware() throws Exception {
         test = new XmlUnmarshaller(true);
         Document document = test.toDocument("<someNameSpace:stuff xmlns:someNameSpace=\"http://example.com/ns\"></someNameSpace:stuff>");
-        assertEquals("someNameSpace:stuff", document.getDocumentElement().getNodeName());
+        assertThat(document.getDocumentElement().getNodeName(), is("someNameSpace:stuff"));
     }
 
     @Rule

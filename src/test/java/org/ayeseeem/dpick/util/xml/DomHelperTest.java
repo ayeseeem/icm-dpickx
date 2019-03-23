@@ -1,6 +1,7 @@
 package org.ayeseeem.dpick.util.xml;
 
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.Iterator;
 
@@ -20,45 +21,45 @@ public class DomHelperTest {
 
         NodeList nodes = test.getNodes("/stuff");
 
-        assertEquals(1, nodes.getLength());
+        assertThat(nodes.getLength(), is(1));
         Node node0 = nodes.item(0);
-        assertEquals(Node.ELEMENT_NODE, node0.getNodeType());
-        assertEquals("stuff", node0.getNodeName());
-        assertEquals("blah, more blah", node0.getTextContent());
+        assertThat(node0.getNodeType(), is(Node.ELEMENT_NODE));
+        assertThat(node0.getNodeName(), is("stuff"));
+        assertThat(node0.getTextContent(), is("blah, more blah"));
     }
 
     @Test
     public void testGetNodes_FromSubNode() throws Exception {
         test = new DomHelper(createDoc("<stuff>blah, <sub>more<inner>inside</inner></sub> blah</stuff>"));
         Node subNode = test.getNodes("/stuff/sub").item(0);
-        assertEquals("sub", subNode.getNodeName());
+        assertThat(subNode.getNodeName(), is("sub"));
 
         // NOTE the use of the "./" to indicate relative to node/current context
         NodeList nodes = test.getNodes(subNode, "./inner");
 
-        assertEquals(1, nodes.getLength());
+        assertThat(nodes.getLength(), is(1));
         Node node0 = nodes.item(0);
-        assertEquals(Node.ELEMENT_NODE, node0.getNodeType());
-        assertEquals("inner", node0.getNodeName());
-        assertEquals("inside", node0.getTextContent());
+        assertThat(node0.getNodeType(), is(Node.ELEMENT_NODE));
+        assertThat(node0.getNodeName(), is("inner"));
+        assertThat(node0.getTextContent(), is("inside"));
     }
 
     @Test
     public void testGetNodes_FromSubNode_CanStillAccessWholeDocument() throws Exception {
         test = new DomHelper(createDoc("<stuff>blah, <sub>more<inner>inside</inner></sub> blah</stuff>"));
         Node subNode = test.getNodes("/stuff/sub").item(0);
-        assertEquals("sub", subNode.getNodeName());
+        assertThat(subNode.getNodeName(), is("sub"));
 
         // NOTE the use of the "/" to indicate relative to document root
         {
             // finds top-level element above current node
             NodeList nodes = test.getNodes(subNode, "/stuff");
-            assertEquals(1, nodes.getLength());
+            assertThat(nodes.getLength(), is(1));
         }
         {
             // no inner elements found: not at top of tree
             NodeList nodes = test.getNodes(subNode, "/inner");
-            assertEquals(0, nodes.getLength());
+            assertThat(nodes.getLength(), is(0));
         }
     }
 
@@ -69,11 +70,11 @@ public class DomHelperTest {
 
         NodeList nodes = test.getNodes("/egNs:stuff");
 
-        assertEquals(1, nodes.getLength());
+        assertThat(nodes.getLength(), is(1));
         Node node0 = nodes.item(0);
-        assertEquals(Node.ELEMENT_NODE, node0.getNodeType());
-        assertEquals("egNs:stuff", node0.getNodeName());
-        assertEquals("blah, blah", node0.getTextContent());
+        assertThat(node0.getNodeType(), is(Node.ELEMENT_NODE));
+        assertThat(node0.getNodeName(), is("egNs:stuff"));
+        assertThat(node0.getTextContent(), is("blah, blah"));
     }
 
     @Test
@@ -83,11 +84,11 @@ public class DomHelperTest {
 
         NodeList nodes = test.getNodes("/egNs:stuff");
 
-        assertEquals(1, nodes.getLength());
+        assertThat(nodes.getLength(), is(1));
         Node node0 = nodes.item(0);
-        assertEquals(Node.ELEMENT_NODE, node0.getNodeType());
-        assertEquals("stuff", node0.getNodeName());
-        assertEquals("blah, blah", node0.getTextContent());
+        assertThat(node0.getNodeType(), is(Node.ELEMENT_NODE));
+        assertThat(node0.getNodeName(), is("stuff"));
+        assertThat(node0.getTextContent(), is("blah, blah"));
     }
 
     private DomHelper test;
