@@ -131,3 +131,13 @@ Currently uses the "Eclipse [Built-in]" settings in Eclipse/Spring STS, for
 Java > Code Style's Clean Up and Formatter.
 
 - **Except** uses 4 spaces for indentation, not tab.
+
+Proposed addition/change:
+Don't (usually) modify method parameters.
+But don't (usually) use `final` on (every) method parameter, to prevent
+it - we think it makes the code unhelpfully verbose.
+Instead, turn on an IDE rule or code linter to warn on reassigned parameters.
+Only use `final` on method parameters in special cases - for example if the
+method is so long that it is hard to see at a glance that the parameters are
+not changed (although, avoid such long methods!). Or where some of the
+parameters _are_ reassigned - use `final` to mark the ones that are not.
