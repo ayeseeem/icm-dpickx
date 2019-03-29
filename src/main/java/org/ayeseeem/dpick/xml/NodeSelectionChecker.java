@@ -5,6 +5,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ayeseeem.dpick.util.dom.ListOfNode;
 import org.hamcrest.Matcher;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -57,14 +58,15 @@ public class NodeSelectionChecker {
     // HACK: ICM 2016-10-15: In progress - need better processing of text content?
     public static List<String> getValueStrings(NodeList nodes) {
         final List<String> valueStrings = new ArrayList<>();
-        for (int i = 0; i < nodes.getLength(); i++) {
-            final Node node = nodes.item(i);
+        ListOfNode nodesList = ListOfNode.of(nodes);
+        nodesList.forEach(node -> {
             final short nodeType = node.getNodeType();
             if (nodeType == Node.ELEMENT_NODE || nodeType == Node.ATTRIBUTE_NODE) {
                 String valueString = node.getTextContent();
                 valueStrings.add(valueString);
             }
-        }
+        });
+
         return valueStrings;
     }
 

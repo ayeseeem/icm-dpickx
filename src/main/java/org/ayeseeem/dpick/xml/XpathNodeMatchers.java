@@ -4,6 +4,7 @@ import java.util.Map;
 
 import javax.xml.xpath.XPathExpressionException;
 
+import org.ayeseeem.dpick.util.dom.ListOfNode;
 import org.hamcrest.Matcher;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -111,12 +112,9 @@ public class XpathNodeMatchers {
      */
     public NodeHandler processEach(NodeHandler nodeHandler) {
         return rootNode -> {
-            final NodeList nodeList = selectNodes(rootNode);
-            assert nodeList != null;
-            for (int i = 0; i < nodeList.getLength(); i++) {
-                final Node node = nodeList.item(i);
-                nodeHandler.handle(node);
-            }
+            NodeList nodes = selectNodes(rootNode);
+            ListOfNode nodesList = ListOfNode.of(nodes);
+            nodesList.forEach(nodeHandler::handle);
         };
     }
 
