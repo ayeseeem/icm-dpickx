@@ -7,10 +7,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.io.ByteArrayOutputStream;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
+import org.ayeseeem.dpick.util.dom.DomBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Document;
@@ -88,14 +85,7 @@ public class DomDumpTest {
 
     @Before
     public void setUp() {
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder;
-        try {
-            builder = factory.newDocumentBuilder();
-        } catch (ParserConfigurationException e) {
-            throw new Error("XML exception - translated to error", e);
-        }
-        doc = builder.newDocument();
+        doc = DomBuilder.emptyDocument();
     }
 
 }

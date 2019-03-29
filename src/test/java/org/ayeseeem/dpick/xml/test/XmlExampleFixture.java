@@ -1,9 +1,6 @@
 package org.ayeseeem.dpick.xml.test;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
+import org.ayeseeem.dpick.util.dom.DomBuilder;
 import org.ayeseeem.dpick.util.xml.DomDump;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -29,14 +26,7 @@ abstract class XmlExampleFixture {
     }
 
     private static Document createExampleDocument() {
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder;
-        try {
-            builder = factory.newDocumentBuilder();
-        } catch (ParserConfigurationException e) {
-            throw new Error("XML exception - translated to error", e);
-        }
-        Document doc = builder.newDocument();
+        Document doc = DomBuilder.emptyDocument();
 
         Element root = doc.createElement("RootElement");
         doc.appendChild(root);

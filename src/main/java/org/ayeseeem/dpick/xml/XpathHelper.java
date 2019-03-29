@@ -1,10 +1,9 @@
 package org.ayeseeem.dpick.xml;
 
+import static org.ayeseeem.dpick.util.dom.DomBuilder.emptyNodeList;
+
 import java.util.Map;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
@@ -13,7 +12,6 @@ import javax.xml.xpath.XPathFactory;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -70,7 +68,7 @@ public class XpathHelper {
             String message = "Unexpected problem evaluating XPath expression " + this.xPath;
             logger.error(message, e);
 
-            return createEmptyNodeList();
+            return emptyNodeList();
         }
     }
 
@@ -78,30 +76,6 @@ public class XpathHelper {
         XPathFactory xPathFactory = XPathFactory.newInstance();
         XPath xPathObject = xPathFactory.newXPath();
         return xPathObject.compile(xPath);
-    }
-
-    /**
-     * Creates an empty node list
-     *
-     * @return an empty NodeList
-     */
-    public static NodeList createEmptyNodeList() {
-        NodeList empty = createEmptyDocument().getChildNodes();
-        assert empty.getLength() == 0;
-        return empty;
-    }
-
-    private static Document createEmptyDocument() {
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder;
-        try {
-            builder = dbf.newDocumentBuilder();
-        } catch (ParserConfigurationException e) {
-            throw new IllegalStateException("Problem creating document", e);
-        }
-        Document document = builder.newDocument();
-        assert document.getChildNodes().getLength() == 0;
-        return document;
     }
 
 }
