@@ -1,7 +1,6 @@
 package org.ayeseeem.dpick.xml;
 
 import java.util.Map;
-import java.util.UUID;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -82,12 +81,17 @@ public class XpathHelper {
     }
 
     /**
-     * Creates an empty node list. Creates an empty document then selects nodes
-     * using a random UUID to ensure an empty result.
+     * Creates an empty node list
      *
-     * @return an empty Node list
+     * @return an empty NodeList
      */
     public static NodeList createEmptyNodeList() {
+        NodeList empty = createEmptyDocument().getChildNodes();
+        assert empty.getLength() == 0;
+        return empty;
+    }
+
+    private static Document createEmptyDocument() {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder;
         try {
@@ -96,13 +100,8 @@ public class XpathHelper {
             throw new IllegalStateException("Problem creating document", e);
         }
         Document document = builder.newDocument();
-        assert document != null;
-
-        return findDefinitelyNonExistentNodes(document);
-    }
-
-    private static NodeList findDefinitelyNonExistentNodes(Document document) {
-        return document.getElementsByTagName(UUID.randomUUID().toString());
+        assert document.getChildNodes().getLength() == 0;
+        return document;
     }
 
 }
