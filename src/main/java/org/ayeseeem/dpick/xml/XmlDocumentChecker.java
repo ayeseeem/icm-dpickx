@@ -22,8 +22,7 @@ public class XmlDocumentChecker {
     public String captureSoleRequired(XpathNodeMatchers xpathNodeMatchers) {
         final Capturer capturer = new Capturer();
 
-        XmlDocumentChecker.check(rootNode)
-                .andDo(xpathNodeMatchers.captureSoleRequired(capturer));
+        check(rootNode).andDo(xpathNodeMatchers.captureSoleRequired(capturer));
 
         final Optional<String> value = capturer.value();
         assert value.isPresent();
