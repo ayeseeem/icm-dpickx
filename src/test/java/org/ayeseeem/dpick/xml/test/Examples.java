@@ -7,7 +7,6 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.StringStartsWith.startsWith;
-import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +55,7 @@ public class Examples extends XmlExampleFixture {
         try {
             XmlDocumentChecker.check(eg).andExpect(xpath("/Version").value(is("3.0")));
 
-            fail("example/test should not reach here");
+            throw new Error("example/test should not reach here");
         } catch (AssertionError e) {
             @SuppressWarnings("unused")
             final String status = "Document is not Version 3";
