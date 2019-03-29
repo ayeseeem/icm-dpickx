@@ -1,5 +1,7 @@
 package org.ayeseeem.dpick.xml;
 
+import java.util.Optional;
+
 import org.w3c.dom.Node;
 
 /**
@@ -23,8 +25,9 @@ public class XmlDocumentChecker {
         XmlDocumentChecker.check(rootNode)
                 .andDo(xpathNodeMatchers.captureSoleRequired(capturer));
 
-        assert capturer.value().isPresent();
-        return capturer.value().get();
+        final Optional<String> value = capturer.value();
+        assert value.isPresent();
+        return value.get();
     }
 
     public static NodeActions check(Node rootNode) {

@@ -87,4 +87,18 @@ public class Examples extends XmlExampleFixture {
         assertThat(drivingAge, is("17"));
     }
 
+    @Test
+    public void exampleFailingToCaptureRequiredValue() throws XPathExpressionException {
+        XmlDocumentChecker checker = new XmlDocumentChecker(eg);
+        try {
+            checker.captureSoleRequired(xpath("//NonExistentElement"));
+
+            throw new Error("example/test should not reach here");
+        } catch (AssertionError e) {
+            @SuppressWarnings("unused")
+            final String status = "Could not capture required value - it didn't exist";
+            // Do something about it
+        }
+    }
+
 }
