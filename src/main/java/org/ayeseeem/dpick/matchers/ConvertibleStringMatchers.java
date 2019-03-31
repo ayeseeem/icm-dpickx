@@ -8,7 +8,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
 /**
- * Expressive factory methods for matchers check {@code String}s can be
+ * Expressive factory methods for matchers that check {@code String}s can be
  * converted to other types and then match a value.
  * <p>
  * Written to help

@@ -10,7 +10,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- * Static methods for making assertions about DOM {@link Node}s found by XPath
+ * Methods for making assertions about DOM {@link Node}s found by XPath
  * expressions
  *
  * @author ayeseeem@gmail.com
@@ -44,7 +44,7 @@ public class XpathNodeMatchers {
     }
 
     /**
-     * Evaluate the XPath on the root node and checks the {@link Node} found
+     * Evaluates the XPath on the root node and checks the {@link Node} found
      * with the given Hamcrest {@link Matcher}.
      *
      * @param matcher
