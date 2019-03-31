@@ -131,6 +131,14 @@ Currently uses the "Eclipse [Built-in]" settings in Eclipse/Spring STS, for
 Java > Code Style's Clean Up and Formatter.
 
 - **Except** uses 4 spaces for indentation, not tab.
+- This includes maximum line lengths as follows
+  - 120 for code
+  - 80 for comments, but
+    "from comment's starting position".
+    The starting position bit is nice because it means that comment blocks
+    don't need to be reformatted when the commented code's indentation level
+    changes, for example when it is refactored to move it into or out of nested
+    classes.
 
 Don't (usually) modify method parameters.
 But don't (usually) use `final` on (every) method parameter, to prevent
