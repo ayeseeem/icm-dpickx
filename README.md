@@ -148,3 +148,13 @@ Only use `final` on method parameters in special cases - for example if the
 method is so long that it is hard to see at a glance that the parameters are
 not changed (although, avoid such long methods!). Or where some of the
 parameters _are_ reassigned - use `final` to mark the ones that are not.
+
+### Rules
+
+- Don't use `public` on interface methods
+  [JLS Method Declarations](https://docs.oracle.com/javase/specs/jls/se8/html/jls-9.html#jls-9.4)
+  says this (our emphasis):
+    > Every method declaration in the body of an interface is implicitly
+    > public (§6.6). It is permitted, but **discouraged as a matter of style**,
+    > to redundantly specify the public modifier for a method declaration in
+    > an interface.
