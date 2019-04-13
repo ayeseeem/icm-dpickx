@@ -20,8 +20,10 @@ import org.hamcrest.TypeSafeMatcher;
 public class ConvertibleStringMatchers {
 
     /**
-     * Factory method for a matcher that checks if a string can be converted to
-     * the specified number
+     * Factory method for a matcher that checks if a string can be converted to the
+     * specified number. Note that the thing being checked must be a string
+     * representation of the number, not the raw number - it will not match the raw
+     * number.
      * <p>
      * Usually it is clearer to wrap this with the syntactic sugar of
      * {@link CoreMatchers#is(Matcher)}, for example
@@ -30,7 +32,8 @@ public class ConvertibleStringMatchers {
      * @param expected
      *            the expected number
      * @return {@code true} if it can be converted to a number and matches the
-     *         value; {@code false} if it does not match, or cannot be converted
+     *         value; {@code false} if it does not match, <em>or cannot be
+     *         converted</em>.
      */
     @Factory
     public static Matcher<String> numberOfValue(double expected) {
@@ -53,8 +56,10 @@ public class ConvertibleStringMatchers {
     }
 
     /**
-     * Factory method for a matcher that checks if a string can be converted to
-     * the specified boolean
+     * Factory method for a matcher that checks if a string can be converted to the
+     * specified boolean. Note that the thing being checked must be a string
+     * representation of the boolean, not the raw boolean - it will not match the
+     * raw boolean.
      * <p>
      * Usually it is clearer to wrap this with the syntactic sugar of
      * {@link CoreMatchers#is(Matcher)}, for example
@@ -63,7 +68,8 @@ public class ConvertibleStringMatchers {
      * @param expected
      *            the expected boolean
      * @return {@code true} if it can be converted to a boolean and matches the
-     *         value; {@code false} if it does not match, or cannot be converted
+     *         value; {@code false} if it does not match, <em>or cannot be
+     *         converted</em>.
      */
     @Factory
     public static Matcher<String> booleanOfValue(boolean expected) {
