@@ -27,13 +27,13 @@ public class ConvertibleStringMatchers {
      * <p>
      * Usually it is clearer to wrap this with the syntactic sugar of
      * {@link CoreMatchers#is(Matcher)}, for example
-     * {@code is(numberOfValue(12.3))}
+     * {@code is(numberOfValue(12.3))}.
      *
      * @param expected
      *            the expected number
-     * @return {@code true} if it can be converted to a number and matches the
-     *         value; {@code false} if it does not match, <em>or cannot be
-     *         converted</em>.
+     * @return {@code true} if the string can be converted to a number and matches
+     *         the expected value; {@code false} if it does not match, <em>or cannot
+     *         be converted</em>.
      */
     @Factory
     public static Matcher<String> numberOfValue(double expected) {
@@ -59,17 +59,18 @@ public class ConvertibleStringMatchers {
      * Factory method for a matcher that checks if a string can be converted to the
      * specified boolean. Note that the thing being checked must be a string
      * representation of the boolean, not the raw boolean - it will not match the
-     * raw boolean.
+     * raw boolean. Note also that the conversion is case-insensitive, as specified
+     * by {@link Boolean#parseBoolean(String)}.
      * <p>
      * Usually it is clearer to wrap this with the syntactic sugar of
      * {@link CoreMatchers#is(Matcher)}, for example
-     * {@code is(booleanOfValue(true))}
+     * {@code is(booleanOfValue(true))}.
      *
      * @param expected
      *            the expected boolean
-     * @return {@code true} if it can be converted to a boolean and matches the
-     *         value; {@code false} if it does not match, <em>or cannot be
-     *         converted</em>.
+     * @return {@code true} if the string can be converted to a boolean and matches
+     *         the expected value; {@code false} if it does not match, <em>or cannot
+     *         be converted</em>.
      */
     @Factory
     public static Matcher<String> booleanOfValue(boolean expected) {

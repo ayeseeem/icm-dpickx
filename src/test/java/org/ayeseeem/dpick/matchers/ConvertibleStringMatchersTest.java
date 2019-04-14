@@ -95,6 +95,37 @@ public class ConvertibleStringMatchersTest {
     }
 
     @Test
+    public void testBooleanOfValue_Matches_True_IsCaseInsensitive() {
+        Matcher<String> subject = booleanOfValue(true);
+
+        assertThat(subject.matches("true"), is(true));
+        assertThat(subject.matches("True"), is(true));
+        assertThat(subject.matches("TRUE"), is(true));
+        assertThat(subject.matches("tRUe"), is(true));
+
+        assertThat(subject.matches("false"), is(false));
+    }
+
+    @Test
+    public void testBooleanOfValue_Matches_False_IsCaseInsensitive() {
+        Matcher<String> subject = booleanOfValue(false);
+
+        assertThat(subject.matches("false"), is(true));
+        assertThat(subject.matches("False"), is(true));
+        assertThat(subject.matches("FALSE"), is(true));
+        assertThat(subject.matches("fAlSe"), is(true));
+
+        assertThat(subject.matches("true"), is(false));
+    }
+
+    @Test
+    public void testBooleanOfValue_Matches_DoesNotAcceptYesAsTrue() {
+        Matcher<String> subject = booleanOfValue(true);
+
+        assertThat(subject.matches("yes"), is(false));
+    }
+
+    @Test
     public void testBooleanOfValue_Matches_DoesNotMatchBooleansThatAreNotInStrings() {
         Matcher<String> subject = booleanOfValue(true);
         assertThat(subject.matches("true"), is(true));
