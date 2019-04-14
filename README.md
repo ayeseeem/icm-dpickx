@@ -51,6 +51,7 @@ XmlDocumentChecker.check(eg)
         .andExpect(xpath("//ContainsSeventeen").value(containsString("7")))
         .andExpect(xpath("//ContainsSeventeen").value(startsWith("1")))
         .andExpect(xpath("//ContainsSeventeen").value(is(numberOfValue(17.0))))
+        .andExpect(xpath("//ContainsSeventeen").value(is(numberOfValue(17))))
         .andExpect(xpath("//ElementWithSizeAttribute/@size").exists())
         .andExpect(xpath("//ElementWithSizeAttribute/@size").value(is("15")))
         ;

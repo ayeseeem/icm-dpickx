@@ -29,10 +29,43 @@ public class ConvertibleStringMatchersTest {
     }
 
     @Test
+    public void testNumberOfValue_Matches_MatchesIntegersAsWellAsDecimals() {
+        Matcher<String> subject = numberOfValue(123.0);
+        assertThat(subject.matches("123.0"), is(true));
+        assertThat(subject.matches("123"), is(true));
+    }
+
+    @Test
     public void testNumberOfValue_Matches_DoesNotMatchNumbersThatAreNotInStrings() {
         Matcher<String> subject = numberOfValue(12.3);
         assertThat(subject.matches("12.3"), is(true));
         assertThat(subject.matches(12.3), is(false));
+    }
+
+    @Test
+    public void testNumberOfValue_Integer_Matches() {
+        Matcher<String> subject = numberOfValue(123);
+        assertThat(subject.matches("123"), is(true));
+        assertThat(subject.matches("123.0"), is(false));
+        assertThat(subject.matches("456"), is(false));
+        assertThat(subject.matches("Cannot become a number"), is(false));
+
+        assertThat(subject.matches(URI.create("non-string-object")), is(false));
+        assertThat(subject.matches(null), is(false));
+    }
+
+    @Test
+    public void testNumberOfValue_Integer_Matches_IntegersNotDecimals() {
+        Matcher<String> subject = numberOfValue(123);
+        assertThat(subject.matches("123"), is(true));
+        assertThat(subject.matches("123.0"), is(false));
+    }
+
+    @Test
+    public void testNumberOfValue_Integer_Matches_DoesNotMatchNumbersThatAreNotInStrings() {
+        Matcher<String> subject = numberOfValue(123);
+        assertThat(subject.matches("123"), is(true));
+        assertThat(subject.matches(123), is(false));
     }
 
     @Test
@@ -49,8 +82,22 @@ public class ConvertibleStringMatchersTest {
     }
 
     @Test
+    public void testNumberOfValue_Integer_DescribeTo() {
+        Matcher<String> subject = numberOfValue(123);
+        Description description = new StringDescription().appendText("Initial description - ");
+
+        subject.describeTo(description);
+
+        assertThat(description.toString(), containsString("Initial description - "));
+        assertThat(description.toString(), containsString("value parsable as an integer"));
+        assertThat(description.toString(), containsString("value parsable as an integer of value <123>"));
+        assertThat(description.toString(), is("Initial description - value parsable as an integer of value <123>"));
+    }
+
+    @Test
     public void testNumberOfValue_InUse() {
         assertThat("12.3", numberOfValue(12.3));
+        assertThat("123", numberOfValue(123));
     }
 
     @Test
@@ -70,6 +117,7 @@ public class ConvertibleStringMatchersTest {
     @Test
     public void testNumberOfValue_InUse_WorksWithSyntacticSugar_Is() {
         assertThat("12.3", is(numberOfValue(12.3)));
+        assertThat("123", is(numberOfValue(123)));
     }
 
     @Test
