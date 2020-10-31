@@ -53,10 +53,10 @@
 
   <dependencies>
 
-    <!-- Not just used in test scope -->
     <dependency>
       <groupId>org.hamcrest</groupId>
       <artifactId>hamcrest-core</artifactId>
+      <!-- not just in test scope -->
     </dependency>
 
     <!-- Logging API: SLF4J for logging - implementation is not specified, 
