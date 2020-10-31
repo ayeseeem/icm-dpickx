@@ -86,7 +86,7 @@ To see more examples, see [`Examples.java`](https://github.com/ayeseeem/icm-dpic
 TODO
 ----
 
-- [ ] Fix [https://github.com/ayeseeem/icm-dpickx/issues/1#issue-733753076](Issue 1)
+- [ ] Fix [Issue 1](https://github.com/ayeseeem/icm-dpickx/issues/1#issue-733753076)
 - [ ] Include failing node number in error messages?
 - [ ] Capture optional value
 - [ ] Capture First value (c.f. Capture Sole)? (=> node count >= 1)
