@@ -86,6 +86,7 @@ To see more examples, see [`Examples.java`](https://github.com/ayeseeem/icm-dpic
 TODO
 ----
 
+- [ ] Fix [https://github.com/ayeseeem/icm-dpickx/issues/1#issue-733753076](Issue 1)
 - [ ] Include failing node number in error messages?
 - [ ] Capture optional value
 - [ ] Capture First value (c.f. Capture Sole)? (=> node count >= 1)
@@ -109,6 +110,10 @@ TODO
       namespaces: does the current code?
 - [ ] Original code had helper methods to create XML documents. Consider
       bringing some in here.
+- [ ] Investigate using Hamcrest
+      [HasXPath](http://hamcrest.org/JavaHamcrest/javadoc/1.3/org/hamcrest/xml/HasXPath.html)
+- [ ] Investigate using Hamcrest
+      [TypeSafeDiagnosingMatcher](http://hamcrest.org/JavaHamcrest/javadoc/1.3/org/hamcrest/TypeSafeDiagnosingMatcher.html)
 
 
 Origin
@@ -152,6 +157,9 @@ parameters _are_ reassigned - use `final` to mark the ones that are not.
 
 ### Rules
 
+- Simplify lambdas:
+  - Remove `{ }` from around single liners
+  - Prefer method references where possible
 - Don't use `public` on interface methods
   [JLS Method Declarations](https://docs.oracle.com/javase/specs/jls/se8/html/jls-9.html#jls-9.4)
   says this (our emphasis):
@@ -159,3 +167,7 @@ parameters _are_ reassigned - use `final` to mark the ones that are not.
     > public (§6.6). It is permitted, but **discouraged as a matter of style**,
     > to redundantly specify the public modifier for a method declaration in
     > an interface.
+
+### Coding Standard TODOs
+
+- [ ] Look for `final` variables that can be removed by inlining the variable
