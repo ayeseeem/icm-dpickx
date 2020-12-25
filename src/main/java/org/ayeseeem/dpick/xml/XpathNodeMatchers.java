@@ -9,9 +9,15 @@ import org.hamcrest.Matcher;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+// TODO: ICM 2019-03-31: Separate out handlers into NodeHandlers?
+// TODO: ICM 2019-03-31: Rename as XpathNodeActions?? as it contains matchers _and_ handlers?
+// TODO: ICM 2019-03-29: Rename, re-work with (renamed?) NodeMatchers
+// - extract an interface - NodeChecks? that could apply also to JSONPath?
+// - separate the XPath parts into an xpath sub-package
+
 /**
  * Methods for making assertions about DOM {@link Node}s found by XPath
- * expressions
+ * expressions.
  */
 public class XpathNodeMatchers {
 
@@ -50,57 +56,56 @@ public class XpathNodeMatchers {
      */
     public NodeMatcher node(Matcher<? super Node> matcher) {
         return rootNode -> throwNotImplementedYet();
-        //return rootNode -> getChecker(rootNode).assertNode(matcher);
+        //return matcherFromHandler(selection -> assertNode(matcher));
     }
 
     /**
-     * Evaluates the XPath on the root node and checks that node exists
+     * Evaluates the XPath on the root node and checks that node exists.
      *
      * @return a node matcher that checks the node exists
      */
     public NodeMatcher exists() {
-        return rootNode -> getChecker(rootNode).exists();
+        return matcherFromHandler(selection -> selection.exists());
     }
 
     /**
-     * Evaluates the XPath on the root node and checks that node does not exist
+     * Evaluates the XPath on the root node and checks that node does not exist.
      *
      * @return a node matcher that checks the node does not exist
      */
     public NodeMatcher doesNotExist() {
-        return rootNode -> getChecker(rootNode).doesNotExist();
+        return matcherFromHandler(selection -> selection.doesNotExist());
     }
 
     /**
-     * Evaluates the XPath on the root node and checks the number of nodes found
+     * Evaluates the XPath on the root node and checks the number of nodes found.
      *
      * @param expectedCount
      *            the expected node count
      * @return a node matcher that implements the check
      */
     public NodeMatcher nodeCount(int expectedCount) {
-        return rootNode -> getChecker(rootNode).hasNodes(expectedCount);
+        return matcherFromHandler(selection -> selection.hasNodes(expectedCount));
     }
 
     /**
      * Evaluates the XPath on the root node and checks the node's text content
-     * with the given Hamcrest {@link Matcher}
+     * with the given Hamcrest {@link Matcher}.
      *
      * @param matcher
      *            a matcher to check the string value
      * @return a node matcher that implements the check
      */
     public NodeMatcher value(Matcher<String> matcher) {
-        return rootNode -> {
-            NodeSelectionChecker checker = getChecker(rootNode);
-            checker.exists();
-            checker.assertMatch(matcher);
-        };
+        return matcherFromHandler(selection -> {
+            selection.exists();
+            selection.assertMatch(matcher);
+        });
     }
 
     /**
      * Evaluates the XPath on the root node and then processes each matching
-     * node with the given {@link NodeHandler}
+     * node with the given {@link NodeHandler}.
      *
      * @param nodeHandler
      *            a handler to process a {@link Node}
@@ -117,7 +122,7 @@ public class XpathNodeMatchers {
 
     /**
      * Creates a helper for capturing a single, required node specified by the
-     * XPath
+     * XPath.
      *
      * @param capturer
      *            a capturer to capture the node's value
@@ -126,24 +131,32 @@ public class XpathNodeMatchers {
      */
     public NodeHandler captureSoleRequired(Capturer capturer) {
         return rootNode -> {
-            getChecker(rootNode).exists();
-            getChecker(rootNode).hasNodes(1);
+            matcherFromHandler(selection -> {
+                selection.exists();
+                selection.hasNodes(1);
+            }).match(rootNode);
 
             final NodeList nodes = selectNodes(rootNode);
             capturer.capture(nodes.item(0));
         };
     }
 
-    /**
-     * Creates a helper for testing the node(s) selected by the XPath
-     *
-     * @param rootNode
-     *            the root Node on which the XPath is evaluated
-     * @return a helper object
-     */
-    private NodeSelectionChecker getChecker(Node rootNode) {
+    private NodeList selectCheckedNodes(Node rootNode, Checks checks) {
         final NodeList nodes = selectNodes(rootNode);
-        return new NodeSelectionChecker(nodes, "XPath " + xpathHelper.getXPath());
+        NodeSelectionChecker checker = new NodeSelectionChecker(nodes, "XPath " + xpathHelper.getXPath());
+        checks.checkWith(checker);
+        return nodes;
+    }
+
+    // TODO: ICM 2019-03-31: move to NodeSelectionChecker?
+    @FunctionalInterface
+    interface Checks {
+        void checkWith(NodeSelectionChecker checker);
+    }
+
+    // TODO: ICM 2019-03-31: Why the name? it doesn't do handle()?
+    private NodeMatcher matcherFromHandler(Checks checks) {
+        return rootNode -> selectCheckedNodes(rootNode, checks);
     }
 
     private NodeList selectNodes(Node rootNode) {
@@ -151,7 +164,7 @@ public class XpathNodeMatchers {
     }
 
     /**
-     * Common way to mark the methods that have not been implemented yet
+     * Common way to mark the methods that have not been implemented yet.
      *
      * @throws UnsupportedOperationException
      *             always
