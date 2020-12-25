@@ -12,9 +12,6 @@ import org.w3c.dom.NodeList;
  * Wraps a {@link NodeList} as an unmodifiable {@link List}, primarily so that
  * it implements {@link Iterable}, so it can 'be the target of the "foreach"
  * statement'.
- *
- * @author ayeseeem@gmail.com
- *
  */
 public class ListOfNode extends AbstractList<Node> {
 

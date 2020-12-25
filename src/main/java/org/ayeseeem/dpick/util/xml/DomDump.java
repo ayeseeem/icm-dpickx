@@ -17,9 +17,6 @@ import org.w3c.dom.Node;
 
 /**
  * Helper for examining XML and HTML DOMs
- *
- * @author ayeseeem@gmail.com
- *
  */
 public class DomDump {
 

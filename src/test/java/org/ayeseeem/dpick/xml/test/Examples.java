@@ -20,9 +20,6 @@ import org.w3c.dom.Node;
 /**
  * Examples of usage as JUnit tests. For more examples, see the
  * {@link IntegrationTest}s.
- *
- * @author ayeseeem@gmail.com
- *
  */
 public class Examples extends XmlExampleFixture {
 

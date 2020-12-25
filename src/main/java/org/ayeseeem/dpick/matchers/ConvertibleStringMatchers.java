@@ -14,8 +14,6 @@ import org.hamcrest.TypeSafeMatcher;
  * Written to help
  * {@link XpathNodeMatchers#value(Matcher)}, which gets
  * strings from XML.
- *
- * @author ayeseeem@gmail.com
  */
 public class ConvertibleStringMatchers {
 

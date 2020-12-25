@@ -17,9 +17,6 @@ import org.w3c.dom.NodeList;
 
 /**
  * Class to help select {@link Node}s with XPath expressions.
- *
- * @author ayeseeem@gmail.com
- *
  */
 public class XpathHelper {
 

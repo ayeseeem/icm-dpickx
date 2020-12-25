@@ -7,9 +7,6 @@ import javax.xml.xpath.XPathExpressionException;
 /**
  * Factory methods for creating Node matchers based on various selection
  * mechanisms. Currently only XPath supported.
- *
- * @author ayeseeem@gmail.com
- *
  */
 public class NodeMatchers {
 

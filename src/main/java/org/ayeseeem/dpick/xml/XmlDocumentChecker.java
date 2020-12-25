@@ -7,9 +7,6 @@ import org.w3c.dom.Node;
 /**
  * Class for checking XML (or HTML) documents. Can check anything that can be
  * presented as a {@link Node}.
- *
- * @author ayeseeem@gmail.com
- *
  */
 public class XmlDocumentChecker {
 

@@ -12,9 +12,6 @@ import org.w3c.dom.NodeList;
 /**
  * Methods for making assertions about DOM {@link Node}s found by XPath
  * expressions
- *
- * @author ayeseeem@gmail.com
- *
  */
 public class XpathNodeMatchers {
 

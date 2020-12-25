@@ -25,9 +25,6 @@ import org.w3c.dom.Node;
 
 /**
  * Test all main usages using end-to-end examples
- *
- * @author ayeseeem@gmail.com
- *
  */
 public class IntegrationTest extends XmlExampleFixture {
 

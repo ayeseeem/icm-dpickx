@@ -8,9 +8,6 @@ import org.w3c.dom.Node;
 
 /**
  * Example XML for use in integration tests and examples
- *
- * @author ayeseeem@gmail.com
- *
  */
 abstract class XmlExampleFixture {
 
