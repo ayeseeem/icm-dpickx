@@ -65,7 +65,7 @@ public class XpathNodeMatchers {
      * @return a node matcher that checks the node exists
      */
     public NodeMatcher exists() {
-        return matcherFromHandler(selection -> selection.exists());
+        return matcherFromHandler(NodeSelectionChecker::exists);
     }
 
     /**
@@ -74,7 +74,7 @@ public class XpathNodeMatchers {
      * @return a node matcher that checks the node does not exist
      */
     public NodeMatcher doesNotExist() {
-        return matcherFromHandler(selection -> selection.doesNotExist());
+        return matcherFromHandler(NodeSelectionChecker::doesNotExist);
     }
 
     /**
