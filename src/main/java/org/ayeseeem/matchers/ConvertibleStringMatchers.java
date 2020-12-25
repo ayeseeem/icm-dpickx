@@ -1,4 +1,4 @@
-package org.ayeseeem.dpick.matchers;
+package org.ayeseeem.matchers;
 
 import org.ayeseeem.dpick.xml.XpathNodeMatchers;
 import org.hamcrest.CoreMatchers;
@@ -15,6 +15,7 @@ import org.hamcrest.TypeSafeMatcher;
  * {@link XpathNodeMatchers#value(Matcher)}, which gets
  * strings from XML.
  */
+// TODO: ICM 2019-03-22: Can/should these helpers be extracted into their own artifact or project or into https://github.com/ayeseeem/icm-bits-java?
 public class ConvertibleStringMatchers {
 
     /**
@@ -40,6 +41,7 @@ public class ConvertibleStringMatchers {
             @Override
             public boolean matchesSafely(String possible) {
                 try {
+                    // TODO: ICM 2019-03-22: Split numberOfValue into numberOf() and numberOfValue()? - check it's a number
                     final double actual = Double.parseDouble(possible);
                     return actual == expected;
                 } catch (NumberFormatException e) {
@@ -75,6 +77,7 @@ public class ConvertibleStringMatchers {
             @Override
             public boolean matchesSafely(String possible) {
                 try {
+                    // TODO: ICM 2019-03-22: Split numberOfValue into numberOf() and numberOfValue()? - check it's a number
                     final int actual = Integer.parseInt(possible);
                     return actual == expected;
                 } catch (NumberFormatException e) {
@@ -112,6 +115,7 @@ public class ConvertibleStringMatchers {
             @Override
             public boolean matchesSafely(String possible) {
                 try {
+                    // TODO: ICM 2019-03-22: Split booleanOfValue into booleanOf() and booleanOfValue()? - check it's a number
                     final boolean actual = Boolean.parseBoolean(possible);
                     return actual == expected;
                 } catch (NumberFormatException e) {

@@ -1,8 +1,8 @@
 package org.ayeseeem.dpick.xml.test;
 
-import static org.ayeseeem.dpick.matchers.ConvertibleStringMatchers.booleanOfValue;
-import static org.ayeseeem.dpick.matchers.ConvertibleStringMatchers.numberOfValue;
 import static org.ayeseeem.dpick.xml.NodeMatchers.xpath;
+import static org.ayeseeem.matchers.ConvertibleStringMatchers.booleanOfValue;
+import static org.ayeseeem.matchers.ConvertibleStringMatchers.numberOfValue;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
