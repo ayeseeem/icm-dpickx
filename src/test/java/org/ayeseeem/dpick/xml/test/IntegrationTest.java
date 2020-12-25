@@ -59,7 +59,7 @@ public class IntegrationTest extends XmlExampleFixture {
     @Test
     public void expect_DoesNotExist_ButDoesExist() throws XPathExpressionException {
         thrown.expect(AssertionError.class);
-        thrown.expectMessage("XPath /RootElement exists");
+        thrown.expectMessage("XPath /RootElement exists unexpectedly");
 
         XmlDocumentChecker.check(eg).andExpect(xpath("/RootElement").doesNotExist());
     }

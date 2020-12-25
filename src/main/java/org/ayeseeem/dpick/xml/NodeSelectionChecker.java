@@ -13,9 +13,6 @@ import org.w3c.dom.NodeList;
 /**
  * Class to help make assertions about a selection of DOM {@link Node}s, for
  * example when selected by XPath expressions
- *
- * @author ayeseeem@gmail.com
- *
  */
 public class NodeSelectionChecker {
 
@@ -41,8 +38,7 @@ public class NodeSelectionChecker {
     }
 
     public void doesNotExist() {
-        // TODO: ICM 2016-10-14: Clarify message: "exists (unexpectedly)"
-        assertTrue(nodes.getLength() == 0, this.selectionExpression + " exists");
+        assertTrue(nodes.getLength() == 0, this.selectionExpression + " exists unexpectedly");
     }
 
     public void hasNodes(int expectedCount) {
