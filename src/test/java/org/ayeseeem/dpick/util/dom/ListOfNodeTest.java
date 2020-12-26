@@ -10,6 +10,7 @@ import static org.junit.Assert.fail;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 import java.util.UUID;
 
 import org.junit.Test;
@@ -30,7 +31,7 @@ public class ListOfNodeTest {
     public void testOf() {
         assertThat(ListOfNode.of(DomBuilder.emptyNodeList()), is(empty()));
 
-        ListOfNode result = ListOfNode.of(randomNodeList());
+        List<Node> result = ListOfNode.of(randomNodeList());
         assertThat(result, contains(result.get(0)));
     }
 
@@ -42,7 +43,7 @@ public class ListOfNodeTest {
     @Test
     public void testGet() {
         NodeList nodes = randomNodeList();
-        ListOfNode subject = ListOfNode.of(nodes);
+        ListOfNode subject = new ListOfNode(nodes);
         assertThat(subject.get(0), is(not(nullValue())));
         assertThat(subject.get(0), is(nodes.item(0)));
     }
@@ -251,11 +252,11 @@ public class ListOfNodeTest {
     }
 
     private static ListOfNode emptyListOfNode() {
-        return ListOfNode.of(DomBuilder.emptyNodeList());
+        return new ListOfNode(DomBuilder.emptyNodeList());
     }
 
     private static ListOfNode randomListOfNode() {
-        return ListOfNode.of(randomNodeList());
+        return new ListOfNode(randomNodeList());
     }
 
     private static NodeList randomNodeList() {

@@ -54,7 +54,7 @@ public class NodeSelectionChecker {
     // HACK: ICM 2016-10-15: In progress - need better processing of text content?
     public static List<String> getValueStrings(NodeList nodes) {
         final List<String> valueStrings = new ArrayList<>();
-        ListOfNode nodesList = ListOfNode.of(nodes);
+        List<Node> nodesList = ListOfNode.of(nodes);
         nodesList.forEach(node -> {
             final short nodeType = node.getNodeType();
             if (nodeType == Node.ELEMENT_NODE || nodeType == Node.ATTRIBUTE_NODE) {

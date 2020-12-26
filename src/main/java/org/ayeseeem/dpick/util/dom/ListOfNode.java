@@ -13,12 +13,12 @@ import org.w3c.dom.NodeList;
  * it implements {@link Iterable}, so it can 'be the target of the "foreach"
  * statement'.
  */
-public class ListOfNode extends AbstractList<Node> {
+public class ListOfNode extends AbstractList<Node> implements List<Node> {
 
     private final NodeList nodes;
 
     /**
-     * Wraps a {@code NodeList} as a {@code ListOfNode}.
+     * Wraps a {@code NodeList} as a {@code List<Node>}.
      *
      * @param nodes
      *            the node list to wrap - cannot be null
@@ -26,13 +26,13 @@ public class ListOfNode extends AbstractList<Node> {
      * @throws NullPointerException
      *             if the node list is null
      */
-    public static ListOfNode of(NodeList nodes) {
+    public static List<Node> of(NodeList nodes) {
         requireNonNull(nodes);
 
         return new ListOfNode(nodes);
     }
 
-    private ListOfNode(NodeList nodes) {
+    ListOfNode(NodeList nodes) {
         this.nodes = nodes;
     }
 
