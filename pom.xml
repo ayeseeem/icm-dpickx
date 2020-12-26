@@ -42,6 +42,18 @@
       <url>https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html</url>
     </license>
   </licenses>
+  <developers>
+    <developer>
+      <id>ayeseeem</id>
+      <name>ayeseeem</name>
+      <email>ayeseeem at gmail.com</email>
+      <organization>ayeseem</organization>
+      <organizationUrl>https://www.ayeseeem.org</organizationUrl>
+      <roles>
+        <role>Project lead</role>
+      </roles>
+    </developer>
+  </developers>
 
   <scm>
     <url>https://github.com/ayeseeem/icm-dpickx/</url>
