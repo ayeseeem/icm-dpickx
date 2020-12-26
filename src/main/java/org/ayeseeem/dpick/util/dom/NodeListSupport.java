@@ -22,7 +22,7 @@ public class NodeListSupport {
      * @throws NullPointerException
      *             if the node list is null
      */
-    public static List<Node> of(NodeList nodes) {
+    public static List<Node> listOf(NodeList nodes) {
         requireNonNull(nodes);
 
         return new ListOfNode(nodes);

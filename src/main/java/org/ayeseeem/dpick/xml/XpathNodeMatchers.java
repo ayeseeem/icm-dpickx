@@ -1,11 +1,12 @@
 package org.ayeseeem.dpick.xml;
 
+import static org.ayeseeem.dpick.util.dom.NodeListSupport.listOf;
+
 import java.util.List;
 import java.util.Map;
 
 import javax.xml.xpath.XPathExpressionException;
 
-import org.ayeseeem.dpick.util.dom.NodeListSupport;
 import org.hamcrest.Matcher;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -116,7 +117,7 @@ public class XpathNodeMatchers {
     public NodeHandler processEach(NodeHandler nodeHandler) {
         return rootNode -> {
             NodeList nodes = selectNodes(rootNode);
-            List<Node> nodesList = NodeListSupport.of(nodes);
+            List<Node> nodesList = listOf(nodes);
             nodesList.forEach(nodeHandler::handle);
         };
     }

@@ -13,16 +13,16 @@ import org.w3c.dom.Node;
 public class NodeListSupportTest {
 
     @Test
-    public void testOf() {
-        assertThat(NodeListSupport.of(DomBuilder.emptyNodeList()), is(empty()));
+    public void testListOf() {
+        assertThat(NodeListSupport.listOf(DomBuilder.emptyNodeList()), is(empty()));
 
-        List<Node> result = NodeListSupport.of(ListOfNodeTest.randomNodeList());
+        List<Node> result = NodeListSupport.listOf(ListOfNodeTest.randomNodeList());
         assertThat(result, contains(result.get(0)));
     }
 
     @Test(expected = NullPointerException.class)
-    public void testOf_RequiresNonNull() {
-        NodeListSupport.of(null);
+    public void testListOf_RequiresNonNull() {
+        NodeListSupport.listOf(null);
     }
 
 }
