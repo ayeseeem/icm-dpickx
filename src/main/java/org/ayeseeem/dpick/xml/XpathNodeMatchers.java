@@ -2,7 +2,6 @@ package org.ayeseeem.dpick.xml;
 
 import static org.ayeseeem.dpick.util.dom.NodeListSupport.listOf;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.xml.xpath.XPathExpressionException;
@@ -117,8 +116,7 @@ public class XpathNodeMatchers {
     public NodeHandler processEach(NodeHandler nodeHandler) {
         return rootNode -> {
             NodeList nodes = selectNodes(rootNode);
-            List<Node> nodesList = listOf(nodes);
-            nodesList.forEach(nodeHandler::handle);
+            listOf(nodes).forEach(nodeHandler::handle);
         };
     }
 
