@@ -1,7 +1,5 @@
 package org.ayeseeem.dpick.util.dom;
 
-import static java.util.Objects.requireNonNull;
-
 import java.util.AbstractList;
 import java.util.List;
 
@@ -16,21 +14,6 @@ import org.w3c.dom.NodeList;
 public class ListOfNode extends AbstractList<Node> implements List<Node> {
 
     private final NodeList nodes;
-
-    /**
-     * Wraps a {@code NodeList} as a {@code List<Node>}.
-     *
-     * @param nodes
-     *            the node list to wrap - cannot be null
-     * @return a new wrapper for the node list
-     * @throws NullPointerException
-     *             if the node list is null
-     */
-    public static List<Node> of(NodeList nodes) {
-        requireNonNull(nodes);
-
-        return new ListOfNode(nodes);
-    }
 
     ListOfNode(NodeList nodes) {
         this.nodes = nodes;

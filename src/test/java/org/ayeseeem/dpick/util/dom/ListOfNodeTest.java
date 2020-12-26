@@ -10,7 +10,6 @@ import static org.junit.Assert.fail;
 
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
 import java.util.UUID;
 
 import org.junit.Test;
@@ -25,19 +24,6 @@ public class ListOfNodeTest {
     public void testSize() {
         assertThat(emptyListOfNode().size(), is(0));
         assertThat(randomListOfNode().size(), is(1));
-    }
-
-    @Test
-    public void testOf() {
-        assertThat(ListOfNode.of(DomBuilder.emptyNodeList()), is(empty()));
-
-        List<Node> result = ListOfNode.of(randomNodeList());
-        assertThat(result, contains(result.get(0)));
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void testOf_RequiresNonNull() {
-        ListOfNode.of(null);
     }
 
     @Test
@@ -259,7 +245,12 @@ public class ListOfNodeTest {
         return new ListOfNode(randomNodeList());
     }
 
-    private static NodeList randomNodeList() {
+    /**
+     * Creates a {@code NodeList} with a <em>single</em> random node.
+     * 
+     * @return a {@code NodeList} with a single node
+     */
+    static NodeList randomNodeList() {
         Document doc = DomBuilder.emptyDocument();
 
         Element root = doc.createElement("RootElement" + UUID.randomUUID().toString());
