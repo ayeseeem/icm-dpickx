@@ -12,9 +12,9 @@ Quick Start
 `icm-dpickx` lets you use XPaths to select nodes in an XML document and then
 do the following:
 
-  - Express your expectations/make assertions about the selected nodes
-  - Process the selected nodes
-  - Capture the values of selected nodes
+- Express your expectations/make assertions about the selected nodes
+- Process the selected nodes
+- Capture the values of selected nodes
 
 The following snippets give an idea of what you can do.
 
@@ -168,6 +168,7 @@ method is so long that it is hard to see at a glance that the parameters are
 not changed (although, avoid such long methods!). Or where some of the
 parameters _are_ reassigned - use `final` to mark the ones that are not.
 
+
 ### Rules
 
 - Simplify lambdas:
@@ -180,6 +181,7 @@ parameters _are_ reassigned - use `final` to mark the ones that are not.
     > public (§6.6). It is permitted, but **discouraged as a matter of style**,
     > to redundantly specify the public modifier for a method declaration in
     > an interface.
+
 
 ### Coding Standard TODOs
 
