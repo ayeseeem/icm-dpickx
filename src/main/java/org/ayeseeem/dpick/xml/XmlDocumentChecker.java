@@ -16,6 +16,14 @@ public class XmlDocumentChecker {
         this.rootNode = rootNode;
     }
 
+    /**
+     * Captures the value of the single, required node specified by the XPath
+     * matchers. The node must be present, and it must be the only one: there
+     * cannot be more than one.
+     * 
+     * @param xpathNodeMatchers the XPath to capture from
+     * @return the value of the node 
+     */
     public String captureSoleRequired(XpathNodeMatchers xpathNodeMatchers) {
         final Capturer capturer = new Capturer();
 
