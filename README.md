@@ -99,7 +99,9 @@ TODO
 
 - [ ] Fix [Issue 1](https://github.com/ayeseeem/icm-dpickx/issues/1#issue-733753076)
 - [ ] Include failing node number in error messages?
-- [ ] Capture optional value
+- [x] Capture optional value
+  - Capture Sole Optional added, to correspond with Capture Sole Required.
+    Any other methods added should consider an Optional alternative.
 - [ ] Capture First value (c.f. Capture Sole)? (=> node count >= 1)
 - [ ] Capture All for multiple nodes
 - [ ] Templatize the capture methods to return specific types, not just
