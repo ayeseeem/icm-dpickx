@@ -97,6 +97,11 @@ To see more examples, see [`Examples.java`](https://github.com/ayeseeem/icm-dpic
 TODO
 ----
 
+### Library `dpickx` ###
+
+- [ ] Rearrange the main `dpickx` lib code into a sub-folder called `dpickx` (or
+      `dpickx-lib`?)
+  - Then maybe a parent/build-all POM at top level?
 - [ ] Fix [Issue 1](https://github.com/ayeseeem/icm-dpickx/issues/1#issue-733753076)
 - [ ] Rename artifact to be `dpickx`, not `icm-dpickx`, as the `icm-` is
       handled by the `groupId`.
@@ -131,14 +136,26 @@ TODO
       as they are unused at the moment. This README and/or their Javadocs
       should explain what they are for and why they've been added - see
       preceding and following TODOs about namespaces and a command-line tool
-- [ ] **Create a tool!** - Make a command-line utility that can extract a value
-      from an XML file (using a given XPath).
-  - Use the added helper class `XmlUnmarshaller` to convert the XML file into
-      a DOM.
 - [ ] Investigate using Hamcrest
       [HasXPath](http://hamcrest.org/JavaHamcrest/javadoc/1.3/org/hamcrest/xml/HasXPath.html)
 - [ ] Investigate using Hamcrest
       [TypeSafeDiagnosingMatcher](http://hamcrest.org/JavaHamcrest/javadoc/1.3/org/hamcrest/TypeSafeDiagnosingMatcher.html)
+
+
+### Tool `dpickx-app` ###
+
+- [x] **Create a tool!** - Make a command-line utility that can extract a value
+      from an XML file (using a given XPath).
+- [x] Use the added helper class `XmlUnmarshaller` to convert the XML file into
+      a DOM.
+- [x] Rearrange code to be in a folder called `dpickx-app`, not `icm-dpickx-...`
+- [x] Rename artifact to be `dpickx-app`, not `icm-dpickx-app`, as the `icm-` is
+      handled by the `groupId`.
+- [ ] Update this README to mention (and explain how to use) the app.
+- [ ] Replace the test file included with the app - `example.xml` - with a way
+      of generating it from the code in `XmlExampleFixture`.
+      The file was originally created by hand, capturing it from the console
+      output when the library tests were run.
 
 
 Origin

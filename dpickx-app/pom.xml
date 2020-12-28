@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- Dependency on Spring boot is not for any Spring functionality, but just to  -->
+  <!-- define a consistent set of versions for (non-Spring) dependencies. -->
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>1.2.5.RELEASE</version>
+    <relativePath /> <!-- lookup parent from repository -->
+  </parent>
+
+  <groupId>org.ayeseeem</groupId>
+  <artifactId>dpickx-app</artifactId>
+  <version>0.9.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>Data Pickaxe for XML - The Tool</name>
+  <description>Tool for extracting and checking parts of an XML document</description>
+  <url>https://github.com/ayeseeem/icm-dpickx</url>
+
+  <organization>
+    <name>${osgi.bundle.vendor}</name>
+    <url>https://ayeseeem.org/</url>
+  </organization>
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>https://opensource.org/licenses/MIT</url>
+    </license>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+    </license>
+    <license>
+      <name>GNU GENERAL PUBLIC LICENSE, Version 3.0</name>
+      <url>https://www.gnu.org/licenses/gpl-3.0.en.html</url>
+    </license>
+    <license>
+      <name>GNU GENERAL PUBLIC LICENSE, Version 2.0</name>
+      <url>https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html</url>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <id>ayeseeem</id>
+      <name>ayeseeem</name>
+      <email>ayeseeem at gmail.com</email>
+      <organization>ayeseem</organization>
+      <organizationUrl>https://www.ayeseeem.org</organizationUrl>
+      <roles>
+        <role>Project lead</role>
+      </roles>
+    </developer>
+  </developers>
+
+  <scm>
+    <url>https://github.com/ayeseeem/icm-dpickx/</url>
+    <connection>scm:git:git://github.com/ayeseeem/icm-dpickx.git</connection>
+    <developerConnection>scm:git:git@github.com:ayeseeem/icm-dpickx.git</developerConnection>
+  </scm>
+
+  <distributionManagement>
+    <repository>
+      <id>project.repository</id>
+      <url>${projectRepository.url}</url>
+    </repository>
+    <snapshotRepository>
+      <id>project.repository</id>
+      <url>${projectRepository.url}</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <properties>
+    <!-- TODO: ICM 2020-12-28: Use start-class property to identify which main to use, allowing us to specify the Spring Boot main, allowing us to restore effectiveMain to also be called main -->
+
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.version>1.8</java.version>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
+
+    <!-- Controls distribution management -->
+    <!-- Use property defined elsewhere - e.g. settings.xml - so POM doesn't know where you deploy to -->
+    <projectRepository.url>${local-dev-project-repo-url}</projectRepository.url>
+    <osgi.bundle.vendor>ayeseeem.org</osgi.bundle.vendor>
+  </properties>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>org.ayeseeem</groupId>
+      <artifactId>icm-dpickx</artifactId>
+      <version>0.9.0-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <!-- TODO: ICM 2020-12-28: Don't need all of "-web" - is there a CLI/app version? -->
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <!-- Logging API: SLF4J for logging - implementation is not specified, 
+      users of the jar can pick their own impl. -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+
+    <!-- Logging implementation for testing only, does not affect users of the jar -->
+    <dependency> 
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest-library</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>    
+
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.1</version>
+        <executions>
+          <execution>
+            <id>default-prepare-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>default-report</id>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>default-check</id>
+            <goals>
+              <goal>check</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <rule>
+                  <element>BUNDLE</element>
+                  <limits>
+                    <limit>
+                      <counter>COMPLEXITY</counter>
+                      <value>COVEREDRATIO</value>
+                      <minimum>0.60</minimum>
+                    </limit>
+                  </limits>
+                </rule>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+ 
+</project>
