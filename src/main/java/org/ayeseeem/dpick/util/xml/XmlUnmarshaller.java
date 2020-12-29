@@ -23,14 +23,14 @@ public class XmlUnmarshaller {
     private final boolean namespaceAware;
 
     /**
-     * Creates an XML unmarshaller without namespace awareness
+     * Creates an XML unmarshaller without namespace awareness.
      */
     public XmlUnmarshaller() {
         this(false);
     }
 
     /**
-     * Creates an XML unmarshaller without namespace awareness
+     * Creates an XML unmarshaller with namespace awareness if specified.
      *
      * @param namespaceAware
      *            {@code true} to be namespace aware
@@ -44,7 +44,7 @@ public class XmlUnmarshaller {
     }
 
     /**
-     * Creates an XML Document
+     * Creates an XML Document.
      *
      * @param xmlString
      *            the XML (as a string)
@@ -59,7 +59,7 @@ public class XmlUnmarshaller {
     }
 
     /**
-     * Creates an XML Document
+     * Creates an XML Document.
      *
      * @param xmlSource
      *            source of the XML
@@ -76,7 +76,7 @@ public class XmlUnmarshaller {
     }
 
     /**
-     * Creates a DOM from a string (of XML)
+     * Creates a DOM from a string (of XML).
      *
      * @param xmlString
      *            the XML (as a string)
@@ -98,7 +98,7 @@ public class XmlUnmarshaller {
     }
 
     /**
-     * Creates a DOM from a string (of XML)
+     * Creates a DOM from a string (of XML).
      *
      * @param xmlSource
      *            source of the XML
