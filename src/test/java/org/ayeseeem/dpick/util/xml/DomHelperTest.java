@@ -56,7 +56,7 @@ public class DomHelperTest {
             assertEquals(1, nodes.getLength());
         }
         {
-            // no inner elements founds: not at top of tree
+            // no inner elements found: not at top of tree
             NodeList nodes = test.getNodes(subNode, "/inner");
             assertEquals(0, nodes.getLength());
         }
