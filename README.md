@@ -98,6 +98,8 @@ TODO
 ----
 
 - [ ] Fix [Issue 1](https://github.com/ayeseeem/icm-dpickx/issues/1#issue-733753076)
+- [ ] Rename artifact to be `dpickx`, not `icm-dpickx`, as the `icm-` is
+      handled by the `groupId`.
 - [ ] Include failing node number in error messages?
 - [x] Capture optional value
   - Capture Sole Optional added, to correspond with Capture Sole Required.
