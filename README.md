@@ -152,6 +152,12 @@ TODO
 - [x] Rename artifact to be `dpickx-app`, not `icm-dpickx-app`, as the `icm-` is
       handled by the `groupId`.
 - [ ] Update this README to mention (and explain how to use) the app.
+- [ ] Spring Boot has only been used to "simplify" creating a runnable `.jar`
+      (and to specify a set of versions of packages).
+      This makes a 12 MB jar, which is excessive. Investigate a cleaner way of
+      doing this, with a smaller (set of) jar(s).
+  - Note that `App.java` and `Application.java` separate the Spring Boot
+    application from the conventional tool/app.
 - [ ] Replace the test file included with the app - `example.xml` - with a way
       of generating it from the code in `XmlExampleFixture`.
       The file was originally created by hand, capturing it from the console

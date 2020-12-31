@@ -14,6 +14,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
+/**
+ * The main entry point to the tool. Compare with {@link Application}.
+ */
 public class App {
 
     private final String file;

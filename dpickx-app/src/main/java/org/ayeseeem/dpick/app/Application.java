@@ -11,6 +11,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
+/**
+ * Spring Boot convenience wrapper to simplify making a runnable Jar file.
+ * @see App
+ */
 @SpringBootApplication
 public class Application {
 
