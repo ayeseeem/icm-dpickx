@@ -90,7 +90,7 @@
 
     <dependency>
       <groupId>org.ayeseeem</groupId>
-      <artifactId>icm-dpickx</artifactId>
+      <artifactId>dpickx</artifactId>
       <version>0.9.0-SNAPSHOT</version>
     </dependency>
 

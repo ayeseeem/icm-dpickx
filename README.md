@@ -9,7 +9,7 @@ Library for extracting and checking parts of an XML document
 Quick Start
 -----------
 
-`icm-dpickx` lets you use XPaths to select nodes in an XML document and then
+`dpickx` lets you use XPaths to select nodes in an XML document and then
 do the following:
 
 - Express your expectations/make assertions about the selected nodes
@@ -114,7 +114,7 @@ TODO
       `dpickx-lib`?)
   - Then maybe a parent/build-all POM at top level?
 - [ ] Fix [Issue 1](https://github.com/ayeseeem/icm-dpickx/issues/1#issue-733753076)
-- [ ] Rename artifact to be `dpickx`, not `icm-dpickx`, as the `icm-` is
+- [x] Rename artifact to be `dpickx`, not `icm-dpickx`, as the `icm-` is
       handled by the `groupId`.
 - [ ] Include failing node number in error messages?
 - [x] Capture optional value
