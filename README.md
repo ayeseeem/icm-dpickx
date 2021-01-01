@@ -94,6 +94,17 @@ assertThat(votingAge, is("18"));
 To see more examples, see [`Examples.java`](src/test/java/org/ayeseeem/dpick/xml/test/Examples.java "Examples")
 
 
+Applying XPaths
+---------------
+
+XPaths are applied to the node passed in to the `XmlDocumentChecker.check()`
+method in a conventional way.
+That is, relative XPaths are relative to the node passed in, but absolute paths
+still apply to the whole document.
+See the [`Examples.java`](src/test/java/org/ayeseeem/dpick/xml/test/Examples.java)
+for more details.
+
+
 TODO
 ----
 
@@ -123,9 +134,11 @@ TODO
       [XMLUnit](http://www.xmlunit.org/) - use to implement some of the internal
       XPath evaluations etc, and/or document using it explicitly in parallel
       with `dpickx` to check the XML is valid etc.
-- [ ] There was an intention to be able to apply checks to just part of a
+- [x] There was an intention to be able to apply checks to just part of a
       document tree. Check if this works, and check/change examples and tests
-      to show this
+      to show this.
+      Relative paths apply relative to the node, absolute paths still refer to
+      the whole document.
 - [ ] Support XML Namespaces. The original code had some capabilities to handle
       namespaces: does the current code? There is the unused, helper class
       `DomHelper`, which shows an approach that might work. Compare it to how

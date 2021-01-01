@@ -37,6 +37,46 @@ public class IntegrationTest {
     }
 
     @Test
+    public void expect_ContextIsNodePassedToCheck_NotWholeDocument() throws XPathExpressionException {
+        Node wholeDocTopElement = eg;
+        XmlDocumentChecker.check(wholeDocTopElement)
+                .andExpect(xpath("Repeated").nodeCount(2)); // There are 2 <Repeated> elements immediately below the top <RootElement>
+
+        Node uniqueSubNode = eg.getFirstChild();
+        assertThat(uniqueSubNode.getNodeName(), is("SomethingUnique"));
+        XmlDocumentChecker.check(uniqueSubNode)
+                .andExpect(xpath("Repeated").nodeCount(0)); // There are No <Repeated> elements immediately below the top sub node
+    }
+
+    @Test
+    public void expect_AbsolutePathsStillReferenceWholeDocument() throws XPathExpressionException {
+        Node wholeDocTopElement = eg;
+        XmlDocumentChecker.check(wholeDocTopElement)
+                .andExpect(xpath("//Repeated").nodeCount(2));
+
+        Node uniqueSubNode = eg.getFirstChild();
+        assertThat(uniqueSubNode.getNodeName(), is("SomethingUnique"));
+        XmlDocumentChecker.check(uniqueSubNode)
+                .andExpect(xpath("//Repeated").nodeCount(2));
+    }
+
+    // @Characterization
+    @Test
+    public void clarifyThatExampleIsPassingTopMostNode_NotDocumentRoot() throws XPathExpressionException {
+        Node wholeDocTopElement = eg;
+        XmlDocumentChecker.check(wholeDocTopElement)
+                .andExpect(xpath("RootElement").nodeCount(0))   // There are no <RootElement>s immediately below the top <RootElement> 
+                .andExpect(xpath("/RootElement").nodeCount(1))
+                ;
+
+        Node doc = eg.getOwnerDocument();
+        XmlDocumentChecker.check(doc)
+                .andExpect(xpath("RootElement").nodeCount(1))   // There is a <RootElement> immediately below the Document root 
+                .andExpect(xpath("/RootElement").nodeCount(1))
+                ;
+    }
+
+    @Test
     public void expect_Exists_RootElement() throws XPathExpressionException {
         XmlDocumentChecker.check(eg).andExpect(xpath("/RootElement").exists());
     }
