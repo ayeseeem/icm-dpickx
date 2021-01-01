@@ -91,7 +91,7 @@ assertThat(votingAge, is("18"));
 ```
 
 
-To see more examples, see [`Examples.java`](https://github.com/ayeseeem/icm-dpickx/blob/master/src/test/java/org/ayeseeem/dpick/xml/test/Examples.java "Examples")
+To see more examples, see [`Examples.java`](src/test/java/org/ayeseeem/dpick/xml/test/Examples.java "Examples")
 
 
 TODO
