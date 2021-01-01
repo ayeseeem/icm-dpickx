@@ -27,7 +27,7 @@ import org.w3c.dom.Node;
 /**
  * Test all main usages using end-to-end examples
  */
-public class IntegrationTest extends XmlExampleFixture {
+public class IntegrationTest {
 
     @Test
     public void verifyNotInSamePackage_ToVerifyPublicInterface() {
@@ -396,5 +396,7 @@ public class IntegrationTest extends XmlExampleFixture {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
+    private Node eg = XmlExampleFixture.createExampleDom();
 
 }

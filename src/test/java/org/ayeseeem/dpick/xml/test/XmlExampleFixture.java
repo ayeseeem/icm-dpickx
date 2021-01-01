@@ -7,18 +7,16 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 /**
- * Example XML for use in integration tests and examples
+ * Example XML for use in integration tests and examples.
  */
-abstract class XmlExampleFixture {
-
-    protected final Node eg = createExampleDom();
+class XmlExampleFixture {
 
     static {
         Document doc = createExampleDocument();
         DomDump.safeDumpToConsole(doc);
     }
 
-    private static Node createExampleDom() {
+    static Node createExampleDom() {
         return createExampleDocument().getDocumentElement();
     }
 

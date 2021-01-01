@@ -21,7 +21,7 @@ import org.w3c.dom.Node;
  * Examples of usage as JUnit tests. For more examples, see the
  * {@link IntegrationTest}s.
  */
-public class Examples extends XmlExampleFixture {
+public class Examples {
 
     @Test
     public void verifyNotInSamePackage_ToVerifyPublicInterface() {
@@ -109,5 +109,7 @@ public class Examples extends XmlExampleFixture {
         String votingAge = checker.captureSoleOptional(xpath("//DoesContainVotingAge")).orElse("18");
         assertThat(votingAge, is("18"));
     }
+
+    private Node eg = XmlExampleFixture.createExampleDom();
 
 }
