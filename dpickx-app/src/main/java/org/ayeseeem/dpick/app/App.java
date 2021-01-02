@@ -38,7 +38,7 @@ public class App {
         System.out.println(content);
     }
 
-    public static void effectiveMain(String[] args) {
+    public static void main(String[] args) {
         if (args.length < 2) {
             System.out.println("Need 2 args: <filename> <XPath>");
             System.out.println(" - Xpath might need (Java) escaping of characters such as \\");
