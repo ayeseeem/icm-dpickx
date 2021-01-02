@@ -115,7 +115,7 @@ public class ConvertibleStringMatchers {
             @Override
             public boolean matchesSafely(String possible) {
                 try {
-                    // TODO: ICM 2019-03-22: Split booleanOfValue into booleanOf() and booleanOfValue()? - check it's a number
+                    // TODO: ICM 2019-03-22: Split booleanOfValue into booleanOf() and booleanOfValue()? - check it's a boolean
                     final boolean actual = Boolean.parseBoolean(possible);
                     return actual == expected;
                 } catch (NumberFormatException e) {
