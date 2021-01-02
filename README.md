@@ -108,7 +108,7 @@ for more details.
 TODO
 ----
 
-### Library `dpickx` ###
+### Library `dpickx`
 
 - [ ] Rearrange the main `dpickx` lib code into a sub-folder called `dpickx` (or
       `dpickx-lib`?)
@@ -155,7 +155,7 @@ TODO
       [TypeSafeDiagnosingMatcher](http://hamcrest.org/JavaHamcrest/javadoc/1.3/org/hamcrest/TypeSafeDiagnosingMatcher.html)
 
 
-### Tool `dpickx-app` ###
+### Tool `dpickx-app`
 
 - [x] **Create a tool!** - Make a command-line utility that can extract a value
       from an XML file (using a given XPath).
