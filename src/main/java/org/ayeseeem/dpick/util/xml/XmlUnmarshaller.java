@@ -144,7 +144,7 @@ public class XmlUnmarshaller {
 
         @Override
         public void fatalError(SAXParseException e) throws SAXException {
-            logger.error("FATAL: " + e.getMessage());
+            logger.error("FATAL: {}", e.getMessage());
             // propagate: matches DocumentBuilder's default behaviour:
             throw e;
         }
