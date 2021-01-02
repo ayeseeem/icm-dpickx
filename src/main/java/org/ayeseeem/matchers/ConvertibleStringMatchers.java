@@ -51,7 +51,7 @@ public class ConvertibleStringMatchers {
 
             @Override
             public void describeTo(Description description) {
-                description.appendText("value parsable as a number of value ").appendValue(expected);
+                description.appendText("value parsable as a double of value ").appendValue(expected);
             }
         };
     }

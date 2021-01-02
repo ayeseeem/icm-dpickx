@@ -158,7 +158,7 @@ public class IntegrationTest {
     @Test
     public void expect_Number_WrongValue() throws XPathExpressionException {
         thrown.expect(AssertionError.class);
-        thrown.expectMessage("Expected: is value parsable as a number of value <888.0>");
+        thrown.expectMessage("Expected: is value parsable as a double of value <888.0>");
         thrown.expectMessage("but: was \"17\"");
 
         XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsSeventeen").value(is(numberOfValue(888.0))));
@@ -167,7 +167,7 @@ public class IntegrationTest {
     @Test
     public void expect_Number_NotANumber() throws XPathExpressionException {
         thrown.expect(AssertionError.class);
-        thrown.expectMessage("Expected: is value parsable as a number of value <888.0>");
+        thrown.expectMessage("Expected: is value parsable as a double of value <888.0>");
         thrown.expectMessage("but: was \"blah blah\"");
 
         XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsAttributeWithEighteen").value(is(numberOfValue(888.0))));

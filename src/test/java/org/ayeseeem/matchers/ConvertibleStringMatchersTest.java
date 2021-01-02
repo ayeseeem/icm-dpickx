@@ -76,9 +76,9 @@ public class ConvertibleStringMatchersTest {
         subject.describeTo(description);
 
         assertThat(description.toString(), containsString("Initial description - "));
-        assertThat(description.toString(), containsString("value parsable as a number"));
-        assertThat(description.toString(), containsString("value parsable as a number of value <12.3>"));
-        assertThat(description.toString(), is("Initial description - value parsable as a number of value <12.3>"));
+        assertThat(description.toString(), containsString("value parsable as a double"));
+        assertThat(description.toString(), containsString("value parsable as a double of value <12.3>"));
+        assertThat(description.toString(), is("Initial description - value parsable as a double of value <12.3>"));
     }
 
     @Test
