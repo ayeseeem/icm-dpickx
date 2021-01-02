@@ -13,7 +13,7 @@
 
   <groupId>org.ayeseeem</groupId>
   <artifactId>dpickx-app</artifactId>
-  <version>0.9.0-SNAPSHOT</version>
+  <version>0.10.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>Data Pickaxe for XML - The Tool</name>
@@ -91,7 +91,7 @@
     <dependency>
       <groupId>org.ayeseeem</groupId>
       <artifactId>dpickx</artifactId>
-      <version>0.9.0-SNAPSHOT</version>
+      <version>0.10.0-SNAPSHOT</version>
     </dependency>
 
     <dependency>
