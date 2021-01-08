@@ -112,7 +112,7 @@ TODO
 
 - [x] Rearrange the main `dpickx` lib code into a sub-folder called `dpickx` (or
       `dpickx-lib`?)
-- [ ] Then make a parent/build-all POM at top level, for use by `-app` (below).
+- [x] Then make a parent/build-all POM at top level, for use by `-app` (below).
 - [ ] Fix [Issue 1](https://github.com/ayeseeem/icm-dpickx/issues/1#issue-733753076)
 - [x] Rename artifact to be `dpickx`, not `icm-dpickx`, as the `icm-` is
       handled by the `groupId`.
@@ -170,7 +170,7 @@ TODO
       This makes a 12 MB jar, which is excessive. Investigate a cleaner way of
       doing this, with a smaller (set of) jar(s).
       Using Apache Maven Assembly Plugin, reduced jar size to 101 kB.
-- [ ] De-duplicate POM settings by depending on a Parent POM, once there is one.
+- [x] De-duplicate POM settings by depending on a Parent POM, once there is one.
 - [ ] Replace the test file included with the app - `example.xml` - with a way
       of generating it from the code in `XmlExampleFixture`.
       The file was originally created by hand, capturing it from the console
