@@ -79,7 +79,7 @@
     <projectRepository.url>${local-dev-project-repo-url}</projectRepository.url>
     <osgi.bundle.vendor>ayeseeem.org</osgi.bundle.vendor>
 
-    <!-- Versions of dependencies based on Spring Boot 1.2.5.RELEASE -->
+    <!-- Versions of dependencies originally based on Spring Boot 1.2.5.RELEASE -->
     <junit.version>4.13.1</junit.version>
     <hamcrest.version>1.3</hamcrest.version>
     <slf4j.version>1.7.12</slf4j.version>
