@@ -110,9 +110,9 @@ TODO
 
 ### Library `dpickx`
 
-- [ ] Rearrange the main `dpickx` lib code into a sub-folder called `dpickx` (or
+- [x] Rearrange the main `dpickx` lib code into a sub-folder called `dpickx` (or
       `dpickx-lib`?)
-  - Then make a parent/build-all POM at top level, for use by `-app` (below).
+- [ ] Then make a parent/build-all POM at top level, for use by `-app` (below).
 - [ ] Fix [Issue 1](https://github.com/ayeseeem/icm-dpickx/issues/1#issue-733753076)
 - [x] Rename artifact to be `dpickx`, not `icm-dpickx`, as the `icm-` is
       handled by the `groupId`.
