@@ -2,87 +2,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.ayeseeem</groupId>
+  <parent>
+    <groupId>org.ayeseeem</groupId>
+    <artifactId>dpickx-parent</artifactId>
+    <version>0.10.0-SNAPSHOT</version>
+    <relativePath>..</relativePath>
+  </parent>
+
   <artifactId>dpickx-app</artifactId>
-  <version>0.10.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>Data Pickaxe for XML - The Tool</name>
   <description>Tool for extracting and checking parts of an XML document</description>
   <url>https://github.com/ayeseeem/icm-dpickx</url>
 
-  <organization>
-    <name>${osgi.bundle.vendor}</name>
-    <url>https://ayeseeem.org/</url>
-  </organization>
-  <licenses>
-    <license>
-      <name>MIT License</name>
-      <url>https://opensource.org/licenses/MIT</url>
-    </license>
-    <license>
-      <name>Apache License, Version 2.0</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-    </license>
-    <license>
-      <name>GNU GENERAL PUBLIC LICENSE, Version 3.0</name>
-      <url>https://www.gnu.org/licenses/gpl-3.0.en.html</url>
-    </license>
-    <license>
-      <name>GNU GENERAL PUBLIC LICENSE, Version 2.0</name>
-      <url>https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html</url>
-    </license>
-  </licenses>
-  <developers>
-    <developer>
-      <id>ayeseeem</id>
-      <name>ayeseeem</name>
-      <email>ayeseeem at gmail.com</email>
-      <organization>ayeseem</organization>
-      <organizationUrl>https://www.ayeseeem.org</organizationUrl>
-      <roles>
-        <role>Project lead</role>
-      </roles>
-    </developer>
-  </developers>
-
-  <scm>
-    <url>https://github.com/ayeseeem/icm-dpickx/</url>
-    <connection>scm:git:git://github.com/ayeseeem/icm-dpickx.git</connection>
-    <developerConnection>scm:git:git@github.com:ayeseeem/icm-dpickx.git</developerConnection>
-  </scm>
-
-  <distributionManagement>
-    <repository>
-      <id>project.repository</id>
-      <url>${projectRepository.url}</url>
-    </repository>
-    <snapshotRepository>
-      <id>project.repository</id>
-      <url>${projectRepository.url}</url>
-    </snapshotRepository>
-  </distributionManagement>
-
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java.version>1.8</java.version>
-    <maven.compiler.source>${java.version}</maven.compiler.source>
-    <maven.compiler.target>${java.version}</maven.compiler.target>
-
-    <!-- Controls distribution management -->
-    <!-- Use property defined elsewhere - e.g. settings.xml - so POM doesn't know where you deploy to -->
-    <projectRepository.url>${local-dev-project-repo-url}</projectRepository.url>
-    <osgi.bundle.vendor>ayeseeem.org</osgi.bundle.vendor>
-
-    <!-- Versions of dependencies based on Spring Boot 1.2.5.RELEASE -->
-    <junit.version>4.12</junit.version>
-    <hamcrest.version>1.3</hamcrest.version>
-    <slf4j.version>1.7.12</slf4j.version>
-    <logback.version>1.1.3</logback.version>
-  </properties>
-
   <dependencies>
-
     <dependency>
       <groupId>org.ayeseeem</groupId>
       <artifactId>dpickx</artifactId>
