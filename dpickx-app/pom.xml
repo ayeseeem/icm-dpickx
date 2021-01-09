@@ -23,18 +23,14 @@
       <version>0.10.0-SNAPSHOT</version>
     </dependency>
 
-    <!-- Logging API: SLF4J for logging - implementation is not specified, 
-      users of the jar can pick their own impl. -->
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
     </dependency>
 
-    <!-- Logging implementation for testing only, does not affect users of the jar -->
     <dependency> 
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <scope>test</scope>
     </dependency>
 
     <dependency>
