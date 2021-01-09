@@ -2,10 +2,9 @@ package org.ayeseeem.dpick.util.xml;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertThrows;
 
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
@@ -29,14 +28,16 @@ public class XmlUnmarshallerTest {
 
     @Test
     public void testToDocument_InvalidXml() throws Exception {
-        thrown.expect(SAXException.class);
-        test.toDocument("<stuff>this is <broken> XML</stuff>");
+        assertThrows(SAXException.class, () -> {
+            test.toDocument("<stuff>this is <broken> XML</stuff>");
+        });
     }
 
     @Test
     public void testToDocument_NonXml() throws Exception {
-        thrown.expect(SAXException.class);
-        test.toDocument("This is NOT XML");
+        assertThrows(SAXException.class, () -> {
+            test.toDocument("This is NOT XML");
+        });
     }
 
     @Test
@@ -52,9 +53,6 @@ public class XmlUnmarshallerTest {
         Document document = test.toDocument("<someNameSpace:stuff xmlns:someNameSpace=\"http://example.com/ns\"></someNameSpace:stuff>");
         assertThat(document.getDocumentElement().getNodeName(), is("someNameSpace:stuff"));
     }
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     private XmlUnmarshaller test = new XmlUnmarshaller();
 

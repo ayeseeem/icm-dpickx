@@ -5,15 +5,14 @@ import static org.ayeseeem.matchers.ConvertibleStringMatchers.numberOfValue;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertThrows;
 
 import java.net.URI;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.StringDescription;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class ConvertibleStringMatchersTest {
 
@@ -102,16 +101,16 @@ public class ConvertibleStringMatchersTest {
 
     @Test
     public void testNumberOfValue_InUse_ValueNotMatched() {
-        thrown.expect(AssertionError.class);
-
-        assertThat("12.3", numberOfValue(45.6));
+        assertThrows(AssertionError.class, () -> {
+            assertThat("12.3", numberOfValue(45.6));
+        });
     }
 
     @Test
     public void testNumberOfValue_InUse_ValueNotConvertible() {
-        thrown.expect(AssertionError.class);
-
-        assertThat("Cannot become a number", numberOfValue(45.6));
+        assertThrows(AssertionError.class, () -> {
+            assertThat("Cannot become a number", numberOfValue(45.6));
+        });
     }
 
     @Test
@@ -202,31 +201,28 @@ public class ConvertibleStringMatchersTest {
 
     @Test
     public void testBooleanOfValue_InUse_ValueNotMatched() {
-        thrown.expect(AssertionError.class);
-
-        assertThat("false", booleanOfValue(true));
+        assertThrows(AssertionError.class, () -> {
+            assertThat("false", booleanOfValue(true));
+        });
     }
 
     @Test
     public void testBooleanOfValue_InUse_CannotBeNull() {
-        thrown.expect(AssertionError.class);
-
-        assertThat(null, booleanOfValue(true));
+        assertThrows(AssertionError.class, () -> {
+            assertThat(null, booleanOfValue(true));
+        });
     }
 
     @Test
     public void testBooleanOfValue_InUse_ValueNotConvertible() {
-        thrown.expect(AssertionError.class);
-
-        assertThat("Cannot become boolean", booleanOfValue(true));
+        assertThrows(AssertionError.class, () -> {
+            assertThat("Cannot become boolean", booleanOfValue(true));
+        });
     }
 
     @Test
     public void testBooleanOfValue_InUse_WorksWithSyntacticSugar_Is() {
         assertThat("true", is(booleanOfValue(true)));
     }
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
 }

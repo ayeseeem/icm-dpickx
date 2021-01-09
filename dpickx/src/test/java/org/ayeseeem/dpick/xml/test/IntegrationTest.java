@@ -9,6 +9,7 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
+import static org.junit.Assert.assertThrows;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +20,7 @@ import javax.xml.xpath.XPathExpressionException;
 
 import org.ayeseeem.dpick.xml.Capturer;
 import org.ayeseeem.dpick.xml.XmlDocumentChecker;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.w3c.dom.Node;
 
 /**
@@ -88,18 +87,18 @@ public class IntegrationTest {
 
     @Test
     public void expect_Exists_ButDoesNotExist() throws XPathExpressionException {
-        thrown.expect(AssertionError.class);
-        thrown.expectMessage("XPath /NeverExisting does not exist");
-
-        XmlDocumentChecker.check(eg).andExpect(xpath("/NeverExisting").exists());
+        Error e = assertThrows(AssertionError.class, () -> {
+            XmlDocumentChecker.check(eg).andExpect(xpath("/NeverExisting").exists());
+        });
+        assertThat(e.getMessage(), containsString("XPath /NeverExisting does not exist"));
     }
 
     @Test
     public void expect_DoesNotExist_ButDoesExist() throws XPathExpressionException {
-        thrown.expect(AssertionError.class);
-        thrown.expectMessage("XPath /RootElement exists unexpectedly");
-
-        XmlDocumentChecker.check(eg).andExpect(xpath("/RootElement").doesNotExist());
+        Error e = assertThrows(AssertionError.class, () -> {
+            XmlDocumentChecker.check(eg).andExpect(xpath("/RootElement").doesNotExist());
+        });
+        assertThat(e.getMessage(), containsString("XPath /RootElement exists unexpectedly"));
     }
 
     @Test
@@ -136,18 +135,18 @@ public class IntegrationTest {
 
     @Test
     public void expect_NodeCount_Wrong() throws XPathExpressionException {
-        thrown.expect(AssertionError.class);
-        thrown.expectMessage("Expected 888 nodes for XPath //Repeated, not 2");
-
-        XmlDocumentChecker.check(eg).andExpect(xpath("//Repeated").nodeCount(888));
+        Error e = assertThrows(AssertionError.class, () -> {
+            XmlDocumentChecker.check(eg).andExpect(xpath("//Repeated").nodeCount(888));
+        });
+        assertThat(e.getMessage(), containsString("Expected 888 nodes for XPath //Repeated, not 2"));
     }
 
     @Test
     public void expect_Node_Matcher() throws XPathExpressionException {
-        thrown.expect(UnsupportedOperationException.class);
-        thrown.expectMessage("Not implemented yet");
-
-        XmlDocumentChecker.check(eg).andExpect(xpath("//Repeated").node(null));
+        Exception e = assertThrows(UnsupportedOperationException.class, () -> {
+            XmlDocumentChecker.check(eg).andExpect(xpath("//Repeated").node(null));
+        });
+        assertThat(e.getMessage(), containsString("Not implemented yet"));
     }
 
     @Test
@@ -157,20 +156,20 @@ public class IntegrationTest {
 
     @Test
     public void expect_Number_WrongValue() throws XPathExpressionException {
-        thrown.expect(AssertionError.class);
-        thrown.expectMessage("Expected: is value parsable as a double of value <888.0>");
-        thrown.expectMessage("but: was \"17\"");
-
-        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsSeventeen").value(is(numberOfValue(888.0))));
+        Error e = assertThrows(AssertionError.class, () -> {
+            XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsSeventeen").value(is(numberOfValue(888.0))));
+        });
+        assertThat(e.getMessage(), containsString("Expected: is value parsable as a double of value <888.0>"));
+        assertThat(e.getMessage(), containsString("but: was \"17\""));
     }
 
     @Test
     public void expect_Number_NotANumber() throws XPathExpressionException {
-        thrown.expect(AssertionError.class);
-        thrown.expectMessage("Expected: is value parsable as a double of value <888.0>");
-        thrown.expectMessage("but: was \"blah blah\"");
-
-        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsAttributeWithEighteen").value(is(numberOfValue(888.0))));
+        Error e = assertThrows(AssertionError.class, () -> {
+            XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsAttributeWithEighteen").value(is(numberOfValue(888.0))));
+        });
+        assertThat(e.getMessage(), containsString("Expected: is value parsable as a double of value <888.0>"));
+        assertThat(e.getMessage(), containsString("but: was \"blah blah\""));
     }
 
     @Test
@@ -183,28 +182,28 @@ public class IntegrationTest {
 
     @Test
     public void expect_Value_WrongValue() throws XPathExpressionException {
-        thrown.expect(AssertionError.class);
-        thrown.expectMessage("Expected: is \"888\"");
-        thrown.expectMessage("but: was \"17\"");
-
-        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsSeventeen").value(is("888")));
+        Error e = assertThrows(AssertionError.class, () -> {
+            XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsSeventeen").value(is("888")));
+        });
+        assertThat(e.getMessage(), containsString("Expected: is \"888\""));
+        assertThat(e.getMessage(), containsString("but: was \"17\""));
     }
 
     @Test
     public void expect_Value_WrongValue_ErrorMessageIncludesXPath() throws XPathExpressionException {
-        thrown.expect(AssertionError.class);
-        thrown.expectMessage("//ContainsSeventeen");
-        thrown.expectMessage("XPath //ContainsSeventeen");
-
-        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsSeventeen").value(is("888")));
+        Error e = assertThrows(AssertionError.class, () -> {
+            XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsSeventeen").value(is("888")));
+        });
+        assertThat(e.getMessage(), containsString("//ContainsSeventeen"));
+        assertThat(e.getMessage(), containsString("XPath //ContainsSeventeen"));
     }
 
     @Test
     public void expect_Value_NonExistentElement() throws XPathExpressionException {
-        thrown.expect(AssertionError.class);
-        thrown.expectMessage("XPath //NeverExisting does not exist");
-
-        XmlDocumentChecker.check(eg).andExpect(xpath("//NeverExisting").value(null));
+        Error e = assertThrows(AssertionError.class, () -> {
+            XmlDocumentChecker.check(eg).andExpect(xpath("//NeverExisting").value(null));
+        });
+        assertThat(e.getMessage(), containsString("XPath //NeverExisting does not exist"));
     }
 
     @Test
@@ -216,12 +215,13 @@ public class IntegrationTest {
 
     @Test
     public void expect_Value_MutlipleElements_NotAllMatch() throws XPathExpressionException {
-        thrown.expect(AssertionError.class);
-        thrown.expectMessage("Expected: is \"123\"");
-        thrown.expectMessage("but: was \"456\"");
         XmlDocumentChecker.check(eg).andExpect(xpath("//DuplicateEleDiffContent").nodeCount(2));
 
-        XmlDocumentChecker.check(eg).andExpect(xpath("//DuplicateEleDiffContent").value(is("123")));
+        Error e = assertThrows(AssertionError.class, () -> {
+            XmlDocumentChecker.check(eg).andExpect(xpath("//DuplicateEleDiffContent").value(is("123")));
+        });
+        assertThat(e.getMessage(), containsString("Expected: is \"123\""));
+        assertThat(e.getMessage(), containsString("but: was \"456\""));
     }
 
     @Test
@@ -231,27 +231,27 @@ public class IntegrationTest {
 
     @Test
     public void expect_Value_Attribute_WrongValue() throws XPathExpressionException {
-        thrown.expect(AssertionError.class);
-        thrown.expectMessage("Expected: is \"888\"");
-        thrown.expectMessage("but: was \"18\"");
-
-        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsAttributeWithEighteen/@attrOf18").value(is("888")));
+        Error e = assertThrows(AssertionError.class, () -> {
+            XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsAttributeWithEighteen/@attrOf18").value(is("888")));
+        });
+        assertThat(e.getMessage(), containsString("Expected: is \"888\""));
+        assertThat(e.getMessage(), containsString("but: was \"18\""));
     }
 
     @Test
     public void expect_Value_NonExistentAttribute() throws XPathExpressionException {
-        thrown.expect(AssertionError.class);
-        thrown.expectMessage("XPath //ContainsAttributeWithEighteen/@nonExistentAttribute does not exist");
-
-        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsAttributeWithEighteen/@nonExistentAttribute").value(is("888")));
+        Error e = assertThrows(AssertionError.class, () -> {
+            XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsAttributeWithEighteen/@nonExistentAttribute").value(is("888")));
+        });
+        assertThat(e.getMessage(), containsString("XPath //ContainsAttributeWithEighteen/@nonExistentAttribute does not exist"));
     }
 
     @Test
     public void invalidXpath() throws XPathExpressionException {
-        thrown.expect(XPathExpressionException.class);
-        thrown.expectCause(instanceOf(TransformerException.class));
-
-        XmlDocumentChecker.check(eg).andExpect(xpath("This is an invalid XPath").exists());
+        Exception e = assertThrows(XPathExpressionException.class, () -> {
+            XmlDocumentChecker.check(eg).andExpect(xpath("This is an invalid XPath").exists());
+        });
+        assertThat(e.getCause(), is(instanceOf(TransformerException.class)));
     }
 
     @Test
@@ -292,20 +292,22 @@ public class IntegrationTest {
 
     @Test
     public void direct_CaptureSoleRequired_MoreThanOneNodeFound() throws XPathExpressionException {
-        thrown.expect(AssertionError.class);
-        thrown.expectMessage("Expected 1 nodes for XPath //Repeated, not 2");
-
         XmlDocumentChecker checker = new XmlDocumentChecker(eg);
-        checker.captureSoleRequired(xpath("//Repeated"));
+
+        Error e = assertThrows(AssertionError.class, () -> {
+            checker.captureSoleRequired(xpath("//Repeated"));
+        });
+        assertThat(e.getMessage(), containsString("Expected 1 nodes for XPath //Repeated, not 2"));
     }
 
     @Test
     public void direct_CaptureSoleRequired_NonExistentElement() throws XPathExpressionException {
-        thrown.expect(AssertionError.class);
-        thrown.expectMessage("XPath //NeverExisting does not exist");
-
         XmlDocumentChecker checker = new XmlDocumentChecker(eg);
-        checker.captureSoleRequired(xpath("//NeverExisting"));
+
+        Error e = assertThrows(AssertionError.class, () -> {
+            checker.captureSoleRequired(xpath("//NeverExisting"));
+        });
+        assertThat(e.getMessage(), containsString("XPath //NeverExisting does not exist"));
     }
 
     @Test
@@ -319,11 +321,12 @@ public class IntegrationTest {
 
     @Test
     public void direct_CaptureSoleOptional_MoreThanOneNodeFound() throws XPathExpressionException {
-        thrown.expect(AssertionError.class);
-        thrown.expectMessage("Expected 1 nodes for XPath //Repeated, not 2");
-
         XmlDocumentChecker checker = new XmlDocumentChecker(eg);
-        checker.captureSoleOptional(xpath("//Repeated"));
+
+        Error e = assertThrows(AssertionError.class, () -> {
+            checker.captureSoleOptional(xpath("//Repeated"));
+        });
+        assertThat(e.getMessage(), containsString("Expected 1 nodes for XPath //Repeated, not 2"));
     }
 
     @Test
@@ -348,20 +351,20 @@ public class IntegrationTest {
 
     @Test
     public void do_CaptureSoleRequired_MoreThanOneNodeFound() throws XPathExpressionException {
-        thrown.expect(AssertionError.class);
-        thrown.expectMessage("Expected 1 nodes for XPath //Repeated, not 2");
-
-        XmlDocumentChecker.check(eg)
-                .andDo(xpath("//Repeated").captureSoleRequired(null));
+        Error e = assertThrows(AssertionError.class, () -> {
+            XmlDocumentChecker.check(eg)
+                    .andDo(xpath("//Repeated").captureSoleRequired(null));
+        });
+        assertThat(e.getMessage(), containsString("Expected 1 nodes for XPath //Repeated, not 2"));
     }
 
     @Test
     public void do_CaptureSoleRequired_NonExistentElement() throws XPathExpressionException {
-        thrown.expect(AssertionError.class);
-        thrown.expectMessage("XPath //NeverExisting does not exist");
-
-        XmlDocumentChecker.check(eg)
-                .andDo(xpath("//NeverExisting").captureSoleRequired(null));
+        Error e = assertThrows(AssertionError.class, () -> {
+            XmlDocumentChecker.check(eg)
+                    .andDo(xpath("//NeverExisting").captureSoleRequired(null));
+        });
+        assertThat(e.getMessage(), containsString("XPath //NeverExisting does not exist"));
     }
 
     @Test
@@ -376,11 +379,11 @@ public class IntegrationTest {
 
     @Test
     public void do_CaptureSoleRequired_NonExistentAttribute() throws XPathExpressionException {
-        thrown.expect(AssertionError.class);
-        thrown.expectMessage("XPath //ElementWithSizeAttribute/@nonExistentAttribute does not exist");
-
-        XmlDocumentChecker.check(eg)
-                .andDo(xpath("//ElementWithSizeAttribute/@nonExistentAttribute").captureSoleRequired(null));
+        Error e = assertThrows(AssertionError.class, () -> {
+            XmlDocumentChecker.check(eg)
+                    .andDo(xpath("//ElementWithSizeAttribute/@nonExistentAttribute").captureSoleRequired(null));
+        });
+        assertThat(e.getMessage(), containsString("XPath //ElementWithSizeAttribute/@nonExistentAttribute does not exist"));
     }
 
     @Test
@@ -397,11 +400,11 @@ public class IntegrationTest {
 
     @Test
     public void do_CaptureSoleOptional_MoreThanOneNodeFound() throws XPathExpressionException {
-        thrown.expect(AssertionError.class);
-        thrown.expectMessage("Expected 1 nodes for XPath //Repeated, not 2");
-
-        XmlDocumentChecker.check(eg)
-                .andDo(xpath("//Repeated").captureSoleOptional(null));
+        Error e = assertThrows(AssertionError.class, () -> {
+            XmlDocumentChecker.check(eg)
+                    .andDo(xpath("//Repeated").captureSoleOptional(null));
+        });
+        assertThat(e.getMessage(), containsString("Expected 1 nodes for XPath //Repeated, not 2"));
     }
 
     @Test
@@ -433,9 +436,6 @@ public class IntegrationTest {
 
         assertThat(capturer.value().isPresent(), is(false));
     }
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     private Node eg = XmlExampleFixture.createExampleDom();
 
