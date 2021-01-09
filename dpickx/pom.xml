@@ -12,7 +12,7 @@
   <artifactId>dpickx</artifactId>
   <packaging>jar</packaging>
 
-  <name>Data Pickaxe for XML</name>
+  <name>Data Pickaxe for XML - The Library</name>
   <description>Library for extracting and checking parts of an XML document</description>
   <url>https://github.com/ayeseeem/icm-dpickx</url>
 
