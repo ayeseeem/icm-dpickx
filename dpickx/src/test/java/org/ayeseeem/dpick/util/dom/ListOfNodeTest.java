@@ -247,7 +247,7 @@ public class ListOfNodeTest {
 
     /**
      * Creates a {@code NodeList} with a <em>single</em> random node.
-     * 
+     *
      * @return a {@code NodeList} with a single node
      */
     static NodeList randomNodeList() {

@@ -21,11 +21,11 @@ public class App {
 
     private final String file;
     private final String xpath;
-    
+
     public App(String file, String xpath) throws XPathExpressionException, FileNotFoundException, IOException, SAXException {
         this.file = file;
         this.xpath = xpath;
-        
+
         captureAndPrint();
     }
 
@@ -44,7 +44,7 @@ public class App {
             System.out.println(" - Xpath might need (Java) escaping of characters such as \\");
             return;
         }
-        
+
         String file = args[0];
         String xpath = args[1];
 

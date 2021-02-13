@@ -20,9 +20,9 @@ public class XmlDocumentChecker {
      * Captures the value of the single, required node specified by the XPath
      * matchers. The node must be present, and it must be the only one: there
      * cannot be more than one.
-     * 
+     *
      * @param xpathNodeMatchers the XPath to capture from
-     * @return the value of the node 
+     * @return the value of the node
      */
     public String captureSoleRequired(XpathNodeMatchers xpathNodeMatchers) {
         final Capturer capturer = new Capturer();
@@ -39,9 +39,9 @@ public class XmlDocumentChecker {
      * matchers. The current definition is that there can be one or zero values; it
      * does not have to be there - it's optional - but if it's there, it must be the
      * only one: there cannot be more than one.
-     * 
+     *
      * @param xpathNodeMatchers the XPath to capture from
-     * @return an {@code Optional} for the possible value 
+     * @return an {@code Optional} for the possible value
      */
     public Optional<String> captureSoleOptional(XpathNodeMatchers xpathNodeMatchers) {
         final Capturer capturer = new Capturer();

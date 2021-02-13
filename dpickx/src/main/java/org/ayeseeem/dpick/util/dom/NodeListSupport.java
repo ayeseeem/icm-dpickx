@@ -14,7 +14,7 @@ public class NodeListSupport {
 
     /**
      * Presents a {@code NodeList} as a {@code List<Node>}, so that normal
-     * {@code List} operations can be used. 
+     * {@code List} operations can be used.
      *
      * @param nodes
      *            the node list to wrap - cannot be null

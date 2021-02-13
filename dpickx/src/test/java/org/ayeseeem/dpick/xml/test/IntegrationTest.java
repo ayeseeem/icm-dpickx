@@ -64,13 +64,13 @@ public class IntegrationTest {
     public void clarifyThatExampleIsPassingTopMostNode_NotDocumentRoot() throws XPathExpressionException {
         Node wholeDocTopElement = eg;
         XmlDocumentChecker.check(wholeDocTopElement)
-                .andExpect(xpath("RootElement").nodeCount(0))   // There are no <RootElement>s immediately below the top <RootElement> 
+                .andExpect(xpath("RootElement").nodeCount(0))   // There are no <RootElement>s immediately below the top <RootElement>
                 .andExpect(xpath("/RootElement").nodeCount(1))
                 ;
 
         Node doc = eg.getOwnerDocument();
         XmlDocumentChecker.check(doc)
-                .andExpect(xpath("RootElement").nodeCount(1))   // There is a <RootElement> immediately below the Document root 
+                .andExpect(xpath("RootElement").nodeCount(1))   // There is a <RootElement> immediately below the Document root
                 .andExpect(xpath("/RootElement").nodeCount(1))
                 ;
     }

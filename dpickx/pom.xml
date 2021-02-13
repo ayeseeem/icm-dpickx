@@ -23,7 +23,7 @@
       <!-- not just in test scope -->
     </dependency>
 
-    <!-- Logging API: SLF4J for logging - implementation is not specified, 
+    <!-- Logging API: SLF4J for logging - implementation is not specified,
       users of the jar can pick their own impl. -->
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -31,7 +31,7 @@
     </dependency>
 
     <!-- Logging implementation for testing only, does not affect users of the jar -->
-    <dependency> 
+    <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
       <scope>test</scope>
@@ -93,5 +93,5 @@
       </plugin>
     </plugins>
   </build>
- 
+
 </project>
