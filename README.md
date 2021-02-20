@@ -3,7 +3,7 @@ Data Pickaxe for XML
 
 [![Build Status](https://travis-ci.org/ayeseeem/icm-dpickx.svg?branch=master)](https://travis-ci.org/ayeseeem/icm-dpickx)
 
-Library for extracting and checking parts of an XML document
+Library and tool for extracting and checking parts of an XML document.
 
 
 Quick Start
@@ -90,8 +90,17 @@ String votingAge = checker.captureSoleOptional(xpath("//DoesContainVotingAge")).
 assertThat(votingAge, is("18"));
 ```
 
-
 To see more examples, see [`Examples.java`](src/test/java/org/ayeseeem/dpick/xml/test/Examples.java "Examples")
+
+
+`dpickx-app` has been begun as a command-line tool to let you apply `dpickx` to
+files.
+At the moment, it just applies `captureSoleRequired` and outputs it to `stdout`.
+You can build and run it like this:
+
+```shell
+mvn clean package && pushd dpickx-app && java -jar target/dpickx-app-0.10.0-SNAPSHOT-jar-with-dependencies.jar example.xml ///ContainsSeventeen&& popd
+```
 
 
 Applying XPaths
@@ -164,7 +173,7 @@ TODO
 - [x] Rearrange code to be in a folder called `dpickx-app`, not `icm-dpickx-...`
 - [x] Rename artifact to be `dpickx-app`, not `icm-dpickx-app`, as the `icm-` is
       handled by the `groupId`.
-- [ ] Update this README to mention (and explain how to use) the app.
+- [x] Update this README to mention (and explain how to use) the app.
 - [x] Spring Boot has only been used to "simplify" creating a runnable `.jar`
       (and to specify a set of versions of packages).
       This makes a 12 MB jar, which is excessive. Investigate a cleaner way of
@@ -175,6 +184,7 @@ TODO
       of generating it from the code in `XmlExampleFixture`.
       The file was originally created by hand, capturing it from the console
       output when the library tests were run.
+- [ ] Add more features: flags to control what to do, separate logging
 
 
 Origin
