@@ -1,7 +1,7 @@
 Data Pickaxe for XML
 ====================
 
-[![Build Status](https://travis-ci.com/ayeseeem/icm-dpickx.svg?branch=master)](https://travis-ci.com/ayeseeem/icm-dpickx)
+[![Build Status](https://travis-ci.com/ayeseeem/icm-dpickx.svg?branch=master)](https://travis-ci.com/github/ayeseeem/icm-dpickx)
 
 Library and tool for extracting and checking parts of an XML document.
 
