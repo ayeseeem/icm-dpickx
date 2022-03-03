@@ -99,7 +99,7 @@ public class DomHelperTest {
             return prefix.equals("egNs") ? "http://example.com/eg/ns" : null;
         }
         @Override
-        public Iterator<?> getPrefixes(String val) {
+        public Iterator<String> getPrefixes(String val) {
             return null;
         }
         @Override
