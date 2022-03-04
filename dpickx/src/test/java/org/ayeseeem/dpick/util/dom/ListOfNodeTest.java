@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.UUID;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -51,6 +52,7 @@ public class ListOfNodeTest {
         }
     }
 
+    @Ignore("while testing on multiple platforms")
     @Test
     public void testGet_IndexTooSmall_ErrorMessage_MatchesNormalList() {
         ListOfNode subject = randomListOfNode();
@@ -87,6 +89,7 @@ public class ListOfNodeTest {
         }
     }
 
+    @Ignore("while testing on multiple platforms")
     @Test
     public void testGet_IndexTooLarge_ErrorMessage_MatchesNormalList() {
         ListOfNode subject = randomListOfNode();
