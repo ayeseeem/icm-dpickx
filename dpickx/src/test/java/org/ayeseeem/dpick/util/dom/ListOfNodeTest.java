@@ -1,5 +1,6 @@
 package org.ayeseeem.dpick.util.dom;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -10,9 +11,9 @@ import static org.junit.Assert.fail;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 import java.util.UUID;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -48,19 +49,18 @@ public class ListOfNodeTest {
             subject.get(-123);
             fail("should have thrown");
         } catch (Throwable e) {
-            assertThat(e.getMessage(), is("-123"));
+            assertThat(e.getMessage(), containsString("-123"));
         }
     }
 
-    @Ignore("while testing on multiple platforms")
     @Test
     public void testGet_IndexTooSmall_ErrorMessage_MatchesNormalList() {
         ListOfNode subject = randomListOfNode();
         try {
             subject.get(-123);
             fail("should have thrown");
-        } catch (Throwable e) {
-            assertThat(e.getMessage(), is(getStandardOutOfBoundsdMessage(-123)));
+        } catch (IndexOutOfBoundsException e) {
+            assertThat(e.getMessage(), is(getStandardOutOfBoundsdMessage(subject.size(), -123)));
         }
     }
 
@@ -85,19 +85,18 @@ public class ListOfNodeTest {
             subject.get(123);
             fail("should have thrown");
         } catch (Throwable e) {
-            assertThat(e.getMessage(), is("123"));
+            assertThat(e.getMessage(), containsString("123"));
         }
     }
 
-    @Ignore("while testing on multiple platforms")
     @Test
     public void testGet_IndexTooLarge_ErrorMessage_MatchesNormalList() {
         ListOfNode subject = randomListOfNode();
         try {
             subject.get(123);
             fail("should have thrown");
-        } catch (Throwable e) {
-            assertThat(e.getMessage(), is(getStandardOutOfBoundsdMessage(123)));
+        } catch (IndexOutOfBoundsException e) {
+            assertThat(e.getMessage(), is(getStandardOutOfBoundsdMessage(subject.size(), 123)));
         }
     }
 
@@ -268,11 +267,12 @@ public class ListOfNodeTest {
         return randomNodeList().item(0);
     }
 
-    private String getStandardOutOfBoundsdMessage(int outOfBoundsIndex) {
+    private String getStandardOutOfBoundsdMessage(int length, int outOfBoundsIndex) {
+        List<Integer> list = Arrays.asList(new Integer[length]);
         try {
-            Arrays.asList().get(outOfBoundsIndex);
+            list.get(outOfBoundsIndex);
             throw new Error("should have thrown");
-        } catch (Throwable e) {
+        } catch (IndexOutOfBoundsException e) {
             return e.getMessage();
         }
     }

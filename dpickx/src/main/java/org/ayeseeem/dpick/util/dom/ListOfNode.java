@@ -1,6 +1,7 @@
 package org.ayeseeem.dpick.util.dom;
 
 import java.util.AbstractList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.w3c.dom.Node;
@@ -22,7 +23,8 @@ public class ListOfNode extends AbstractList<Node> implements List<Node> {
     @Override
     public Node get(int index) {
         if (index < 0 || index >= size()) {
-            throw new IndexOutOfBoundsException(Integer.toString(index));
+            List<Integer> listLikeBehaviour = Arrays.asList(new Integer[size()]);
+            listLikeBehaviour.get(index);
         }
 
         return nodes.item(index);
