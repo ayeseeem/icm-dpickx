@@ -204,6 +204,9 @@ values from the node too.
 Coding Standard
 ---------------
 
+Basic standard is [icm-java-style](https://github.com/ayeseeem/icm-java-style/),
+with the following notes:
+
 Currently uses the "Eclipse [Built-in]" settings in Eclipse/Spring STS, for
 Java > Code Style's Clean Up and Formatter.
 
@@ -242,5 +245,7 @@ parameters _are_ reassigned - use `final` to mark the ones that are not.
 
 
 ### Coding Standard TODOs
+
+
 
 - [ ] Look for `final` variables that can be removed by inlining the variable

@@ -27,14 +27,14 @@ public class XmlUnmarshallerTest {
     }
 
     @Test
-    public void testToDocument_InvalidXml() throws Exception {
+    public void testToDocument_InvalidXml() {
         assertThrows(SAXException.class, () -> {
             test.toDocument("<stuff>this is <broken> XML</stuff>");
         });
     }
 
     @Test
-    public void testToDocument_NonXml() throws Exception {
+    public void testToDocument_NonXml() {
         assertThrows(SAXException.class, () -> {
             test.toDocument("This is NOT XML");
         });
