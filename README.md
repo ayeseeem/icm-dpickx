@@ -117,7 +117,7 @@ for more details.
 TODO
 ----
 
-### Library `dpickx`
+### Library `dpickx` ###
 
 - [x] Rearrange the main `dpickx` lib code into a sub-folder called `dpickx` (or
       `dpickx-lib`?)
@@ -164,7 +164,7 @@ TODO
       [TypeSafeDiagnosingMatcher](http://hamcrest.org/JavaHamcrest/javadoc/1.3/org/hamcrest/TypeSafeDiagnosingMatcher.html)
 
 
-### Tool `dpickx-app`
+### Tool `dpickx-app` ###
 
 - [x] **Create a tool!** - Make a command-line utility that can extract a value
       from an XML file (using a given XPath).
@@ -230,7 +230,7 @@ not changed (although, avoid such long methods!). Or where some of the
 parameters _are_ reassigned - use `final` to mark the ones that are not.
 
 
-### Rules
+### Rules ###
 
 - Simplify lambdas:
   - Remove `{ }` from around single liners
@@ -244,8 +244,6 @@ parameters _are_ reassigned - use `final` to mark the ones that are not.
     > an interface.
 
 
-### Coding Standard TODOs
-
-
+### Coding Standard TODOs ###
 
 - [ ] Look for `final` variables that can be removed by inlining the variable
