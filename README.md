@@ -1,7 +1,7 @@
 Data Pickaxe for XML
 ====================
 
-![Build Status](https://github.com/ayeseeem/icm-dpickx/actions/workflows/maven.yml/badge.svg)
+[![Build Status](https://github.com/ayeseeem/icm-dpickx/actions/workflows/maven.yml/badge.svg)](https://github.com/ayeseeem/icm-dpickx/actions/workflows/maven.yml)
 
 Library and tool for extracting and checking parts of an XML document.
 
