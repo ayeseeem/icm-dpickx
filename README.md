@@ -184,7 +184,7 @@ TODO
       of generating it from the code in `XmlExampleFixture`.
       The file was originally created by hand, capturing it from the console
       output when the library tests were run.
-- [ ] Add more features: flags to control what to do, separate logging
+- [ ] Add more features: flags to control what to do, separate logging (to file)
 
 
 Origin
