@@ -25,7 +25,7 @@ public class XpathHelper {
     private final String xPath;
     private final XPathExpression expression;
 
-    public XpathHelper(String xPath, Map<String, String> namespaces, Object... args) throws XPathExpressionException {
+    public XpathHelper(String xPath, @SuppressWarnings("unused") Map<String, String> namespaces, Object... args) throws XPathExpressionException {
         this.xPath = String.format(xPath, args);
         expression = createXpathExpression(this.xPath);
     }
