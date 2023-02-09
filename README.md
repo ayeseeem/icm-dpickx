@@ -127,10 +127,10 @@ TODO
       handled by the `groupId`.
 - [ ] Include failing node number in error messages?
 - [x] Capture optional value
-  - Capture Sole Optional added, to correspond with Capture Sole Required.
+  - `captureSoleOptional` added, to correspond with  `captureSoleRequired`.
     Any other methods added should consider an Optional alternative.
-- [ ] Capture First value (c.f. Capture Sole)? (=> node count >= 1)
-- [ ] Capture All for multiple nodes
+- [ ] `captureFirstRequired`, `captureFirstOptional` (=> node count >= 1)
+- [ ] `captureAll` for multiple nodes
 - [ ] Templatize the capture methods to return specific types, not just
       `String`s
 - [ ] Consider if the more complicated ways of doing capture are still needed:
