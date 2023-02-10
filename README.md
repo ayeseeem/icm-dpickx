@@ -93,6 +93,9 @@ assertThat(votingAge, is("18"));
 To see more examples, see [`Examples.java`](src/test/java/org/ayeseeem/dpick/xml/test/Examples.java "Examples")
 
 
+Tool
+----
+
 `dpickx-app` has been begun as a command-line tool to let you apply `dpickx` to
 files.
 At the moment, it just applies `captureSoleRequired` and outputs it to `stdout`.
