@@ -173,11 +173,9 @@
             <format>
               <includes>
                 <include>**/pom.xml</include>
-                <include>**/*.xml</include>
+                <include>*.xml</include>
+                <include>src/**/*.xml</include>
               </includes>
-              <excludes>
-                <exclude>target/</exclude>
-              </excludes>
               <trimTrailingWhitespace/>
               <endWithNewline/>
               <indent>
@@ -198,12 +196,11 @@
             </format>
             <format>
               <includes>
-                <include>**/*.md</include>
-                <include>**/*.txt</include>
+                <include>*.md</include>
+                <include>src/**/*.md</include>
+                <include>*.txt</include>
+                <include>src/**/*.txt</include>
               </includes>
-              <excludes>
-                <exclude>target/</exclude>
-              </excludes>
               <trimTrailingWhitespace/>
               <endWithNewline/>
               <indent>
