@@ -147,17 +147,6 @@
               </format>
               <format>
                 <includes>
-                  <include>src/**/*.java</include>
-                </includes>
-                <trimTrailingWhitespace/>
-                <endWithNewline/>
-                <indent>
-                  <spaces>true</spaces>
-                  <spacesPerTab>4</spacesPerTab>
-                </indent>
-              </format>
-              <format>
-                <includes>
                   <include>*.md</include>
                   <include>src/**/*.md</include>
                   <include>*.txt</include>
@@ -171,6 +160,14 @@
                 </indent>
               </format>
             </formats>
+            <java>
+              <trimTrailingWhitespace/>
+              <endWithNewline/>
+              <indent>
+                <spaces>true</spaces>
+                <spacesPerTab>4</spacesPerTab>
+              </indent>
+            </java>
           </configuration>
           <executions>
             <execution>
