@@ -233,20 +233,6 @@ not changed (although, avoid such long methods!). Or where some of the
 parameters _are_ reassigned - use `final` to mark the ones that are not.
 
 
-### Rules ###
-
-- Simplify lambdas:
-  - Remove `{ }` from around single liners
-  - Prefer method references where possible
-- Don't use `public` on interface methods
-  [JLS Method Declarations](https://docs.oracle.com/javase/specs/jls/se8/html/jls-9.html#jls-9.4)
-  says this (our emphasis):
-    > Every method declaration in the body of an interface is implicitly
-    > public (§6.6). It is permitted, but **discouraged as a matter of style**,
-    > to redundantly specify the public modifier for a method declaration in
-    > an interface.
-
-
 ### Coding Standard TODOs ###
 
 - [ ] Look for `final` variables that can be removed by inlining the variable
