@@ -63,6 +63,20 @@ public class DomDumpTest {
     }
 
     @Test
+    public void testSafeDump_XmlDocument_Indents_SpacesNotTabs() {
+        Element root = doc.createElement("RootElement");
+        doc.appendChild(root);
+
+        root.appendChild(doc.createElement("SomethingUnique"));
+
+        DomDump.safeDump(doc, sink);
+        DomDump.safeDumpToConsole(doc);
+        assertThat(dumpedString(), containsString(" " + "<SomethingUnique"));
+        assertThat(dumpedString(), not(containsString("\t" + "<SomethingUnique")));
+        assertThat(dumpedString(), not(containsString("\t")));
+    }
+
+    @Test
     public void testSafeDump_XmlDocument_Indents_2Spaces() {
         Element root = doc.createElement("RootElement");
         doc.appendChild(root);
