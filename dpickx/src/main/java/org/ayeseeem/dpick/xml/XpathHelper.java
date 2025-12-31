@@ -53,14 +53,19 @@ public class XpathHelper {
             final NodeList nodes = (NodeList) expression.evaluate(rootNode, XPathConstants.NODESET);
             return nodes;
         } catch (XPathExpressionException e) {
-            // we don't know why we would ever see this. The XPath compiled OK:
-            // we don't know why it would fail to evaluate.
+            // We don't know why we would ever see this.
+            // The XPath compiled OK.
             //
-            // TODO: ICM 2016-10-14: Improve/change: can happen e.g. if Node is
-            // an empty XML Document top-level element, e.g. created:
-            // Document doc = builder.newDocument();
-            // Node n = doc.getDocumentElement();
+            // We would only expect to see this if the context (the rootNode)
+            // is null, and the XPath was not contextless (contextless example: "1+1"),
+            // but that would also be influenced by the return type, which we have
+            // set as NODESET.
             //
+            // So we _would_ (we do) get this if it's a node-like XPath and
+            // the Node is null - see Javadocs for XPathExpression#evaluate(Object)
+
+            // TODO: ICM 2025-12-31: Improve/change: would it be better to disallow null node?
+
             // So return an empty node list, rather than throwing an exception
             String message = "Unexpected problem evaluating XPath expression " + this.xPath;
             logger.error(message, e);
