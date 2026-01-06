@@ -99,10 +99,19 @@ Tool
 `dpickx-app` has been begun as a command-line tool to let you apply `dpickx` to
 files.
 At the moment, it just applies `captureSoleRequired` and outputs it to `stdout`.
-You can build and run it like this:
+You can build and run it with the commands below - note the different number of
+slashes, and different command chaining for the final `popd`.
+
+In a `bash`-like shell (`///`, `; popd`)
 
 ```shell
-mvn clean package && pushd dpickx-app && java -jar target/dpickx-app-0.10.0-SNAPSHOT-jar-with-dependencies.jar example.xml ///ContainsSeventeen&& popd
+mvn clean package && pushd dpickx-app && java -jar target/dpickx-app-0.10.0-SNAPSHOT-jar-with-dependencies.jar example.xml ///ContainsSeventeen ; popd
+```
+
+or Windows `cmd` console ( `//`, `& popd`)
+
+```cmd
+mvn clean package && pushd dpickx-app && java -jar target/dpickx-app-0.10.0-SNAPSHOT-jar-with-dependencies.jar example.xml //ContainsSeventeen & popd
 ```
 
 
