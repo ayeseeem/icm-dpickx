@@ -85,7 +85,7 @@ public class XmlUnmarshaller {
      *             If any parse errors occur. This is an expected sort of error,
      *             for when non-XML or invalid XML is passed in
      */
-    private Document createNormalizedDom(String xmlString) throws SAXException{
+    private Document createNormalizedDom(String xmlString) throws SAXException {
         // TODO: ICM 2015-09-16: Specifying the encoding as UTF-8 - should we check that it actually is UTF-8 first?
         final ByteArrayInputStream is = new ByteArrayInputStream(xmlString.getBytes(StandardCharsets.UTF_8));
         try {

@@ -16,7 +16,7 @@ public class DomHelper {
 
     private NamespaceContext nsContext;
 
-    public DomHelper (Node rootNode) {
+    public DomHelper(Node rootNode) {
         this.rootNode = rootNode;
     }
 

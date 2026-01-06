@@ -98,10 +98,12 @@ public class DomHelperTest {
         public String getNamespaceURI(String prefix) {
             return prefix.equals("egNs") ? "http://example.com/eg/ns" : null;
         }
+
         @Override
         public Iterator<String> getPrefixes(String val) {
             return null;
         }
+
         @Override
         public String getPrefix(String uri) {
             return null;

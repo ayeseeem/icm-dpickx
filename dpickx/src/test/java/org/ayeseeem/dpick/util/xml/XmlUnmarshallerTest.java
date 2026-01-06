@@ -12,7 +12,7 @@ import org.xml.sax.SAXException;
 public class XmlUnmarshallerTest {
 
     @Test
-    public void testDefaultsToNamespaceNotAware(){
+    public void testDefaultsToNamespaceNotAware() {
         test = new XmlUnmarshaller();
         assertThat(test.isNamespaceAware(), is(false));
     }
