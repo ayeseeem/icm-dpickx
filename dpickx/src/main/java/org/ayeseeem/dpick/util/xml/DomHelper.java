@@ -24,7 +24,8 @@ public class DomHelper {
      * Sets a namespace context for so that the XPaths used by
      * {@link DomHelper#getNodes(String)} will work with XML namespaces
      *
-     * @param nsContext context to use
+     * @param nsContext
+     *            context to use
      */
     public void setNsContext(NamespaceContext nsContext) {
         this.nsContext = nsContext;
@@ -48,8 +49,8 @@ public class DomHelper {
 
     /**
      * Gets nodes relative to the specified {@code rootNode}. Note that absolute
-     * XPaths - for example, {@code /topLevel}, still work with respect to the
-     * whole DOM. To select relative to the Node, use relative XPaths such as
+     * XPaths - for example, {@code /topLevel}, still work with respect to the whole
+     * DOM. To select relative to the Node, use relative XPaths such as
      * {@code ./here} or {@code .//any}
      * <p>
      * To select from the whole DOM, also see {@link #getNodes(String)}.

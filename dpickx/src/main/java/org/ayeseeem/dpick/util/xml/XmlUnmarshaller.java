@@ -130,8 +130,7 @@ public class XmlUnmarshaller {
 
     /**
      * When passed to a document builder, prevents it writing errors to
-     * {@code System.err}. Instead, it logs various types of errors and
-     * warnings.
+     * {@code System.err}. Instead, it logs various types of errors and warnings.
      *
      * Only fatal errors result in the {@code SAXException} being propagated.
      */

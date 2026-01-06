@@ -11,9 +11,8 @@ import org.hamcrest.TypeSafeMatcher;
  * Expressive factory methods for matchers that check {@code String}s can be
  * converted to other types and then match a value.
  * <p>
- * Written to help
- * {@link XpathNodeMatchers#value(Matcher)}, which gets
- * strings from XML.
+ * Written to help {@link XpathNodeMatchers#value(Matcher)}, which gets strings
+ * from XML.
  */
 // TODO: ICM 2019-03-22: Can/should these helpers be extracted into their own artifact or project or into https://github.com/ayeseeem/icm-bits-java?
 public class ConvertibleStringMatchers {

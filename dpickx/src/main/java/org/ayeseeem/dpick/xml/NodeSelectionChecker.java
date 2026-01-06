@@ -72,8 +72,8 @@ public class NodeSelectionChecker {
      *            the condition that is expected to be true
      * @param message
      *            the message describing the error case. If a clear error case
-     *            message cannot be devised, then just describe that the
-     *            expected case was not met.
+     *            message cannot be devised, then just describe that the expected
+     *            case was not met.
      * @throws AssertionError
      *             if the condition is {@code false}
      */
