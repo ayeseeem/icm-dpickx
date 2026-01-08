@@ -30,7 +30,7 @@ public class XmlExampleFixtureTest {
         createExampleFile();
 
         List<String> latest = readAllLines(EXAMPLE_XML);
-        List<String> reference = readAllLines("../dpickx-app/example--goldbrick.xml");
+        List<String> reference = readAllLines("./src/test/resources/example--goldbrick.xml");
 
         // Better diagnostic than simple list compare
         assertThat(latest, contains(reference.toArray()));
