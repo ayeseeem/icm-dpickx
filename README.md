@@ -18,7 +18,7 @@ do the following:
 
 The following snippets give an idea of what you can do.
 
-For an XML document like this:
+For an XML document like this (see [`example.xml`](./dpickx-app/example.xml "Example XML file")):
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
@@ -192,10 +192,6 @@ TODO
       doing this, with a smaller (set of) jar(s).
       Using Apache Maven Assembly Plugin, reduced jar size to 101 kB.
 - [x] De-duplicate POM settings by depending on a Parent POM, once there is one.
-- [ ] Replace the test file included with the app - `example.xml` - with a way
-      of generating it from the code in `XmlExampleFixture`.
-      The file was originally created by hand, capturing it from the console
-      output when the library tests were run.
 - [ ] Add more features: flags to control what to do, separate logging (to file)
 
 

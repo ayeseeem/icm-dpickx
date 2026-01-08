@@ -20,7 +20,7 @@ class XmlExampleFixture {
         return createExampleDocument().getDocumentElement();
     }
 
-    private static Document createExampleDocument() {
+    static Document createExampleDocument() {
         Document doc = DomBuilder.emptyDocument();
 
         Element root = doc.createElement("RootElement");
