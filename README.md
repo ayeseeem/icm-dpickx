@@ -191,6 +191,7 @@ TODO
       This makes a 12 MB jar, which is excessive. Investigate a cleaner way of
       doing this, with a smaller (set of) jar(s).
       Using Apache Maven Assembly Plugin, reduced jar size to 101 kB.
+      - Adding Logback as a logging implementation increased this to 925 kB
 - [x] De-duplicate POM settings by depending on a Parent POM, once there is one.
 - [ ] Add more features: flags to control what to do, separate logging (to file)
 
