@@ -68,7 +68,7 @@ public class XpathHelper {
 
             // So return an empty node list, rather than throwing an exception
             String message = "Unexpected problem evaluating XPath expression " + this.xPath;
-            logger.error(message, e);
+            logger.error(message, e); // Currently this logging is disabled in unit tests
 
             return emptyNodeList();
         }

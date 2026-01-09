@@ -11,6 +11,9 @@
     </encoder>
   </appender>
 
+<!--  <logger name="org.ayeseeem.dpick.xml.XpathHelper" level="OFF"/>-->
+<!--  <logger name="org.ayeseeem.dpick.util.xml.XmlUnmarshaller" level="OFF"/>-->
+
   <root level="info">
     <appender-ref ref="STDOUT" />
   </root>
