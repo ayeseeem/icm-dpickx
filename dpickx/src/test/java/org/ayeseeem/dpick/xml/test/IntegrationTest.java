@@ -260,6 +260,11 @@ public class IntegrationTest {
     }
 
     @Test
+    public void expect_Value_BooleanMatcher_AnythingNonTrueIsFalse() throws XPathExpressionException {
+        XmlDocumentChecker.check(eg).andExpect(xpath("//ContainsSeventeen").value(is(booleanOfValue(false))));
+    }
+
+    @Test
     public void do_ProcessEach() throws XPathExpressionException {
         List<String> spy = new ArrayList<>();
 

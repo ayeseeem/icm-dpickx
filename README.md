@@ -143,6 +143,13 @@ TODO
     Any other methods added should consider an Optional alternative.
 - [ ] `captureFirstRequired`, `captureFirstOptional` (=> node count >= 1)
 - [ ] `captureAll` for multiple nodes
+- [ ] **Better booleans**.
+      The current implementation uses Java's `Boolean.parseBoolean()`, and so
+      interprets (case-insensitive) strings "true" as `true`,
+      and anything else as `false`.
+      Whereas XML seems to accept (only) `0`, `1`, `true`, and `false`.
+      As we are checking  XML, it might be sensible to match the XML behaviour
+      rather than the Java behaviour.
 - [ ] Templatize the capture methods to return specific types, not just
       `String`s
 - [ ] Consider if the more complicated ways of doing capture are still needed:

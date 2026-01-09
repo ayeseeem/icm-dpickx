@@ -135,6 +135,7 @@ public class ConvertibleStringMatchersTest {
         Matcher<String> subject = booleanOfValue(false);
         assertThat(subject.matches("true"), is(false));
         assertThat(subject.matches("false"), is(true));
+        assertThat(subject.matches("ANYTHING"), is(true));
         assertThat(subject.matches("Cannot become boolean"), is(true));
 
         assertThat(subject.matches(URI.create("non-string-object")), is(false));
@@ -196,6 +197,7 @@ public class ConvertibleStringMatchersTest {
     public void testBooleanOfValue_InUse() {
         assertThat("true", booleanOfValue(true));
         assertThat("false", booleanOfValue(false));
+        assertThat("ANYTHING", booleanOfValue(false));
         assertThat("Cannot become boolean", booleanOfValue(false));
     }
 
