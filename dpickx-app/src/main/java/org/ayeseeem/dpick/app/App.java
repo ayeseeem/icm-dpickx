@@ -56,8 +56,8 @@ public class App {
     }
 
     private Node makeDoc(String file) throws FileNotFoundException, IOException, SAXException {
-        XmlUnmarshaller u = new XmlUnmarshaller();
         try (FileInputStream fis = new FileInputStream(file)) {
+            XmlUnmarshaller u = new XmlUnmarshaller();
             Document doc = u.toDocument(fis);
             return doc;
         }
