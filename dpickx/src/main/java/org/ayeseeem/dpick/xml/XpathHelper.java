@@ -3,6 +3,7 @@ package org.ayeseeem.dpick.xml;
 import static org.ayeseeem.dpick.util.dom.DomBuilder.emptyNodeList;
 
 import java.util.Map;
+import java.util.Objects;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -49,6 +50,8 @@ public class XpathHelper {
      * @return the result of the XPath selection
      */
     public NodeList getNodes(Node rootNode) {
+        Objects.requireNonNull(rootNode);
+
         try {
             final NodeList nodes = (NodeList) expression.evaluate(rootNode, XPathConstants.NODESET);
             return nodes;
@@ -57,14 +60,13 @@ public class XpathHelper {
             // The XPath compiled OK.
             //
             // We would only expect to see this if the context (the rootNode)
-            // is null, and the XPath was not contextless (contextless example: "1+1"),
+            // is null, and the XPath was not contextless
+            // (contextless examples: "1+1" -> NUMBER; "concat('ABC ','DEF')" -> String)
             // but that would also be influenced by the return type, which we have
             // set as NODESET.
             //
             // So we _would_ (we do) get this if it's a node-like XPath and
             // the Node is null - see Javadocs for XPathExpression#evaluate(Object)
-
-            // TODO: ICM 2025-12-31: Improve/change: would it be better to disallow null node?
 
             // So return an empty node list, rather than throwing an exception
             String message = "Unexpected problem evaluating XPath expression " + this.xPath;

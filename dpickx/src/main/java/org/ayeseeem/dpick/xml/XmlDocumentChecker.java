@@ -1,5 +1,6 @@
 package org.ayeseeem.dpick.xml;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import org.w3c.dom.Node;
@@ -13,6 +14,7 @@ public class XmlDocumentChecker {
     private final Node rootNode;
 
     public XmlDocumentChecker(Node rootNode) {
+        Objects.requireNonNull(rootNode);
         this.rootNode = rootNode;
     }
 

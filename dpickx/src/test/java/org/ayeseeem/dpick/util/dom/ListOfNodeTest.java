@@ -75,6 +75,7 @@ public class ListOfNodeTest {
         ListOfNode subject = randomListOfNode();
         assertThat(subject.get(0), is(not(nullValue())));
         assertThat(subject.get(subject.size() - 1), is(not(nullValue())));
+
         subject.get(subject.size());
     }
 

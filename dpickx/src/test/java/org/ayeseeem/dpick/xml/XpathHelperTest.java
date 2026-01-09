@@ -6,7 +6,6 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertNotNull;
 
 import javax.xml.xpath.XPathExpressionException;
 
@@ -18,15 +17,11 @@ import org.w3c.dom.NodeList;
 public class XpathHelperTest {
 
     //@Characterization
-    @Test
-    public void testGetNodes_CurrentlyReturnsEmptyList_FromNode() throws XPathExpressionException {
+    @Test(expected = NullPointerException.class)
+    public void testGetNodes_RootNodeCannotBeNull() throws XPathExpressionException {
         XpathHelper subject = new XpathHelper("somePath", emptyMap());
 
-        Node nullNode = null;
-
-        NodeList result = subject.getNodes(nullNode);
-        assertThat(result, is(not(nullValue())));
-        assertThat(result.getLength(), is(0));
+        subject.getNodes(null);
     }
 
     @Test
@@ -34,7 +29,6 @@ public class XpathHelperTest {
         Document doc = emptyDocument();
         doc.appendChild(doc.createElement("SomeRootElement"));
         Node n = doc.getDocumentElement();
-        assertNotNull(n);
 
         XpathHelper subject = new XpathHelper("NonExistentNode", emptyMap());
 
@@ -45,13 +39,26 @@ public class XpathHelperTest {
 
     //@Characterization
     @Test
-    public void testGetNodes_ExampleOfContextlessXpath() throws XPathExpressionException {
+    public void testGetNodes_ExampleOfContextlessXpath_Number() throws XPathExpressionException {
         Document doc = emptyDocument();
         doc.appendChild(doc.createElement("SomeRootElement"));
         Node n = doc.getDocumentElement();
-        assertNotNull(n);
 
         XpathHelper subject = new XpathHelper("1+1", emptyMap());
+
+        NodeList result = subject.getNodes(n);
+        assertThat(result, is(not(nullValue())));
+        assertThat(result.getLength(), is(0));
+    }
+
+    //@Characterization
+    @Test
+    public void testGetNodes_ExampleOfContextlessXpath_String() throws XPathExpressionException {
+        Document doc = emptyDocument();
+        doc.appendChild(doc.createElement("SomeRootElement"));
+        Node n = doc.getDocumentElement();
+
+        XpathHelper subject = new XpathHelper("concat('ABC ','DEF')", emptyMap());
 
         NodeList result = subject.getNodes(n);
         assertThat(result, is(not(nullValue())));
