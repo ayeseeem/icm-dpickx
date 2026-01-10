@@ -207,14 +207,14 @@ public class IntegrationTest {
     }
 
     @Test
-    public void expect_Value_MutlipleElements() throws XPathExpressionException {
+    public void expect_Value_MultipleElements() throws XPathExpressionException {
         XmlDocumentChecker.check(eg).andExpect(xpath("//Duplicate").nodeCount(2));
 
         XmlDocumentChecker.check(eg).andExpect(xpath("//Duplicate").value(is("123")));
     }
 
     @Test
-    public void expect_Value_MutlipleElements_NotAllMatch() throws XPathExpressionException {
+    public void expect_Value_MultipleElements_NotAllMatch() throws XPathExpressionException {
         XmlDocumentChecker.check(eg).andExpect(xpath("//DuplicateEleDiffContent").nodeCount(2));
 
         Error e = assertThrows(AssertionError.class, () -> {
