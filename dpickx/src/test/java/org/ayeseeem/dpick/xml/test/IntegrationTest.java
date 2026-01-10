@@ -218,10 +218,10 @@ public class IntegrationTest {
         XmlDocumentChecker.check(eg).andExpect(xpath("//DuplicateEleDiffContent").nodeCount(2));
 
         Error e = assertThrows(AssertionError.class, () -> {
-            XmlDocumentChecker.check(eg).andExpect(xpath("//DuplicateEleDiffContent").value(is("123")));
+            XmlDocumentChecker.check(eg).andExpect(xpath("//DuplicateEleDiffContent").value(is("111")));
         });
-        assertThat(e.getMessage(), containsString("Expected: is \"123\""));
-        assertThat(e.getMessage(), containsString("but: was \"456\""));
+        assertThat(e.getMessage(), containsString("Expected: is \"111\""));
+        assertThat(e.getMessage(), containsString("but: was \"222\""));
     }
 
     @Test
@@ -273,7 +273,7 @@ public class IntegrationTest {
                 .andDo(xpath("//DuplicateEleDiffContent")
                         .processEach(node -> spy.add(node.getTextContent())));
 
-        assertThat(spy, contains("123", "456"));
+        assertThat(spy, contains("111", "222"));
     }
 
     @Test

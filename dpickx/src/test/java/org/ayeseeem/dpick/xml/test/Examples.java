@@ -43,6 +43,10 @@ public class Examples {
                 .andExpect(xpath("//ContainsSeventeen").value(startsWith("1")))
                 .andExpect(xpath("//ContainsSeventeen").value(is(numberOfValue(17.0))))
                 .andExpect(xpath("//ContainsSeventeen").value(is(numberOfValue(17))))
+                .andExpect(xpath("//Duplicate").exists())
+                .andExpect(xpath("//Duplicate").nodeCount(2))
+                .andExpect(xpath("//DuplicateEleDiffContent").exists())
+                .andExpect(xpath("//DuplicateEleDiffContent").nodeCount(2))
                 .andExpect(xpath("//ElementWithSizeAttribute/@size").exists())
                 .andExpect(xpath("//ElementWithSizeAttribute/@size").value(is("15")))
                 ;

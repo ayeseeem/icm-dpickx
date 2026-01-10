@@ -31,8 +31,8 @@ For an XML document like this (see [`example.xml`](./dpickx-app/example.xml "Exa
   <ContainsAttributeWithEighteen attrOf18="18">blah blah</ContainsAttributeWithEighteen>
   <Duplicate>123</Duplicate>
   <Duplicate>123</Duplicate>
-  <DuplicateEleDiffContent>123</DuplicateEleDiffContent>
-  <DuplicateEleDiffContent>456</DuplicateEleDiffContent>
+  <DuplicateEleDiffContent>111</DuplicateEleDiffContent>
+  <DuplicateEleDiffContent>222</DuplicateEleDiffContent>
   <AlwaysTrue>true</AlwaysTrue>
 </RootElement>
 ```
@@ -52,6 +52,10 @@ XmlDocumentChecker.check(eg)
         .andExpect(xpath("//ContainsSeventeen").value(startsWith("1")))
         .andExpect(xpath("//ContainsSeventeen").value(is(numberOfValue(17.0))))
         .andExpect(xpath("//ContainsSeventeen").value(is(numberOfValue(17))))
+        .andExpect(xpath("//Duplicate").exists())
+        .andExpect(xpath("//Duplicate").nodeCount(2))
+        .andExpect(xpath("//DuplicateEleDiffContent").exists())
+        .andExpect(xpath("//DuplicateEleDiffContent").nodeCount(2))
         .andExpect(xpath("//ElementWithSizeAttribute/@size").exists())
         .andExpect(xpath("//ElementWithSizeAttribute/@size").value(is("15")))
         ;

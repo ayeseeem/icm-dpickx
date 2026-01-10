@@ -63,12 +63,12 @@ class XmlExampleFixture {
 
         {
             Element element = doc.createElement("DuplicateEleDiffContent");
-            element.setTextContent("123");
+            element.setTextContent("111");
             root.appendChild(element);
         }
         {
             Element element = doc.createElement("DuplicateEleDiffContent");
-            element.setTextContent("456");
+            element.setTextContent("222");
             root.appendChild(element);
         }
 

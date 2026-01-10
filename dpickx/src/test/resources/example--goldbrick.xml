@@ -8,7 +8,7 @@
   <ContainsAttributeWithEighteen attrOf18="18">blah blah</ContainsAttributeWithEighteen>
   <Duplicate>123</Duplicate>
   <Duplicate>123</Duplicate>
-  <DuplicateEleDiffContent>123</DuplicateEleDiffContent>
-  <DuplicateEleDiffContent>456</DuplicateEleDiffContent>
+  <DuplicateEleDiffContent>111</DuplicateEleDiffContent>
+  <DuplicateEleDiffContent>222</DuplicateEleDiffContent>
   <AlwaysTrue>true</AlwaysTrue>
 </RootElement>
