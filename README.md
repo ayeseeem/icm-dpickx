@@ -144,7 +144,7 @@ TODO
 - [ ] Include failing node number in error messages?
 - [x] Capture optional value
   - `captureSoleOptional` added, to correspond with  `captureSoleRequired`.
-    Any other methods added should consider an Optional alternative.
+    Any other methods added should consider an `Optional` alternative.
 - [ ] `captureFirstRequired`, `captureFirstOptional` (=> node count >= 1)
 - [ ] `captureAll` for multiple nodes
 - [ ] **Better booleans**.
