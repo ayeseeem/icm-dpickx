@@ -11,11 +11,15 @@ public class Capturer {
     private Optional<String> value = Optional.empty();
 
     public void capture(Node node) {
-        value = Optional.of(node.getTextContent());
+        value = Optional.of(convertToString(node));
     }
 
     public Optional<String> value() {
         return value;
+    }
+
+    static String convertToString(Node node) {
+        return node.getTextContent();
     }
 
 }

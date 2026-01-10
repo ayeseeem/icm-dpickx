@@ -146,7 +146,7 @@ TODO
   - `captureSoleOptional` added, to correspond with  `captureSoleRequired`.
     Any other methods added should consider an `Optional` alternative.
 - [ ] `captureFirstRequired`, `captureFirstOptional` (=> node count >= 1)
-- [ ] `captureAll` for multiple nodes
+- [x] `captureAll` for multiple nodes
 - [ ] **Better booleans**.
       The current implementation uses Java's `Boolean.parseBoolean()`, and so
       interprets (case-insensitive) strings "true" as `true`,

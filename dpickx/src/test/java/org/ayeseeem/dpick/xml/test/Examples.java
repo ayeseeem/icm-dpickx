@@ -6,6 +6,8 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.core.StringStartsWith.startsWith;
 
 import java.util.ArrayList;
@@ -78,6 +80,24 @@ public class Examples {
                 ;
 
         assertThat(fakeConsumer.size(), is(2));
+    }
+
+    @Test
+    public void exampleCapturingAll() throws XPathExpressionException {
+        XmlDocumentChecker checker = new XmlDocumentChecker(eg);
+        List<String> elements = checker.captureAll(xpath("//DuplicateEleDiffContent"));
+
+        // do something with captured values...
+        assertThat(elements, contains("111", "222"));
+    }
+
+    @Test
+    public void exampleCapturingAll_NonExistent() throws XPathExpressionException {
+        XmlDocumentChecker checker = new XmlDocumentChecker(eg);
+        List<String> elements = checker.captureAll(xpath("//NonExistentElement"));
+
+        // do something with captured values...
+        assertThat(elements, is(empty()));
     }
 
     @Test

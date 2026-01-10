@@ -121,6 +121,32 @@ public class XpathNodeMatchers {
     }
 
     /**
+     * Creates a helper for capturing all nodes specified by the XPath.
+     *
+     * @param capturer
+     *            a capturer to capture the nodes' values
+     * @return a new node handler that uses the {@code capturer} to capture the
+     *         nodes' values
+     */
+    public NodeHandler captureAll(ListCapturer capturer) {
+        return rootNode -> {
+            final NodeList nodes = selectNodes(rootNode);
+            // TODO: ICM 2026-01-10: Simplify/remove the if/else for a captureAllOptional, retain for captureAllRequired
+            if (nodes.getLength() > 0) {
+                matcherFromHandler(selection -> {
+                    selection.exists();
+                    //selection.hasNodes(1);    // TODO: ICM 2026-01-10: Remove commented out reminder line
+                }).match(rootNode);
+                for (int i = 0; i < nodes.getLength(); i++) {
+                    capturer.capture(nodes.item(i));
+                }
+            } else {
+                matcherFromHandler(NodeSelectionChecker::doesNotExist).match(rootNode);
+            }
+        };
+    }
+
+    /**
      * Creates a helper for capturing a single, required node specified by the
      * XPath.
      *

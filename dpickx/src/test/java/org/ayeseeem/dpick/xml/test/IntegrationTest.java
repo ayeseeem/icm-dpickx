@@ -8,6 +8,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.junit.Assert.assertThrows;
 
@@ -19,6 +20,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.ayeseeem.dpick.xml.Capturer;
+import org.ayeseeem.dpick.xml.ListCapturer;
 import org.ayeseeem.dpick.xml.XmlDocumentChecker;
 import org.junit.Test;
 import org.w3c.dom.Node;
@@ -288,6 +290,22 @@ public class IntegrationTest {
     }
 
     @Test
+    public void direct_CaptureAll() throws XPathExpressionException {
+        XmlDocumentChecker checker = new XmlDocumentChecker(eg);
+        List<String> textValues = checker.captureAll(xpath("//DuplicateEleDiffContent"));
+
+        assertThat(textValues, contains("111", "222"));
+    }
+
+    @Test
+    public void direct_CaptureAll_NonExistentElement() throws XPathExpressionException {
+        XmlDocumentChecker checker = new XmlDocumentChecker(eg);
+        List<String> textValues = checker.captureAll(xpath("//NeverExisting"));
+
+        assertThat(textValues, is(empty()));
+    }
+
+    @Test
     public void direct_CaptureSoleRequired() throws XPathExpressionException {
         XmlDocumentChecker checker = new XmlDocumentChecker(eg);
         String textValue = checker.captureSoleRequired(xpath("//ContainsSeventeen"));
@@ -340,6 +358,29 @@ public class IntegrationTest {
         Optional<?> textValue = checker.captureSoleOptional(xpath("//NeverExisting"));
 
         assertThat(textValue.isPresent(), is(false));
+    }
+
+    @Test
+    public void do_CaptureAll() throws XPathExpressionException {
+        final ListCapturer capturer = new ListCapturer();
+        assertThat(capturer.value(), is(empty()));
+
+        XmlDocumentChecker.check(eg)
+                .andDo(xpath("//DuplicateEleDiffContent").captureAll(capturer));
+
+        assertThat(capturer.value(), contains("111", "222"));
+    }
+
+    //@Characterization
+    @Test
+    public void do_CaptureAll_NonExistentElement() throws XPathExpressionException {
+        final ListCapturer capturer = new ListCapturer();
+        assertThat(capturer.value(), is(empty()));
+
+        XmlDocumentChecker.check(eg)
+                .andDo(xpath("//NeverExisting").captureAll(capturer));
+
+        assertThat(capturer.value(), is(empty()));
     }
 
     @Test

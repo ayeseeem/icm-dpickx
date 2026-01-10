@@ -1,5 +1,6 @@
 package org.ayeseeem.dpick.xml;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -16,6 +17,22 @@ public class XmlDocumentChecker {
     public XmlDocumentChecker(Node rootNode) {
         Objects.requireNonNull(rootNode);
         this.rootNode = rootNode;
+    }
+
+    /**
+     * Captures the values of all the nodes specified by the XPath
+     * matchers. If no nodes are matched, returns an empty list.
+     *
+     * @param xpathNodeMatchers
+     *            the XPath to capture from
+     * @return the values of the nodes
+     */
+    public List<String> captureAll(XpathNodeMatchers xpathNodeMatchers) {
+        final ListCapturer capturer = new ListCapturer();
+
+        check(rootNode).andDo(xpathNodeMatchers.captureAll(capturer));
+
+        return capturer.value();
     }
 
     /**
