@@ -15,12 +15,14 @@ import static org.junit.Assert.assertThrows;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 
 import javax.xml.transform.TransformerException;
 import javax.xml.xpath.XPathExpressionException;
 
-import org.ayeseeem.dpick.xml.Capturer;
+import org.ayeseeem.dpick.xml.StringCapturer;
 import org.ayeseeem.dpick.xml.ListCapturer;
+import org.ayeseeem.dpick.xml.Capturer;
 import org.ayeseeem.dpick.xml.XmlDocumentChecker;
 import org.junit.Test;
 import org.w3c.dom.Node;
@@ -314,6 +316,24 @@ public class IntegrationTest {
     }
 
     @Test
+    public void direct_CaptureSoleRequired_AsInteger() throws XPathExpressionException {
+        XmlDocumentChecker checker = new XmlDocumentChecker(eg);
+        Function<String, Integer> toInteger = Integer::parseInt;
+        Integer value = checker.captureSoleRequired(xpath("//ContainsSeventeen"), toInteger);
+
+        assertThat(value, is(17));
+    }
+
+    @Test
+    public void direct_CaptureSoleRequired_AsInt() throws XPathExpressionException {
+        XmlDocumentChecker checker = new XmlDocumentChecker(eg);
+        Function<String, Integer> toInteger = Integer::parseInt;
+        int value = checker.captureSoleRequired(xpath("//ContainsSeventeen"), toInteger);
+
+        assertThat(value, is(17));
+    }
+
+    @Test
     public void direct_CaptureSoleRequired_MoreThanOneNodeFound() {
         XmlDocumentChecker checker = new XmlDocumentChecker(eg);
 
@@ -340,6 +360,15 @@ public class IntegrationTest {
 
         assertThat(textValue.isPresent(), is(true));
         assertThat(textValue.get(), is("17"));
+    }
+
+    @Test
+    public void direct_CaptureSoleOptional_AsInteger() throws XPathExpressionException {
+        XmlDocumentChecker checker = new XmlDocumentChecker(eg);
+        Function<String, Integer> toInteger = Integer::parseInt;
+        Optional<Integer> value = checker.captureSoleOptional(xpath("//ContainsSeventeen"), toInteger);
+
+        assertThat(value.get(), is(17));
     }
 
     @Test
@@ -385,7 +414,7 @@ public class IntegrationTest {
 
     @Test
     public void do_CaptureSoleRequired() throws XPathExpressionException {
-        final Capturer capturer = new Capturer();
+        final StringCapturer capturer = new StringCapturer();
         assertThat(capturer.value().isPresent(), is(false));
 
         XmlDocumentChecker.check(eg)
@@ -393,6 +422,26 @@ public class IntegrationTest {
 
         assertThat(capturer.value().isPresent(), is(true));
         assertThat(capturer.value().get(), is("17"));
+    }
+
+    @Test
+    public void do_CaptureSoleRequired_AsInteger() throws XPathExpressionException {
+        final Capturer<Integer> capturer = new Capturer<>(Integer::parseInt);
+
+        XmlDocumentChecker.check(eg)
+                .andDo(xpath("//ContainsSeventeen").captureSoleRequired(capturer));
+
+        assertThat(capturer.value().get(), is(17));
+    }
+
+    @Test
+    public void do_CaptureSoleRequired_AsDouble() throws XPathExpressionException {
+        final Capturer<Double> capturer = new Capturer<>(Double::parseDouble);
+
+        XmlDocumentChecker.check(eg)
+                .andDo(xpath("//ContainsSeventeen").captureSoleRequired(capturer));
+
+        assertThat(capturer.value().get(), is(17.0));
     }
 
     @Test
@@ -415,7 +464,7 @@ public class IntegrationTest {
 
     @Test
     public void do_CaptureSoleRequired_Attribute() throws XPathExpressionException {
-        final Capturer capturer = new Capturer();
+        final StringCapturer capturer = new StringCapturer();
 
         XmlDocumentChecker.check(eg)
                 .andDo(xpath("//ElementWithSizeAttribute/@size").captureSoleRequired(capturer));
@@ -434,7 +483,7 @@ public class IntegrationTest {
 
     @Test
     public void do_CaptureSoleOptional() throws XPathExpressionException {
-        final Capturer capturer = new Capturer();
+        final StringCapturer capturer = new StringCapturer();
         assertThat(capturer.value().isPresent(), is(false));
 
         XmlDocumentChecker.check(eg)
@@ -442,6 +491,26 @@ public class IntegrationTest {
 
         assertThat(capturer.value().isPresent(), is(true));
         assertThat(capturer.value().get(), is("17"));
+    }
+
+    @Test
+    public void do_CaptureSoleOptional_AsInteger() throws XPathExpressionException {
+        final Capturer<Integer> capturer = new Capturer<>(Integer::parseInt);
+
+        XmlDocumentChecker.check(eg)
+                .andDo(xpath("//ContainsSeventeen").captureSoleOptional(capturer));
+
+        assertThat(capturer.value().get(), is(17));
+    }
+
+    @Test
+    public void do_CaptureSoleOptional_AsDouble() throws XPathExpressionException {
+        final Capturer<Double> capturer = new Capturer<>(Double::parseDouble);
+
+        XmlDocumentChecker.check(eg)
+                .andDo(xpath("//ContainsSeventeen").captureSoleOptional(capturer));
+
+        assertThat(capturer.value().get(), is(17.0));
     }
 
     @Test
@@ -455,7 +524,7 @@ public class IntegrationTest {
 
     @Test
     public void do_CaptureSoleOptional_NonExistentElement() throws XPathExpressionException {
-        final Capturer capturer = new Capturer();
+        final StringCapturer capturer = new StringCapturer();
 
         XmlDocumentChecker.check(eg)
                 .andDo(xpath("//NeverExisting").captureSoleOptional(capturer));
@@ -465,7 +534,7 @@ public class IntegrationTest {
 
     @Test
     public void do_CaptureSoleOptional_Attribute() throws XPathExpressionException {
-        final Capturer capturer = new Capturer();
+        final StringCapturer capturer = new StringCapturer();
 
         XmlDocumentChecker.check(eg)
                 .andDo(xpath("//ElementWithSizeAttribute/@size").captureSoleOptional(capturer));
@@ -475,7 +544,7 @@ public class IntegrationTest {
 
     @Test
     public void do_CaptureSoleOptional_NonExistentAttribute() throws XPathExpressionException {
-        final Capturer capturer = new Capturer();
+        final StringCapturer capturer = new StringCapturer();
 
         XmlDocumentChecker.check(eg)
                 .andDo(xpath("//ElementWithSizeAttribute/@nonExistentAttribute").captureSoleOptional(capturer));

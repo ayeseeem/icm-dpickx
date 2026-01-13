@@ -84,6 +84,17 @@ String drivingAge = checker.captureSoleRequired(xpath("//ContainsSeventeen"));
 assertThat(drivingAge, is("17"));
 ```
 
+If you want to convert the captured value to a specific type, add a converter,
+for example like this:
+
+```java
+XmlDocumentChecker checker = new XmlDocumentChecker(eg);
+int drivingAge = checker.captureSoleRequired(xpath("//ContainsSeventeen"), Integer::parseInt);
+
+// do something with captured value...
+assertThat(drivingAge, is(17));
+```
+
 You can also capture optional values, like this:
 
 ```java
@@ -155,7 +166,7 @@ TODO
       As we are checking  XML, it might be sensible to match the XML behaviour
       rather than the Java behaviour.
 - [ ] Templatize the capture methods to return specific types, not just
-      `String`s
+      `String`s - in progress
 - [ ] Consider if the more complicated ways of doing capture are still needed:
       can the whole mechanism be simplified?
 - [ ] Throw a library-specific `Error` instead of (or perhaps extension of)

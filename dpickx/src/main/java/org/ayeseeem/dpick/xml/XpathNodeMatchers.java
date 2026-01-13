@@ -155,7 +155,7 @@ public class XpathNodeMatchers {
      * @return a new node handler that uses the {@code capturer} to capture the
      *         node's value
      */
-    public NodeHandler captureSoleRequired(Capturer capturer) {
+    public NodeHandler captureSoleRequired(Capturer<?> capturer) {
         return rootNode -> {
             matcherFromHandler(selection -> {
                 selection.exists();
@@ -178,7 +178,7 @@ public class XpathNodeMatchers {
      * @return a new node handler that uses the {@code capturer} to capture the
      *         node's value
      */
-    public NodeHandler captureSoleOptional(Capturer capturer) {
+    public NodeHandler captureSoleOptional(Capturer<?> capturer) {
         return rootNode -> {
             final NodeList nodes = selectNodes(rootNode);
             if (nodes.getLength() > 0) {

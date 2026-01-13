@@ -110,6 +110,15 @@ public class Examples {
     }
 
     @Test
+    public void exampleCapturingRequiredValue_ToSpecificType() throws XPathExpressionException {
+        XmlDocumentChecker checker = new XmlDocumentChecker(eg);
+        int drivingAge = checker.captureSoleRequired(xpath("//ContainsSeventeen"), Integer::parseInt);
+
+        // do something with captured value...
+        assertThat(drivingAge, is(17));
+    }
+
+    @Test
     public void exampleFailingToCaptureRequiredValue() throws XPathExpressionException {
         XmlDocumentChecker checker = new XmlDocumentChecker(eg);
         try {

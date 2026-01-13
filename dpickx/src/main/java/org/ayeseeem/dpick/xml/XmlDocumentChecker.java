@@ -1,8 +1,11 @@
 package org.ayeseeem.dpick.xml;
 
+import static org.ayeseeem.dpick.xml.StringCapturer.NOOP;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Function;
 
 import org.w3c.dom.Node;
 
@@ -36,7 +39,7 @@ public class XmlDocumentChecker {
     }
 
     /**
-     * Captures the value of the single, required node specified by the XPath
+     * Captures the text value of the single, required node specified by the XPath
      * matchers. The node must be present, and it must be the only one: there
      * cannot be more than one.
      *
@@ -45,13 +48,42 @@ public class XmlDocumentChecker {
      * @return the value of the node
      */
     public String captureSoleRequired(XpathNodeMatchers xpathNodeMatchers) {
-        final Capturer capturer = new Capturer();
+        return captureSoleRequired(xpathNodeMatchers, NOOP);
+    }
+
+    /**
+     * Captures the value of the single, required node specified by the XPath
+     * matchers. The node must be present, and it must be the only one: there cannot
+     * be more than one.
+     *
+     * @param xpathNodeMatchers
+     *            the XPath to capture from
+     * @param converter
+     *            used to convert the text value of the node to the specified type T
+     * @return the value of the node
+     */
+    public <T> T captureSoleRequired(XpathNodeMatchers xpathNodeMatchers, Function<String, T> converter) {
+        final Capturer<T> capturer = new Capturer<>(converter);
 
         check(rootNode).andDo(xpathNodeMatchers.captureSoleRequired(capturer));
 
-        final Optional<String> value = capturer.value();
+        final Optional<T> value = capturer.value();
         assert value.isPresent();
         return value.get();
+    }
+
+    /**
+     * Captures the text value of the single, optional node specified by the XPath
+     * matchers. The current definition is that there can be one or zero values; it
+     * does not have to be there - it's optional - but if it's there, it must be the
+     * only one: there cannot be more than one.
+     *
+     * @param xpathNodeMatchers
+     *            the XPath to capture from
+     * @return an {@code Optional} for the possible value
+     */
+    public Optional<String> captureSoleOptional(XpathNodeMatchers xpathNodeMatchers) {
+        return captureSoleOptional(xpathNodeMatchers, NOOP);
     }
 
     /**
@@ -62,10 +94,12 @@ public class XmlDocumentChecker {
      *
      * @param xpathNodeMatchers
      *            the XPath to capture from
+     * @param converter
+     *            used to convert the text value of the node to the specified type T
      * @return an {@code Optional} for the possible value
      */
-    public Optional<String> captureSoleOptional(XpathNodeMatchers xpathNodeMatchers) {
-        final Capturer capturer = new Capturer();
+    public <T> Optional<T> captureSoleOptional(XpathNodeMatchers xpathNodeMatchers, Function<String, T> converter) {
+        final Capturer<T> capturer = new Capturer<>(converter);
 
         XmlDocumentChecker.check(rootNode)
                 .andDo(xpathNodeMatchers.captureSoleOptional(capturer));

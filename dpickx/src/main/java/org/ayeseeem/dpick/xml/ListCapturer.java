@@ -17,7 +17,7 @@ public class ListCapturer {
     }
 
     public void capture(Node node) {
-        values.add(Capturer.convertToString(node));
+        values.add(StringCapturer.convertToString(node));
     }
 
     public List<String> value() {
