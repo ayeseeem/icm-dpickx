@@ -11,6 +11,7 @@ import javax.xml.xpath.XPathExpressionException;
 
 import org.junit.Test;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -35,6 +36,58 @@ public class XpathHelperTest {
         NodeList result = subject.getNodes(n);
         assertThat(result, is(not(nullValue())));
         assertThat(result.getLength(), is(0));
+    }
+
+    @Test
+    public void testGetNodes_FiltersWithinTheNode_NotDocRoot() throws XPathExpressionException {
+        Document doc = emptyDocument();
+        Element root = doc.createElement("SomeRootElement");
+        doc.appendChild(root);
+
+        {
+            Element element = doc.createElement("ele");
+            element.setTextContent("111");
+            root.appendChild(element);
+        }
+
+        final Node wanted;
+        {
+            Element element = doc.createElement("wanted");
+            wanted = root.appendChild(element);
+        }
+
+        {
+            Element element = doc.createElement("ele");
+            element.setTextContent("222");
+            wanted.appendChild(element);
+        }
+
+        {
+            Element element = doc.createElement("ele");
+            element.setTextContent("333");
+            wanted.appendChild(element);
+        }
+
+        // Find relative to passed in node
+        {
+            XpathHelper subject = new XpathHelper("./ele", emptyMap());
+
+            NodeList result = subject.getNodes(wanted);
+            assertThat(result.item(0).getTextContent(), is("222"));
+            assertThat(result.item(1).getTextContent(), is("333"));
+            assertThat(result.getLength(), is(2));
+        }
+
+        // Find all
+        {
+            XpathHelper subject = new XpathHelper("//ele", emptyMap());
+
+            NodeList result = subject.getNodes(wanted);
+            assertThat(result.item(0).getTextContent(), is("111"));
+            assertThat(result.item(1).getTextContent(), is("222"));
+            assertThat(result.item(2).getTextContent(), is("333"));
+            assertThat(result.getLength(), is(3));
+        }
     }
 
     //@Characterization
