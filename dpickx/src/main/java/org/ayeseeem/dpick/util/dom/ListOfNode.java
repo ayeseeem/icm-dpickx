@@ -35,4 +35,20 @@ public class ListOfNode extends AbstractList<Node> implements List<Node> {
         return nodes.getLength();
     }
 
+    /**
+     * Finds the last index of the node.
+     * <p>
+     * The DOM doesn't generally allow nodes to be inserted more than once in the
+     * tree (it removes the duplicate when adding again). Our implementation defers
+     * to abstract list, and @code Node uses == for equals, so we never expect to
+     * find a node in more than one location (index). So we expect @code indexOf
+     * and @code lastIndexOf to always be the same.
+     */
+    @Override
+    public int lastIndexOf(Object node) {
+        int lastIndex = super.lastIndexOf(node);
+        assert lastIndex == super.indexOf(node);
+        return lastIndex;
+    }
+
 }

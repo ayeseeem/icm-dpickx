@@ -1,5 +1,6 @@
 package org.ayeseeem.dpick.util.dom;
 
+import static org.ayeseeem.dpick.util.dom.DomBuilder.emptyDocument;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -150,12 +151,33 @@ public class ListOfNodeTest {
         assertThat(subject.indexOf(randomNode()), is(-1));
     }
 
+    //@Characterization
     @Test
-    public void testLastIndexOf() {
-        // TODO: ICM 2019-03-24: Verify it's the _last_ index, not just _an_ index
-        ListOfNode subject = randomListOfNode();
-        assertThat(subject.indexOf(subject.get(0)), is(0));
-        assertThat(subject.indexOf(randomNode()), is(-1));
+    public void testLastIndexOf_MatchesIndexOf() {
+        // TODO: ICM 2026-01-13: Do a more complicated test and verify both each time.
+
+        Document doc = emptyDocument();
+        Element root = doc.createElement("SomeRootElement");
+        doc.appendChild(root);
+
+        Node node1 = root.appendChild(doc.createElement("node"));
+        Node node2 = root.appendChild(doc.createElement("node"));
+        Node node3 = root.appendChild(doc.createElement("node"));
+
+        NodeList nodes = root.getElementsByTagName("node");
+        assert nodes.getLength() == 3;
+
+        ListOfNode subject = new ListOfNode(nodes);
+
+        assertThat(subject.lastIndexOf(node1), is(0));
+        assertThat(subject.lastIndexOf(node2), is(1));
+        assertThat(subject.lastIndexOf(node3), is(2));
+
+        assertThat(subject.lastIndexOf(node1), is(subject.indexOf(node1)));
+        assertThat(subject.lastIndexOf(node2), is(subject.indexOf(node2)));
+        assertThat(subject.lastIndexOf(node3), is(subject.indexOf(node3)));
+
+        assertThat(subject.lastIndexOf(randomNode()), is(-1));
     }
 
     @Test(expected = UnsupportedOperationException.class)
