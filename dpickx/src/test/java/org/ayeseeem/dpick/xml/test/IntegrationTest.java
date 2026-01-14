@@ -20,9 +20,9 @@ import java.util.function.Function;
 import javax.xml.transform.TransformerException;
 import javax.xml.xpath.XPathExpressionException;
 
-import org.ayeseeem.dpick.xml.StringCapturer;
-import org.ayeseeem.dpick.xml.ListCapturer;
 import org.ayeseeem.dpick.xml.Capturer;
+import org.ayeseeem.dpick.xml.ListCapturer;
+import org.ayeseeem.dpick.xml.StringCapturer;
 import org.ayeseeem.dpick.xml.XmlDocumentChecker;
 import org.junit.Test;
 import org.w3c.dom.Node;
