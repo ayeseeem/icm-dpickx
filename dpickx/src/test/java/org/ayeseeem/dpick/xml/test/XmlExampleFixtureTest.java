@@ -57,11 +57,11 @@ public class XmlExampleFixtureTest {
         DomDump.safeDump(doc, sink);
     }
 
-    private List<String> readAllLines(String sourcePath) throws IOException {
+    private static List<String> readAllLines(String sourcePath) throws IOException {
         return readAllLines(Paths.get(sourcePath));
     }
 
-    private List<String> readAllLines(Path source) throws IOException {
+    private static List<String> readAllLines(Path source) throws IOException {
         try (Stream<String> data = Files.lines(source)) {
             List<String> lines = data.collect(toList());
             return lines;
@@ -70,11 +70,11 @@ public class XmlExampleFixtureTest {
 
     // TODO: ICM 2026-01-08: For Java after Java 8
 
-//    private List<String> readAllLines(String sourcePath) throws IOException {
+//    private static List<String> readAllLines(String sourcePath) throws IOException {
 //        return readAllLines(Path.of(sourcePath));
 //    }
 //
-//    private List<String> readAllLines(Path source) throws IOException {
+//    private static List<String> readAllLines(Path source) throws IOException {
 //        return Files.readAllLines(source);
 //    }
 
