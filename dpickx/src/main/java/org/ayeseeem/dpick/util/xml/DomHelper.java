@@ -1,8 +1,9 @@
 package org.ayeseeem.dpick.util.xml;
 
+import static javax.xml.xpath.XPathConstants.NODESET;
+
 import javax.xml.namespace.NamespaceContext;
 import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
@@ -69,9 +70,10 @@ public class DomHelper {
         if (nsContext != null) {
             xpath.setNamespaceContext(nsContext);
         }
+
         final XPathExpression expr = xpath.compile(xPathExpression);
 
-        NodeList nodes = (NodeList) expr.evaluate(rootNode, XPathConstants.NODESET);
+        NodeList nodes = (NodeList) expr.evaluate(rootNode, NODESET);
         return nodes;
     }
 

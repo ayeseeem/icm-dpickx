@@ -1,9 +1,10 @@
 package org.ayeseeem.dpick.util.xml;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -87,7 +88,7 @@ public class XmlUnmarshaller {
      */
     private Document createNormalizedDom(String xmlString) throws SAXException {
         // TODO: ICM 2015-09-16: Specifying the encoding as UTF-8 - should we check that it actually is UTF-8 first?
-        final ByteArrayInputStream is = new ByteArrayInputStream(xmlString.getBytes(StandardCharsets.UTF_8));
+        final ByteArrayInputStream is = new ByteArrayInputStream(xmlString.getBytes(UTF_8));
         try {
             return createNormalizedDom(is);
         } catch (IOException e) {

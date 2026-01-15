@@ -1,12 +1,12 @@
 package org.ayeseeem.dpick.xml;
 
+import static javax.xml.xpath.XPathConstants.NODESET;
 import static org.ayeseeem.dpick.util.dom.DomBuilder.emptyNodeList;
 
 import java.util.Map;
 import java.util.Objects;
 
 import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
@@ -53,7 +53,7 @@ public class XpathHelper {
         Objects.requireNonNull(rootNode);
 
         try {
-            final NodeList nodes = (NodeList) expression.evaluate(rootNode, XPathConstants.NODESET);
+            final NodeList nodes = (NodeList) expression.evaluate(rootNode, NODESET);
             return nodes;
         } catch (XPathExpressionException e) {
             // We don't know why we would ever see this.
