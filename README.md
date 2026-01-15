@@ -261,8 +261,3 @@ Only use `final` on method parameters in special cases - for example if the
 method is so long that it is hard to see at a glance that the parameters are
 not changed (although, avoid such long methods!). Or where some of the
 parameters _are_ reassigned - use `final` to mark the ones that are not.
-
-
-### Coding Standard TODOs ###
-
-- [ ] Look for `final` variables that can be removed by inlining the variable
