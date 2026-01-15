@@ -48,8 +48,6 @@ public class XmlExampleFixtureTest {
                 Collections.indexOfSubList(readMe, example), is(not(-1)));
     }
 
-    // TODO: ICM 2026-01-08: Verify example of *usage* of the example file is in README
-
     void createExampleFile() throws FileNotFoundException {
         Document doc = XmlExampleFixture.createExampleDocument();
         DomDump.safeDumpToConsole(doc);

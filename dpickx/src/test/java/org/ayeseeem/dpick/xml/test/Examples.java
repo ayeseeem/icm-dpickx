@@ -34,6 +34,7 @@ public class Examples {
 
     @Test
     public void exampleComplexCheck_ValidXml() throws XPathExpressionException {
+        // README Example start
         XmlDocumentChecker.check(eg)
                 .andExpect(xpath("/RootElement/SomethingUnique").exists())
                 .andExpect(xpath("//NeverExisting").doesNotExist())
@@ -52,6 +53,7 @@ public class Examples {
                 .andExpect(xpath("//ElementWithSizeAttribute/@size").exists())
                 .andExpect(xpath("//ElementWithSizeAttribute/@size").value(is("15")))
                 ;
+        // README Example end
     }
 
     @Test

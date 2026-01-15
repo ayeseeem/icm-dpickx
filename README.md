@@ -41,24 +41,26 @@ Convert it to a DOM, then you can make assertions like this:
 
 ```java
 Node eg = topLevelDocumentOrSomeNodeFromXml();
-XmlDocumentChecker.check(eg)
-        .andExpect(xpath("/RootElement/SomethingUnique").exists())
-        .andExpect(xpath("//NeverExisting").doesNotExist())
-        .andExpect(xpath("//Repeated").exists())
-        .andExpect(xpath("//Repeated").nodeCount(2))
-        .andExpect(xpath("/NeverExistingTopLevel").doesNotExist())
-        .andExpect(xpath("//ContainsSeventeen").value(is("17")))
-        .andExpect(xpath("//ContainsSeventeen").value(containsString("7")))
-        .andExpect(xpath("//ContainsSeventeen").value(startsWith("1")))
-        .andExpect(xpath("//ContainsSeventeen").value(is(numberOfValue(17.0))))
-        .andExpect(xpath("//ContainsSeventeen").value(is(numberOfValue(17))))
-        .andExpect(xpath("//Duplicate").exists())
-        .andExpect(xpath("//Duplicate").nodeCount(2))
-        .andExpect(xpath("//DuplicateEleDiffContent").exists())
-        .andExpect(xpath("//DuplicateEleDiffContent").nodeCount(2))
-        .andExpect(xpath("//ElementWithSizeAttribute/@size").exists())
-        .andExpect(xpath("//ElementWithSizeAttribute/@size").value(is("15")))
-        ;
+        // README Example start
+        XmlDocumentChecker.check(eg)
+                .andExpect(xpath("/RootElement/SomethingUnique").exists())
+                .andExpect(xpath("//NeverExisting").doesNotExist())
+                .andExpect(xpath("//Repeated").exists())
+                .andExpect(xpath("//Repeated").nodeCount(2))
+                .andExpect(xpath("/NeverExistingTopLevel").doesNotExist())
+                .andExpect(xpath("//ContainsSeventeen").value(is("17")))
+                .andExpect(xpath("//ContainsSeventeen").value(containsString("7")))
+                .andExpect(xpath("//ContainsSeventeen").value(startsWith("1")))
+                .andExpect(xpath("//ContainsSeventeen").value(is(numberOfValue(17.0))))
+                .andExpect(xpath("//ContainsSeventeen").value(is(numberOfValue(17))))
+                .andExpect(xpath("//Duplicate").exists())
+                .andExpect(xpath("//Duplicate").nodeCount(2))
+                .andExpect(xpath("//DuplicateEleDiffContent").exists())
+                .andExpect(xpath("//DuplicateEleDiffContent").nodeCount(2))
+                .andExpect(xpath("//ElementWithSizeAttribute/@size").exists())
+                .andExpect(xpath("//ElementWithSizeAttribute/@size").value(is("15")))
+                ;
+        // README Example end
 ```
 
 And you can select and process nodes like this:
