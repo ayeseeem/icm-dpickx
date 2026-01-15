@@ -8,7 +8,6 @@ import static org.hamcrest.Matchers.isEmptyString;
 import static org.hamcrest.Matchers.nullValue;
 
 import java.nio.file.Paths;
-import java.util.Scanner;
 import java.util.regex.Pattern;
 
 import org.junit.Test;
@@ -34,17 +33,13 @@ public class ExampleDocumentationTest {
                 "(?<=" + EXAMPLE_START + ")(.*)(?=\\s*" + EXAMPLE_END + ")",
                 Pattern.DOTALL);
 
-        final String contentFromJava;
-        try (Scanner scanner = new Scanner(Paths.get(EXAMPLE_JAVA), UTF_8.name())) {
-            contentFromJava = scanner.findWithinHorizon(regex, 0);
-        }
+        SnippetExtractor extractor = new SnippetExtractor(regex, UTF_8);
+
+        String contentFromJava = extractor.extractFrom(Paths.get(EXAMPLE_JAVA));
         assertThat(contentFromJava, is(not(nullValue())));
         assertThat(contentFromJava, not(isEmptyString()));
 
-        final String contentFromReadme;
-        try (Scanner scanner = new Scanner(Paths.get("../README.md"), UTF_8.name())) {
-            contentFromReadme = scanner.findWithinHorizon(regex, 0);
-        }
+        String contentFromReadme = extractor.extractFrom(Paths.get("../README.md"));
         assertThat(contentFromReadme, is(not(nullValue())));
         assertThat(contentFromReadme, not(isEmptyString()));
 
