@@ -29,6 +29,7 @@ For an XML document like this (see [`example.xml`](./dpickx-app/example.xml "Exa
   <ElementWithSizeAttribute size="15"/>
   <ContainsSeventeen>17</ContainsSeventeen>
   <ContainsAttributeWithEighteen attrOf18="18">blah blah</ContainsAttributeWithEighteen>
+  <ContainsOneQuarter>0.25</ContainsOneQuarter>
   <Duplicate>123</Duplicate>
   <Duplicate>123</Duplicate>
   <DuplicateEleDiffContent>111</DuplicateEleDiffContent>
@@ -53,6 +54,8 @@ Node eg = topLevelDocumentOrSomeNodeFromXml();
                 .andExpect(xpath("//ContainsSeventeen").value(startsWith("1")))
                 .andExpect(xpath("//ContainsSeventeen").value(is(numberOfValue(17.0))))
                 .andExpect(xpath("//ContainsSeventeen").value(is(numberOfValue(17))))
+                .andExpect(xpath("//ContainsOneQuarter").value(is("0.25")))
+                .andExpect(xpath("//ContainsOneQuarter").value(is(numberOfValue(0.25))))
                 .andExpect(xpath("//Duplicate").exists())
                 .andExpect(xpath("//Duplicate").nodeCount(2))
                 .andExpect(xpath("//DuplicateEleDiffContent").exists())

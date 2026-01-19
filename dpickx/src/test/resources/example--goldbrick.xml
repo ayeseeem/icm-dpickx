@@ -6,6 +6,7 @@
   <ElementWithSizeAttribute size="15"/>
   <ContainsSeventeen>17</ContainsSeventeen>
   <ContainsAttributeWithEighteen attrOf18="18">blah blah</ContainsAttributeWithEighteen>
+  <ContainsOneQuarter>0.25</ContainsOneQuarter>
   <Duplicate>123</Duplicate>
   <Duplicate>123</Duplicate>
   <DuplicateEleDiffContent>111</DuplicateEleDiffContent>

@@ -51,6 +51,12 @@ class XmlExampleFixture {
         }
 
         {
+            Element element = doc.createElement("ContainsOneQuarter");
+            element.setTextContent("0.25");
+            root.appendChild(element);
+        }
+
+        {
             Element element = doc.createElement("Duplicate");
             element.setTextContent("123");
             root.appendChild(element);

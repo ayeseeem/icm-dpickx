@@ -46,6 +46,8 @@ public class Examples {
                 .andExpect(xpath("//ContainsSeventeen").value(startsWith("1")))
                 .andExpect(xpath("//ContainsSeventeen").value(is(numberOfValue(17.0))))
                 .andExpect(xpath("//ContainsSeventeen").value(is(numberOfValue(17))))
+                .andExpect(xpath("//ContainsOneQuarter").value(is("0.25")))
+                .andExpect(xpath("//ContainsOneQuarter").value(is(numberOfValue(0.25))))
                 .andExpect(xpath("//Duplicate").exists())
                 .andExpect(xpath("//Duplicate").nodeCount(2))
                 .andExpect(xpath("//DuplicateEleDiffContent").exists())

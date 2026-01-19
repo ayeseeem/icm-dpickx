@@ -334,6 +334,18 @@ public class IntegrationTest {
     }
 
     @Test
+    public void direct_CaptureSoleRequired_AsInteger_FailsOnDecimalsNumber() {
+        XmlDocumentChecker checker = new XmlDocumentChecker(eg);
+        Function<String, Integer> toInteger = Integer::parseInt;
+
+        Exception e = assertThrows(NumberFormatException.class, () -> {
+            checker.captureSoleRequired(xpath("//ContainsOneQuarter"), toInteger);
+        });
+        e.printStackTrace();
+        assertThat(e.getMessage(), containsString("0.25"));
+    }
+
+    @Test
     public void direct_CaptureSoleRequired_MoreThanOneNodeFound() {
         XmlDocumentChecker checker = new XmlDocumentChecker(eg);
 
