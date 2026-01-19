@@ -116,6 +116,11 @@ Tool
 `dpickx-app` has been begun as a command-line tool to let you apply `dpickx` to
 files.
 At the moment, it just applies `captureSoleRequired` and outputs it to `stdout`.
+
+It captures the content as a `String`, unless you pass `--integer` (or `-i`),
+in which case it will try to parse the content as an integer, and fail if it
+cannot.
+
 You can build and run it with the commands below - note the different number of
 slashes, and different command chaining for the final `popd`.
 
