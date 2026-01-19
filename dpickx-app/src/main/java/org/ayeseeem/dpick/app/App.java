@@ -7,10 +7,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
 
 import javax.xml.xpath.XPathExpressionException;
 
 import org.ayeseeem.dpick.util.xml.XmlUnmarshaller;
+import org.ayeseeem.dpick.xml.StringCapturer;
 import org.ayeseeem.dpick.xml.XmlDocumentChecker;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -36,13 +38,14 @@ public class App {
 
         XmlDocumentChecker checker = new XmlDocumentChecker(docRoot);
 
+        final Function<String, ?> converter;
         if (asInteger) {
-            int content = checker.captureSoleRequired(xpath(xpath), Integer::parseInt);
-            System.out.println(content);
+            converter = Integer::parseInt;
         } else {
-            String content = checker.captureSoleRequired(xpath(xpath));
-            System.out.println(content);
+            converter = StringCapturer.NOOP;
         }
+        Object content = checker.captureSoleRequired(xpath(xpath), converter);
+        System.out.println(content);
     }
 
     public static void main(String[] args) {
