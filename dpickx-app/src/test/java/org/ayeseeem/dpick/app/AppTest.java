@@ -17,7 +17,6 @@ import org.junit.Test;
 public class AppTest {
 
     // TODO: ICM 2026-01-19: De-duplicate - defined in XmlExampleFixtureTest too
-    // TODO: ICM 2026-01-19: Need a FileNotFoundException if not found!!!!
     private static final String EXAMPLE_XML = "../dpickx-app/example.xml";
 
     @Test
