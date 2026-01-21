@@ -3,10 +3,10 @@ package org.ayeseeem.dpick.app;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.isEmptyString;
 import static org.junit.Assert.assertThrows;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.io.PrintStream;
 
 import org.junit.Test;
@@ -21,7 +21,7 @@ public class AppTest {
     private static final String EXAMPLE_XML = "../dpickx-app/example.xml";
 
     @Test
-    public void noArgs() {
+    public void noArgs() throws Exception {
         App.mainExecutor(new String[] {}, out);
 
         assertThat(capturedOut.toString(), containsString("Need at least 2 args:"));
@@ -29,24 +29,24 @@ public class AppTest {
         assertThat(capturedOut.toString(), containsString("Xpath might need (Java) escaping of characters such as \\"));
     }
 
-    //@Characterization
     @Test
-    public void fileNotFound_FailsSilently() {
-        App.mainExecutor(new String[] { "Non-Existent-File.xml", "//SomeElementType" }, out);
+    public void fileNotFound() {
+        Exception e = assertThrows(FileNotFoundException.class, () -> {
+            App.mainExecutor(new String[] { "Non-Existent-File.xml", "//SomeElementType" }, out);
+        });
 
-        assertThat(capturedOut.toString(), is(""));
-        assertThat(capturedOut.toString(), is(isEmptyString()));
+        assertThat(e.getMessage(), containsString("Non-Existent-File.xml"));
     }
 
     @Test
-    public void captureSingleStringValue() {
+    public void captureSingleStringValue() throws Exception {
         App.mainExecutor(new String[] { EXAMPLE_XML, "//ContainsSeventeen" }, out);
 
         assertThat(capturedOut.toString(), is("17" + NL));
     }
 
     @Test
-    public void captureSingleIntegerValue() {
+    public void captureSingleIntegerValue() throws Exception {
         App.mainExecutor(new String[] { EXAMPLE_XML, "//ContainsSeventeen", "--integer" }, out);
 
         assertThat(capturedOut.toString(), is("17" + NL));

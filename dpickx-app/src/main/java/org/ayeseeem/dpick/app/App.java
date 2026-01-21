@@ -24,6 +24,9 @@ import org.xml.sax.SAXException;
  */
 public class App {
 
+    public static final int FILE_NOT_FOUND__ERROR = 2;
+    public static final String FILE_NOT_FOUND__MESSAGE = "File Not Found";
+
     private final PrintStream out;
     private final String file;
     private final String xpath;
@@ -52,10 +55,18 @@ public class App {
     }
 
     public static void main(String[] args) {
-        mainExecutor(args, System.out);
+        try {
+            mainExecutor(args, System.out);
+        } catch (FileNotFoundException e) {
+            System.err.println(FILE_NOT_FOUND__MESSAGE + ": " + e.getMessage());
+            System.exit(FILE_NOT_FOUND__ERROR);
+        } catch (XPathExpressionException | IOException | SAXException e) {
+            e.printStackTrace();
+        }
     }
 
-    static void mainExecutor(String[] args, PrintStream out) {
+    static void mainExecutor(String[] args, PrintStream out)
+            throws XPathExpressionException, FileNotFoundException, IOException, SAXException {
         if (args.length < 2) {
             out.println("Need at least 2 args: <filename> <XPath> [-i] [--integer]");
             out.println(" - Xpath might need (Java) escaping of characters such as \\");
@@ -67,12 +78,7 @@ public class App {
 
         List<String> argList = Arrays.asList(args);
         boolean asInteger = argList.contains("-i") || argList.contains("--integer");
-
-        try {
-            new App(out, file, xpath, asInteger);
-        } catch (XPathExpressionException | IOException | SAXException e) {
-            e.printStackTrace();
-        }
+        new App(out, file, xpath, asInteger);
     }
 
     private Node makeDoc(String file) throws FileNotFoundException, IOException, SAXException {
