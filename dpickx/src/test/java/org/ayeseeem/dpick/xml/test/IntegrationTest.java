@@ -346,6 +346,33 @@ public class IntegrationTest {
     }
 
     @Test
+    public void direct_CaptureSoleRequired_AsDouble() throws XPathExpressionException {
+        XmlDocumentChecker checker = new XmlDocumentChecker(eg);
+        Function<String, Double> toDouble = Double::parseDouble;
+        Double value = checker.captureSoleRequired(xpath("//ContainsOneQuarter"), toDouble);
+
+        assertThat(value, is(0.25));
+    }
+
+    @Test
+    public void direct_CaptureSoleRequired_AsDoublePrimitive() throws XPathExpressionException {
+        XmlDocumentChecker checker = new XmlDocumentChecker(eg);
+        Function<String, Double> toDouble = Double::parseDouble;
+        double value = checker.captureSoleRequired(xpath("//ContainsOneQuarter"), toDouble);
+
+        assertThat(value, is(0.25));
+    }
+
+    @Test
+    public void direct_CaptureSoleRequired_AsDouble_AcceptsInteger() throws XPathExpressionException {
+        XmlDocumentChecker checker = new XmlDocumentChecker(eg);
+        Function<String, Double> toDouble = Double::parseDouble;
+        Double value = checker.captureSoleRequired(xpath("//ContainsSeventeen"), toDouble);
+
+        assertThat(value, is(17.0));
+    }
+
+    @Test
     public void direct_CaptureSoleRequired_MoreThanOneNodeFound() {
         XmlDocumentChecker checker = new XmlDocumentChecker(eg);
 

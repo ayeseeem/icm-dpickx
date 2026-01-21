@@ -31,25 +31,40 @@ public class App {
     private final String file;
     private final String xpath;
 
-    public App(PrintStream out, String file, String xpath, boolean asInteger) throws XPathExpressionException, FileNotFoundException, IOException, SAXException {
+    private enum Type {
+        INTEGER, NUMBER, STRING
+    }
+
+    public App(PrintStream out, String file, String xpath, Type type) throws XPathExpressionException, FileNotFoundException, IOException, SAXException {
         this.out = out;
         this.file = file;
         this.xpath = xpath;
 
-        captureAndPrint(asInteger);
+        captureAndPrint(type);
     }
 
-    private void captureAndPrint(boolean asInteger) throws XPathExpressionException, FileNotFoundException, IOException, SAXException {
+    private void captureAndPrint(Type asType) throws XPathExpressionException, FileNotFoundException, IOException, SAXException {
         Node docRoot = makeDoc(file);
 
         XmlDocumentChecker checker = new XmlDocumentChecker(docRoot);
 
         final Function<String, ?> converter;
-        if (asInteger) {
+
+        switch (asType) {
+        case INTEGER:
             converter = Integer::parseInt;
-        } else {
+            break;
+
+        case NUMBER:
+            converter = Double::parseDouble;
+            break;
+
+        case STRING:
+        default:
             converter = StringCapturer.NOOP;
+            break;
         }
+
         Object content = checker.captureSoleRequired(xpath(xpath), converter);
         out.println(content);
     }
@@ -68,7 +83,7 @@ public class App {
     static void mainExecutor(String[] args, PrintStream out)
             throws XPathExpressionException, FileNotFoundException, IOException, SAXException {
         if (args.length < 2) {
-            out.println("Need at least 2 args: <filename> <XPath> [-i] [--integer]");
+            out.println("Need at least 2 args: <filename> <XPath> [-i] [--integer] [-n] [--number]");
             out.println(" - Xpath might need (Java) escaping of characters such as \\");
             return;
         }
@@ -77,8 +92,15 @@ public class App {
         String xpath = args[1];
 
         List<String> argList = Arrays.asList(args);
-        boolean asInteger = argList.contains("-i") || argList.contains("--integer");
-        new App(out, file, xpath, asInteger);
+        final Type type;
+        if (argList.contains("-i") || argList.contains("--integer")) {
+            type = Type.INTEGER;
+        } else if (argList.contains("-n") || argList.contains("--number")) {
+            type = Type.NUMBER;
+        } else {
+            type = Type.STRING;
+        }
+        new App(out, file, xpath, type);
     }
 
     private Node makeDoc(String file) throws FileNotFoundException, IOException, SAXException {

@@ -24,7 +24,7 @@ public class AppTest {
         App.mainExecutor(new String[] {}, out);
 
         assertThat(capturedOut.toString(), containsString("Need at least 2 args:"));
-        assertThat(capturedOut.toString(), containsString("<filename> <XPath> [-i] [--integer]"));
+        assertThat(capturedOut.toString(), containsString("<filename> <XPath> [-i] [--integer] [-n] [--number]"));
         assertThat(capturedOut.toString(), containsString("Xpath might need (Java) escaping of characters such as \\"));
     }
 
@@ -58,6 +58,20 @@ public class AppTest {
         });
 
         assertThat(e.getMessage(), containsString("0.25"));
+    }
+
+    @Test
+    public void captureSingleNumberValue() throws Exception {
+        App.mainExecutor(new String[] { EXAMPLE_XML, "//ContainsOneQuarter", "--number" }, out);
+
+        assertThat(capturedOut.toString(), is("0.25" + NL));
+    }
+
+    @Test
+    public void captureSingleNumberValue_AcceptsIntegers() throws Exception {
+        App.mainExecutor(new String[] { EXAMPLE_XML, "//ContainsSeventeen", "--number" }, out);
+
+        assertThat(capturedOut.toString(), is("17.0" + NL));
     }
 
     private final ByteArrayOutputStream capturedOut = new ByteArrayOutputStream();
