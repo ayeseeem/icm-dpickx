@@ -23,6 +23,7 @@ import org.w3c.dom.Document;
 
 public class XmlExampleFixtureTest {
 
+    // TODO: ICM 2026-01-19: De-duplicate - defined in AppTest too
     private static final String EXAMPLE_XML = "../dpickx-app/example.xml";
 
     @Test

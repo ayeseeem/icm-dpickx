@@ -1,15 +1,69 @@
 package org.ayeseeem.dpick.app;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.isEmptyString;
+import static org.junit.Assert.assertThrows;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import org.junit.Test;
 
+/**
+ * Test main app usages using end-to-end examples,
+ */
 public class AppTest {
 
+    // TODO: ICM 2026-01-19: De-duplicate - defined in XmlExampleFixtureTest too
+    // TODO: ICM 2026-01-19: Need a FileNotFoundException if not found!!!!
+    private static final String EXAMPLE_XML = "../dpickx-app/example.xml";
+
     @Test
-    public void verifyTestsAreConfiguredCorrectly() {
-        assertThat(true, is(true));
+    public void noArgs() {
+        App.mainExecutor(new String[] {}, out);
+
+        assertThat(capturedOut.toString(), containsString("Need at least 2 args:"));
+        assertThat(capturedOut.toString(), containsString("<filename> <XPath> [-i] [--integer]"));
+        assertThat(capturedOut.toString(), containsString("Xpath might need (Java) escaping of characters such as \\"));
     }
+
+    //@Characterization
+    @Test
+    public void fileNotFound_FailsSilently() {
+        App.mainExecutor(new String[] { "Non-Existent-File.xml", "//SomeElementType" }, out);
+
+        assertThat(capturedOut.toString(), is(""));
+        assertThat(capturedOut.toString(), is(isEmptyString()));
+    }
+
+    @Test
+    public void captureSingleStringValue() {
+        App.mainExecutor(new String[] { EXAMPLE_XML, "//ContainsSeventeen" }, out);
+
+        assertThat(capturedOut.toString(), is("17" + NL));
+    }
+
+    @Test
+    public void captureSingleIntegerValue() {
+        App.mainExecutor(new String[] { EXAMPLE_XML, "//ContainsSeventeen", "--integer" }, out);
+
+        assertThat(capturedOut.toString(), is("17" + NL));
+    }
+
+    @Test
+    public void captureSingleIntegerValue_FailsIfNotInteger() {
+        Exception e = assertThrows(NumberFormatException.class, () -> {
+            App.mainExecutor(new String[] { EXAMPLE_XML, "//ContainsOneQuarter", "--integer" }, out);
+        });
+
+        assertThat(e.getMessage(), containsString("0.25"));
+    }
+
+    private final ByteArrayOutputStream capturedOut = new ByteArrayOutputStream();
+    private final PrintStream out = new PrintStream(capturedOut);
+
+    private static final String NL = String.format("%n");
 
 }
